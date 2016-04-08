@@ -5,7 +5,7 @@
 class Line
 {
 public:
-    line();
+    Line();
 };
 
 #endif // LINE_H

@@ -7,18 +7,18 @@ SOURCES += main.cpp \
     client.cpp \
     server.cpp \
     circle.cpp \
-    line.cpp \
     ellipsis.cpp \
     polygon.cpp \
     shape.cpp \
     point.cpp \
-    drawing.cpp
+    drawing.cpp \
+    line.cpp
 
 HEADERS += \
     circle.h \
-    line.h \
     ellipsis.h \
     polygon.h \
     shape.h \
     point.h \
-    drawing.h
+    drawing.h \
+    line.h
