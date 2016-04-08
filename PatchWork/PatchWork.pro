@@ -4,8 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    client.cpp \
-    server.cpp \
+    #commented because only 1 main is allowed, uncomment to get the files back in the Sources explorer, enjoy the english bitches
+    #client.cpp \
+    #server.cpp \
     circle.cpp \
     ellipsis.cpp \
     polygon.cpp \
