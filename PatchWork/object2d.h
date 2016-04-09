@@ -7,25 +7,19 @@
 
 using namespace std;
 
-class Object2D :public ObjectInterface{
+class Object2D{
     protected:
         std::string color;
         vector<Point> vertices;
-        Object2D(std::string, vector<Point>);
+        Object2D(std::string color): color(color){}
     public:
 
         //Personal method
         virtual float getArea();
         virtual float getPerimeter();
 
-        // Inherited method from ObjectInterface
-        void draw();
-        void applyTranslation(float x,float y);
-        void applyRotationDirect(float angle);
-        void applyRotationIndirect(float angle);
-        void applyHomethety(float ratio);
-        void applyAxialSymmetry();
-        void applyCentralSymmetry();
+        std::string getColor() const;
+        void setColor(std::string color);
 
 };
 #endif // OBJECT2D_H

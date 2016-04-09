@@ -8,14 +8,12 @@ class Point
 {
     public:
         Point(int x,int y);
-        ~Point();
         int getX() const;
         int getY() const;
         void setX(int x);
         void setY(int y);
 
         friend ostream& operator<< (ostream &os, const Point &p);
-
     private :
         int x,y;
 

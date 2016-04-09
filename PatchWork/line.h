@@ -1,11 +1,15 @@
 #ifndef LINE_H
 #define LINE_H
 #include "object2d.h"
+#include "objectinterface.h"
+#include <iostream>
+#include <vector>
+using namespace  std;
 
-class Line : public Object2D
+class Line : public Object2D,public ObjectInterface
 {
     public:
-        Line();
+        Line(string color,Point p1,Point p2);
         ~Line();
         // Inherited method from Object2D
         float getArea();
@@ -19,6 +23,8 @@ class Line : public Object2D
         void applyHomethety(float ratio);
         void applyAxialSymmetry();
         void applyCentralSymmetry();
+
+        friend ostream& operator<< (ostream &os, const Line &p);
 };
 
 #endif // LINE_H
