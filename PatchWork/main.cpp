@@ -13,9 +13,10 @@ int main(int argc, char *argv[])
     Point p2(5,2);
     cout << p<<endl;
 
-    ObjectInterface*l = new Line("red",p,p2);
+    ObjectInterface *l = new Line("red",p,p2);
     l->draw();
     //cout <<*l <<endl;
+    cout<<typeid(l).name()<<endl;
 
     Fresque *f = new Fresque();
 

@@ -19,11 +19,11 @@ class Fresque : public ObjectInterface
         void applyCentralSymmetry();
 
         // Personal method
-        bool add(ObjectInterface const& o);
+        bool add(ObjectInterface &o);
         bool remove(ObjectInterface const& o);
 
     private:
-        std::vector<ObjectInterface> objects;
+        std::vector<ObjectInterface*> objects;
 };
 
 #endif // FRESQUE_H

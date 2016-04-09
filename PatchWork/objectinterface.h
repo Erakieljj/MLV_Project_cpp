@@ -8,8 +8,8 @@ class ObjectInterface
 {
 public:
     ObjectInterface() {}
-    ~ObjectInterface(){}
-    virtual void draw(){ cout<<"NO polymorph"<<endl;}
+
+    virtual void draw()=0;
     virtual void applyTranslation(float x,float y){}
     virtual void applyRotationDirect(float angle){}
     virtual void applyRotationIndirect(float angle){}

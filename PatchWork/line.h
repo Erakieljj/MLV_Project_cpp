@@ -6,7 +6,7 @@
 #include <vector>
 using namespace  std;
 
-class Line : public Object2D,public ObjectInterface
+class Line : public ObjectInterface,Object2D
 {
     public:
         Line(string color,Point p1,Point p2);
@@ -15,7 +15,7 @@ class Line : public Object2D,public ObjectInterface
         float getPerimeter();
 
         // Inherited method from ObjectInterface
-        virtual void draw();
+        void draw();
         void applyTranslation(float x,float y);
         void applyRotationDirect(float angle);
         void applyRotationIndirect(float angle);
