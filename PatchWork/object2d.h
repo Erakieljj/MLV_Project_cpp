@@ -9,14 +9,12 @@ using namespace std;
 
 class Object2D :public ObjectInterface{
     protected:
+        std::string color;
+        vector<Point> vertices;
         Object2D(std::string, vector<Point>);
     public:
-        std::string color; // le type peut changer
-        vector<Point> vertices;
-        //createObject2D();
 
         //Personal method
-
         virtual float getArea();
         virtual float getPerimeter();
 
@@ -29,4 +27,5 @@ class Object2D :public ObjectInterface{
         void applyAxialSymmetry();
         void applyCentralSymmetry();
 
+};
 #endif // OBJECT2D_H

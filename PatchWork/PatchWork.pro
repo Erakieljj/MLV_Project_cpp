@@ -10,7 +10,7 @@ SOURCES += main.cpp \
     line.cpp \
     object2d.cpp \
     point.cpp \
-    objectinterface.cpp \
+    #objectinterface.cpp \
     fresque.cpp
 
 HEADERS += \
@@ -22,3 +22,5 @@ HEADERS += \
 
 DISTFILES += \
     PatchWork.pro.user
+
+

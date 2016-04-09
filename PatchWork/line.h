@@ -4,11 +4,9 @@
 
 class Line : public Object2D
 {
-    protected:
+    public:
         Line();
         ~Line();
-    public:
-
         // Inherited method from Object2D
         float getArea();
         float getPerimeter();

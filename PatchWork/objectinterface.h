@@ -13,7 +13,6 @@ public:
     virtual void applyHomethety(float ratio);
     virtual void applyAxialSymmetry();
     virtual void applyCentralSymmetry();
-
 };
 
 #endif // OBJECTINTERFACE_H

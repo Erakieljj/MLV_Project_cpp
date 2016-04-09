@@ -1,1 +1,2 @@
-Object2D::Object2D():
+#include "object2d.h"
+
