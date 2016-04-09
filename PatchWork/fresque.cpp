@@ -2,11 +2,12 @@
 using namespace std;
 
 Fresque::Fresque() {
-    cout << "Init fresque";
+    cout << "Init fresque"<<endl;
 }
 
 // Inherited method from ObjectInterface
 void Fresque::draw(){
+    cout << "drawin inc "<< objects.size()<<endl;
     for(ObjectInterface o : objects) {
         o.draw();
     }
@@ -45,12 +46,15 @@ void Fresque::applyCentralSymmetry(){
 }
 
 // Personal method
-bool Fresque::add(ObjectInterface o){
-    objects.push_back(o);
+bool Fresque::add(ObjectInterface const&o){
+    cout << "WE ADD"<<endl;
+    cout << this->objects.size()<<endl;
+    this->objects.push_back(o);
+    cout << this->objects.size()<<endl;
     return true;
 }
 
-bool Fresque::remove(ObjectInterface o){
+bool Fresque::remove(ObjectInterface const &o){
     cout << "Remove";
     return false;
 }

@@ -3,12 +3,12 @@
 #include "objectinterface.h"
 #include <iostream>
 #include <vector>
+using namespace std;
 
 class Fresque : public ObjectInterface
 {
     public:
         Fresque();
-        ~Fresque(){}
         // Inherited method from ObjectInterface
         void draw();
         void applyTranslation(float x,float y);
@@ -19,8 +19,8 @@ class Fresque : public ObjectInterface
         void applyCentralSymmetry();
 
         // Personal method
-        bool add(ObjectInterface o);
-        bool remove(ObjectInterface o);
+        bool add(ObjectInterface const& o);
+        bool remove(ObjectInterface const& o);
 
     private:
         std::vector<ObjectInterface> objects;

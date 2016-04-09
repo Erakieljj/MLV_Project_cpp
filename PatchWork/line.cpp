@@ -45,7 +45,7 @@ float Line::getPerimeter(){
 }
 
 void Line::draw(){
-    cout << "LINE";
+    cout << "LINE" <<endl;
 }
 
 ostream & operator<< (ostream & os, const Line & l)

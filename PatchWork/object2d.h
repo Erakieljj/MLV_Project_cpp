@@ -12,7 +12,6 @@ class Object2D{
         std::string color;
         vector<Point> vertices;
         Object2D(std::string color): color(color){}
-        ~Object2D(){}
 
     public:
 

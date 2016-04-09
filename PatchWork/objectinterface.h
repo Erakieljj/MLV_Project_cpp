@@ -1,5 +1,7 @@
 #ifndef OBJECTINTERFACE_H
 #define OBJECTINTERFACE_H
+#include "iostream"
+using namespace std;
 
 
 class ObjectInterface
@@ -7,7 +9,7 @@ class ObjectInterface
 public:
     ObjectInterface() {}
     ~ObjectInterface(){}
-    virtual void draw(){}
+    virtual void draw(){ cout<<"NO polymorph"<<endl;}
     virtual void applyTranslation(float x,float y){}
     virtual void applyRotationDirect(float angle){}
     virtual void applyRotationIndirect(float angle){}
