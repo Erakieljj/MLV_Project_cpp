@@ -7,22 +7,18 @@ SOURCES += main.cpp \
     #commented due to multiple main, uncomment to get the client and server files back
     #client.cpp \
     #server.cpp \
-    circle.cpp \
     line.cpp \
-    ellipsis.cpp \
-    polygon.cpp \
-    drawing.cpp \
     object2d.cpp \
-    point.cpp
+    point.cpp \
+    objectinterface.cpp \
+    fresque.cpp
 
 HEADERS += \
-    circle.h \
     line.h \
-    ellipsis.h \
-    polygon.h \
-    drawing.h \
     object2d.h \
-    point.h
+    point.h \
+    objectinterface.h \
+    fresque.h
 
 DISTFILES += \
     PatchWork.pro.user
