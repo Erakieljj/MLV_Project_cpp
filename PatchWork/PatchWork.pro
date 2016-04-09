@@ -10,7 +10,6 @@ SOURCES += main.cpp \
     line.cpp \
     ellipsis.cpp \
     polygon.cpp \
-    shape.cpp \
     drawing.cpp \
     coordinates.cpp \
     object2d.cpp
@@ -20,7 +19,6 @@ HEADERS += \
     line.h \
     ellipsis.h \
     polygon.h \
-    shape.h \
     drawing.h \
     coordinates.h \
     object2d.h
