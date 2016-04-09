@@ -11,8 +11,8 @@ SOURCES += main.cpp \
     ellipsis.cpp \
     polygon.cpp \
     drawing.cpp \
-    coordinates.cpp \
-    object2d.cpp
+    object2d.cpp \
+    point.cpp
 
 HEADERS += \
     circle.h \
@@ -20,8 +20,8 @@ HEADERS += \
     ellipsis.h \
     polygon.h \
     drawing.h \
-    coordinates.h \
-    object2d.h
+    object2d.h \
+    point.h
 
 DISTFILES += \
     PatchWork.pro.user
