@@ -4,8 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    client.cpp \
-    server.cpp \
+    #commented due to multiple main, uncomment to get the client and server files back
+    #client.cpp \
+    #server.cpp \
     circle.cpp \
     line.cpp \
     ellipsis.cpp \
