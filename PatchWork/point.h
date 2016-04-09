@@ -8,7 +8,7 @@ class Point
         ~Point();
 
     private :
-        float x,y;
+        int x,y;
 
 };
 
