@@ -9,6 +9,10 @@ class Point
 
         Point();
         ~Point();
+
+    private :
+        float x,y;
+
 };
 
 #endif // POINT_H
