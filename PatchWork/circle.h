@@ -1,11 +1,15 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
+    class Circle : public Object2D
+    {
+        protected:
+            Circle();
+            ~Circle();
 
-class Circle
-{
-public:
-    Circle();
-};
+        public:
+            createCircle();
+
+    };
 
 #endif // CIRCLE_H
