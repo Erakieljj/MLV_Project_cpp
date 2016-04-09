@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 {
     cout << "Hello World!" << endl;
     Point p(1,2);
+    cout << p;
 
     return 0;
 }

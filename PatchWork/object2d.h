@@ -1,6 +1,6 @@
 #ifndef OBJECT2D_H
 #define OBJECT2D_H
-    #include "coordinates.h"
+#include "point.h"
 
     class Object2D {
         protected:
