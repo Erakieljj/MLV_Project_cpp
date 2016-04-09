@@ -1,16 +1,17 @@
 #ifndef OBJECT2D_H
 #define OBJECT2D_H
 #include <string.h>
+#include <vector>
 #include "point.h"
 
     using namespace std;
 
     class Object2D {
         protected:
-            Object2D(std::string, ArrayList<Coordinates>);
+            Object2D(std::string, vector<Point>);
         public:
             std::string color; // le type peut changer
-            ArrayList<Coordinates> vertices;
+            vector<Point> vertices;
 
             createObject2D();
             applyTranslation(Object2D obj);
