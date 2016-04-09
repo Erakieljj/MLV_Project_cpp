@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     Point p2(5,2);
     cout << p;
 
-    Line l("red",p,p2);
+    Line *l = new Line("red",p,p2);
     cout <<l;
     return 0;
 }

@@ -10,7 +10,7 @@ class Line : public Object2D,public ObjectInterface
 {
     public:
         Line(string color,Point p1,Point p2);
-        ~Line();
+        ~Line(){}
         // Inherited method from Object2D
         float getArea();
         float getPerimeter();

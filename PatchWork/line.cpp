@@ -44,6 +44,10 @@ float Line::getPerimeter(){
     return 0;
 }
 
+void Line::draw(){
+    cout << "LINE";
+}
+
 ostream & operator<< (ostream & os, const Line & l)
 {
     for(Point p : l.vertices) {

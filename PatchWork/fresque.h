@@ -8,6 +8,7 @@ class Fresque : public ObjectInterface
 {
     public:
         Fresque();
+        ~Fresque(){}
         // Inherited method from ObjectInterface
         void draw();
         void applyTranslation(float x,float y);
