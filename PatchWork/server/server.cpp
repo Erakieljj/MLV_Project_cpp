@@ -3,11 +3,7 @@
 #include <sys/types.h>
 #ifdef __WIN32__
 # include <winsock2.h>
-<<<<<<< HEAD:PatchWork/server/server.cpp
-#include<Ws2tcpip.h>
-=======
 # include <ws2tcpip.h>
->>>>>>> origin/master:PatchWork/server.cpp
 #else
 # include <sys/socket.h>
 # include <netinet/in.h>
