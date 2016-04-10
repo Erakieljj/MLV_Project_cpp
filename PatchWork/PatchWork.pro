@@ -9,16 +9,18 @@ SOURCES += main.cpp \
     #server.cpp \
     line.cpp \
     object2d.cpp \
-    point.cpp \
     #objectinterface.cpp \
-    fresque.cpp
+    fresque.cpp \
+    matrix.cpp \
+    point.cpp
 
 HEADERS += \
     line.h \
     object2d.h \
-    point.h \
     objectinterface.h \
-    fresque.h
+    fresque.h \
+    matrix.h \
+    point.h
 
 DISTFILES += \
     PatchWork.pro.user

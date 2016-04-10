@@ -6,6 +6,11 @@
 
 using namespace std;
 
+Matrix::Matrix():m(0),n(0)
+{
+
+}
+
 Matrix::Matrix(double m,double n) :m(m),n(n)
 {
     this->mat.resize(m);
@@ -96,6 +101,23 @@ Matrix Matrix::operator* (const Matrix& matrix)
         }
     }
     return *mul;
+}
+
+
+Matrix& Matrix::operator= (const Matrix& matrix)
+{
+    this->m=matrix.m;
+    this->n = matrix.n;
+    this->mat.resize(m);
+    for(int i = 0 ; i < m ; ++i)
+    {
+        mat[i].resize(n);
+        for(int j=0;j<n;j++){
+            this->mat[i][j] = matrix.mat[i][j];
+        }
+    }
+
+    return (*this);
 }
 /*
 Matrix& Matrix::operator= (const Matrix& mat)

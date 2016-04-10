@@ -20,8 +20,11 @@ int main(int argc, char *argv[])
     Fresque *f = new Fresque();
 
     f->add(*l);
+    cout << " AFFICHAGE DE LA FRESQUE"<<endl;
     f->draw();
-    f->applyHomethety(5);
+    f->applyHomethety(5,6);
+    cout << " AFFICHAGE DE LA FRESQUE apres homothety 5,6"<<endl;
+    f->draw();
     cout <<endl;
 
     Matrix *m1 = new Matrix(3,7);

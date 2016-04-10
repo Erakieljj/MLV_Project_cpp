@@ -12,24 +12,24 @@ void Fresque::draw(){
     }
 }
 
-void Fresque::applyTranslation(float x,float y){
+void Fresque::applyTranslation(double x,double y){
     for(ObjectInterface* o : objects) {
         o->applyTranslation(x,y);
     }
 }
-void Fresque::applyRotationDirect(float angle){
+void Fresque::applyRotationDirect(double angle){
     for(ObjectInterface* o : objects) {
         o->applyRotationDirect(angle);
     }
 }
-void Fresque::applyRotationIndirect(float angle){
+void Fresque::applyRotationIndirect(double angle){
     for(ObjectInterface* o : objects) {
         o->applyRotationIndirect(angle);
     }
 }
-void Fresque::applyHomethety(float ratio){
+void Fresque::applyHomethety(double x,double y){
     for(ObjectInterface* o : objects) {
-        o->applyHomethety(ratio);
+        o->applyHomethety(x,y);
     }
 }
 void Fresque::applyAxialSymmetry(){

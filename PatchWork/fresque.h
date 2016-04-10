@@ -11,10 +11,10 @@ class Fresque : public ObjectInterface
         Fresque();
         // Inherited method from ObjectInterface
         void draw();
-        void applyTranslation(float x,float y);
-        void applyRotationDirect(float angle);
-        void applyRotationIndirect(float angle);
-        void applyHomethety(float ratio);
+        void applyTranslation(double x,double y);
+        void applyRotationDirect(double angle);
+        void applyRotationIndirect(double angle);
+        void applyHomethety(double x, double y);
         void applyAxialSymmetry();
         void applyCentralSymmetry();
 

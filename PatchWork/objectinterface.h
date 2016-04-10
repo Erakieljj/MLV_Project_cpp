@@ -10,10 +10,10 @@ public:
     ObjectInterface() {}
 
     virtual void draw()=0;
-    virtual void applyTranslation(float x,float y){}
-    virtual void applyRotationDirect(float angle){}
-    virtual void applyRotationIndirect(float angle){}
-    virtual void applyHomethety(float ratio){}
+    virtual void applyTranslation(double x,double y){}
+    virtual void applyRotationDirect(double angle){}
+    virtual void applyRotationIndirect(double angle){}
+    virtual void applyHomethety(double x,double y){}
     virtual void applyAxialSymmetry(){}
     virtual void applyCentralSymmetry(){}
 };

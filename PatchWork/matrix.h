@@ -15,6 +15,10 @@ class Matrix
     public:
         //Liste des constructeurs :
         ///
+        /// \brief Default constructor
+        ///
+        Matrix();
+        ///
         /// \brief Matrix (m,n)
         ///
         Matrix(double m , double n);
@@ -70,6 +74,13 @@ class Matrix
         /// \return
         ///
         Matrix operator*(const Matrix &matrix);
+
+        ///
+        /// \brief affectation function of matrix
+        /// \param mat
+        /// \return
+        ///
+        Matrix& operator= (const Matrix & mat);
         /*
 
         //Liste des fonctions de manipulation de la matrice courante
