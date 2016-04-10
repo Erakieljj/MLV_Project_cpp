@@ -46,11 +46,27 @@ void Fresque::applyCentralSymmetry(double x,double y){
 
 // Personal method
 bool Fresque::add(ObjectInterface & o){
-      objects.push_back(&o);
+    objects.push_back(&o);
     return true;
 }
 
 bool Fresque::remove(ObjectInterface &o){
     cout << "Remove";
     return false;
+}
+
+float Fresque::getArea(){
+    float area = 0;
+    for(ObjectInterface* o : objects){
+        area+=o->getArea();
+    }
+    return area;
+}
+
+float Fresque::getPerimeter(){
+    float perimeter = 0;
+    for(ObjectInterface* o : objects){
+        perimeter+=o->getPerimeter();
+    }
+    return perimeter;
 }

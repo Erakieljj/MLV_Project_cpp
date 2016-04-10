@@ -104,6 +104,8 @@ class Matrix
         /// \return
         ///
         Matrix& operator= (const Matrix & mat);
+
+        vector<Point> getPoints();
         /*
 
         //Liste des fonctions de manipulation de la matrice courante

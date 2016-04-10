@@ -17,5 +17,6 @@ float Ellipse::getPerimeter(){
 }
 
 void Ellipse::draw(){
+    cout << " \n**CIRCLE**("<<color<< ")\nRayon large : "<<rlar<<"Rayon longeur : "<<rlon<<endl<<"Matrice : " << endl;
     this->mat.print();
 }

@@ -93,14 +93,8 @@ Matrix Matrix::axialSymmetry(double a, double b)
     Matrix *m4 = rotationIndirect(atan(a));
     Matrix *m5 = translation(0,b);
 
-    cout << "DANS AXIAL" <<endl;
-    m1->print();
-    m2->print();
-    Matrix m = (*m1)*(*m2);
-    m.print();
-    m = m *(*m3) * *m4 * *m5;
-    m.print();
-    cout << "OUT AXIAL" <<endl;
+    Matrix m = (*m1)*(*m2)*(*m3)*(*m4)*(*m5);
+
     return m;
 }
 
@@ -122,6 +116,14 @@ void Matrix::print()
         }
         cout <<endl;
     }
+}
+
+vector<Point> Matrix::getPoints(){
+    vector<Point> points;
+    for(int j=0; j<n;j++){
+        points.push_back(Point(mat[0][j],mat[1][j]));
+    }
+    return points;
 }
 
 Matrix Matrix::operator* (const Matrix& matrix)

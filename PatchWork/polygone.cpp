@@ -37,5 +37,7 @@ float Polygone::getPerimeter(){
 }
 
 void Polygone::draw(){
+    cout << "\n**POLYGONE**("<<color<< ")\n Matrice : " << endl;
+
     this->mat.print();
 }

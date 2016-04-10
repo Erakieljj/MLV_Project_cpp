@@ -22,6 +22,9 @@ class Fresque : public ObjectInterface
         bool add(ObjectInterface &o);
         bool remove(ObjectInterface &o);
 
+        float getArea();
+        float getPerimeter();
+
     private:
         std::vector<ObjectInterface*> objects;
 };

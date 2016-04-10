@@ -22,6 +22,7 @@ float Line::getPerimeter(){
 }
 
 void Line::draw(){
+    cout << "\n**LINE**("<<color<< ")\n Matrice : " << endl;
     this->mat.print();
 }
 

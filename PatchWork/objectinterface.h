@@ -16,6 +16,9 @@ public:
     virtual void applyHomethety(double x,double y)=0;
     virtual void applyAxialSymmetry(double a,double b)=0;
     virtual void applyCentralSymmetry(double x,double y)=0;
+
+    virtual float getArea() =0;
+    virtual float getPerimeter() =0;
 };
 
 #endif // OBJECTINTERFACE_H

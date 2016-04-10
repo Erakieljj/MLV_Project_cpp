@@ -17,5 +17,6 @@ float Circle::getPerimeter(){
 }
 
 void Circle::draw(){
+    cout << " \n**CIRCLE**("<<color<< ")\nRayon : "<<rayon<<endl<<"Matrice : " << endl;
     this->mat.print();
 }
