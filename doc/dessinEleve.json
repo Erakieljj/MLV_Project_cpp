@@ -1,0 +1,31 @@
+{
+	"idEleve":"1",
+	"shapes": {
+		"ellipsis": {
+			"color":"color",
+			"x":"x",
+			"y":"y",
+			"rlong":"rlong",
+			"rlarg":"rlarg"
+			
+		},
+		"circle":{
+			"color":"color",
+			"x":"x",
+			"y":"y",
+			"rayon":"rayon"
+		},
+		"line":{
+			"color":"color",
+			"coordonnees":[
+				"x1",
+				"x2",
+				"x3",
+				"x4"
+			]
+		},
+		"polygon":{
+			"color":"color"
+		}
+	}
+}
