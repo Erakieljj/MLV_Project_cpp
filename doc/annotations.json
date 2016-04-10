@@ -1,0 +1,9 @@
+{
+	"studentId":"1",
+	"annotation": {
+		"nbColorAccepted":"False",
+		"nbShapeRequired":"True",
+		"sumAreaShapeAccepted": "False",
+		"sumAreaRequired": 25
+	} 	
+}
