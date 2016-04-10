@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #ifdef __WIN32__
 # include <winsock2.h>
+#include<Ws2tcpip.h>
 #else
 # include <sys/socket.h>
 # include <netinet/in.h>
@@ -54,7 +55,6 @@ int main()
     /* --------------- socket() function ------------------*/
 
     client = socket(AF_INET, SOCK_STREAM, 0);
-
     if (client < 0)
     {
         cout << "\nError establishing socket..." << endl;
