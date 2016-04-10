@@ -12,13 +12,13 @@ Line::Line(string color, Point p1, Point p2):Object2D(color)
 }
 
 float Line::getArea(){
-    cout <<"get area";
     return 0;
 }
 
 float Line::getPerimeter(){
-    cout <<"get permimeter";
-    return 0;
+    Point pi = vertices.at(0);
+    Point pj = vertices.at(1);
+    return Point::dist(pi,pj);
 }
 
 void Line::draw(){

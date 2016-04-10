@@ -14,9 +14,10 @@ class Point
         //
         Point(double x, double y);
 
+        static float dist(Point p1,Point p2);
         //getters
-        inline double get_x(){return this -> x;};
-        inline double get_y(){return this -> y;};
+        inline double get_x(){return this -> x;}
+        inline double get_y(){return this -> y;}
 
         //
 

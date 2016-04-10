@@ -52,11 +52,18 @@ class Matrix
         static Matrix* translation(double x, double y);
 
         ///
-        /// \brief Return the rotation matrix
+        /// \brief Return the direct rotation matrix
         /// \param alpha
         /// \return return the rotation matrix
         ///
-        static Matrix* rotation(double alpha);
+        static Matrix* rotationDirect(double alpha);
+
+        ///
+        /// \brief Return the indirect rotation matrix
+        /// \param alpha
+        /// \return return the rotation matrix
+        ///
+        static Matrix* rotationIndirect(double alpha);
 
         ///
         /// \brief Return the homothety matrix
@@ -65,6 +72,22 @@ class Matrix
         /// \return Return the homothety matrix
         ///
         static Matrix* homothety(double x, double y);
+
+        ///
+        /// \brief Return the axial symmetry matrix for y = ax+b
+        /// \param a
+        /// \param b
+        /// \return
+        ///
+        static Matrix axialSymmetry(double a,double b);
+
+        ///
+        /// \brief Return the axial central matrix for y = ax+b
+        /// \param a
+        /// \param b
+        /// \return
+        ///
+        static Matrix* centralSymmetry(double a,double b);
 
         void print();
 

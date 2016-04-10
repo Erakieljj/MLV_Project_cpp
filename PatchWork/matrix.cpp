@@ -53,12 +53,23 @@ Matrix* Matrix::translation(double x, double y)
 }
 
 
-Matrix* Matrix::rotation(double alpha)
+Matrix* Matrix::rotationDirect(double alpha)
 {
     Matrix *m = idMatrix(3);
     m->mat[0][0]=cos(alpha);
     m->mat[0][1]=sin(alpha);
     m->mat[1][1]=-sin(alpha);
+    m->mat[1][2]=cos(alpha);
+
+    return m;
+}
+
+Matrix* Matrix::rotationIndirect(double alpha)
+{
+    Matrix *m = idMatrix(3);
+    m->mat[0][0]=cos(alpha);
+    m->mat[0][1]=-sin(alpha);
+    m->mat[1][1]=sin(alpha);
     m->mat[1][2]=cos(alpha);
 
     return m;
@@ -70,6 +81,34 @@ Matrix* Matrix::homothety(double x, double y)
     m->mat[0][0]=x;
     m->mat[1][1]=y;
 
+    return m;
+}
+
+Matrix Matrix::axialSymmetry(double a, double b)
+{
+    Matrix *m1 = translation(0,-b);
+    Matrix *m2 = rotationDirect(atan(a));
+    Matrix *m3 = idMatrix(3);
+    m3->mat[1][1]=-1;
+    Matrix *m4 = rotationIndirect(atan(a));
+    Matrix *m5 = translation(0,b);
+
+    cout << "DANS AXIAL" <<endl;
+    m1->print();
+    m2->print();
+    Matrix m = (*m1)*(*m2);
+    m.print();
+    m = m *(*m3) * *m4 * *m5;
+    m.print();
+    cout << "OUT AXIAL" <<endl;
+    return m;
+}
+
+Matrix* Matrix::centralSymmetry(double a, double b)
+{
+    Matrix *m = idMatrix(3);
+    m->mat[0][0]=-1;
+    m->mat[1][1]=-1;
     return m;
 }
 

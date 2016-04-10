@@ -15,8 +15,8 @@ class Fresque : public ObjectInterface
         void applyRotationDirect(double angle);
         void applyRotationIndirect(double angle);
         void applyHomethety(double x, double y);
-        void applyAxialSymmetry();
-        void applyCentralSymmetry();
+        void applyAxialSymmetry(double a,double b);
+        void applyCentralSymmetry(double x,double y);
 
         // Personal method
         bool add(ObjectInterface &o);

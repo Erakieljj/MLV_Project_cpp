@@ -18,17 +18,17 @@ void Object2D::applyHomethety(double x, double y){
 }
 
 void Object2D::applyRotationDirect(double angle) {
-    this->mat = *(Matrix::rotation(angle)) * this->mat;
+    this->mat = *(Matrix::rotationDirect(angle)) * this->mat;
 }
 
 void Object2D::applyRotationIndirect(double angle) {
-    this->mat = *(Matrix::rotation(-angle)) * this->mat;
+    this->mat = *(Matrix::rotationIndirect(angle)) * this->mat;
 }
 
-void Object2D::applyAxialSymmetry(){
-    this->mat = this->mat;
+void Object2D::applyAxialSymmetry(double a, double b){
+    this->mat = (Matrix::axialSymmetry(a,b)) * this->mat;
 }
 
-void Object2D::applyCentralSymmetry(){
-    this->mat = this->mat;
+void Object2D::applyCentralSymmetry(double x,double y){
+    this->mat = *(Matrix::centralSymmetry(x,y)) * this->mat;
 }

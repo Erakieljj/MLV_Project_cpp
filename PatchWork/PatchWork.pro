@@ -12,7 +12,10 @@ SOURCES += main.cpp \
     #objectinterface.cpp \
     fresque.cpp \
     matrix.cpp \
-    point.cpp
+    point.cpp \
+    polygone.cpp \
+    circle.cpp \
+    ellipse.cpp
 
 HEADERS += \
     line.h \
@@ -20,7 +23,10 @@ HEADERS += \
     objectinterface.h \
     fresque.h \
     matrix.h \
-    point.h
+    point.h \
+    polygone.h \
+    circle.h \
+    ellipse.h
 
 DISTFILES += \
     PatchWork.pro.user

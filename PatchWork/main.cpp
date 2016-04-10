@@ -24,19 +24,19 @@ int main(int argc, char *argv[])
     f->add(*l);
     cout << " AFFICHAGE DE LA FRESQUE"<<endl;
     f->draw();
-    f->applyHomethety(5,6);
+    f->applyAxialSymmetry(5,6);
     cout << " AFFICHAGE DE LA FRESQUE apres homothety 5,6"<<endl;
     f->draw();
     cout <<endl;
 
     Matrix *m1 = new Matrix(3,7);
     Matrix *m2 = Matrix::idMatrix(3);
-    Matrix *m3 = Matrix::homothety(2,4);
-    Matrix *m4 = Matrix::rotation(90);
+    Matrix m3 = Matrix::axialSymmetry(2,4);
+    Matrix *m4 = Matrix::rotationDirect(90);
     Matrix *m5 = Matrix::translation(10,4);
     m1->print();
     m2->print();
-    m3->print();
+    m3.print();
     m4->print();
     m5->print();
 
@@ -44,11 +44,11 @@ int main(int argc, char *argv[])
     Matrix *m6 = new Matrix(l->getPoints());
 
     // Matrix de homothetie * Matrix reprensenté par notre Line
-    m3->print();
+
     m6->print();
 
     try{
-        Matrix mm = *m3 * (*m6) ;
+        Matrix mm = m3 * (*m6) ;
         mm.print();
     } catch(domain_error* e){
         cout <<e->what() <<endl;

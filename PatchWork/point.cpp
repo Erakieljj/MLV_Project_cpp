@@ -1,10 +1,16 @@
 #include <point.h>
+#include <math.h>
+using namespace std;
 
 //create a point of coordinates (x,y)
 Point::Point(double x, double y)
 {
     this -> x = x;
     this -> y = y;
+}
+
+float Point::dist(Point p1,Point p2) {
+    return sqrt(pow(p2.get_x() - p1.get_x(),2) +pow(p2.get_y()-p1.get_y(),2));
 }
 
 //return the coordinates -this

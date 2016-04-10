@@ -32,15 +32,15 @@ void Fresque::applyHomethety(double x,double y){
         o->applyHomethety(x,y);
     }
 }
-void Fresque::applyAxialSymmetry(){
+void Fresque::applyAxialSymmetry(double a,double b){
     for(ObjectInterface* o : objects) {
-        o->applyAxialSymmetry();
+        o->applyAxialSymmetry(a,b);
     }
 }
 
-void Fresque::applyCentralSymmetry(){
+void Fresque::applyCentralSymmetry(double x,double y){
     for(ObjectInterface* o : objects) {
-        o->applyCentralSymmetry();
+        o->applyCentralSymmetry(x,y);
     }
 }
 

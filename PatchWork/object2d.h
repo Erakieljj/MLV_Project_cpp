@@ -30,8 +30,8 @@ class Object2D :public ObjectInterface {
         void applyRotationDirect(double angle);
         void applyRotationIndirect(double angle);
         void applyHomethety(double x,double y);
-        void applyAxialSymmetry();
-        void applyCentralSymmetry();
+        void applyAxialSymmetry(double a, double b);
+        void applyCentralSymmetry(double x,double y);
 
 };
 #endif // OBJECT2D_H
