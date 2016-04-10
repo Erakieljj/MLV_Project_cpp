@@ -1,7 +1,7 @@
 #include <cstring>
 #include <cmath>
 #include <iostream>
-
+#include <stdexcept>
 #include <matrix.h>
 
 using namespace std;
