@@ -68,23 +68,6 @@ Matrix* Matrix::homothety(double x, double y)
     return m;
 }
 
-/*
-Matrix Matrix::transpose()
-{
-    Matrix trans(*this);
-    
-    trans.m[1] = this->m[3];
-    trans.m[2] = this->m[6];
-    trans.m[5] = this->m[7];
-
-    trans.m[3] = this->m[1];
-    trans.m[6] = this->m[2];
-    trans.m[7] = this->m[5];
-
-    return trans;
-}
-*/
-
 void Matrix::print()
 {
     cout << endl;
@@ -97,6 +80,23 @@ void Matrix::print()
     }
 }
 
+Matrix Matrix::operator* (const Matrix& matrix)
+{
+    if(this->n!= matrix.m){
+        throw new domain_error("Error with operator '*' : Nb col first Matrix != Nb line second Matrix ("+to_string(this->m)+","+to_string(this->n)+") *" +"("+to_string(matrix.m)+","+to_string(matrix.n)+")");
+    }
+    Matrix *mul = new Matrix(this->m,matrix.n);
+
+    for(int i=0; i<this->m; ++i) {
+        for(int j=0; j<matrix.n; ++j) {
+            for(int k=0; k<this->n; ++k)
+            {
+                mul->mat[i][j]+=this->mat[i][k]*matrix.mat[k][j];
+            }
+        }
+    }
+    return *mul;
+}
 /*
 Matrix& Matrix::operator= (const Matrix& mat)
 {

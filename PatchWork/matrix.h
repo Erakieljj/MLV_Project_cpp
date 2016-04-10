@@ -63,6 +63,13 @@ class Matrix
         static Matrix* homothety(double x, double y);
 
         void print();
+
+        /// Product of two matrix
+        /// \brief operator *
+        /// \param matrix
+        /// \return
+        ///
+        Matrix operator*(const Matrix &matrix);
         /*
 
         //Liste des fonctions de manipulation de la matrice courante

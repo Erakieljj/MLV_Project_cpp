@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     f->applyHomethety(5);
     cout <<endl;
 
-    Matrix *m1 = new Matrix(3,2);
+    Matrix *m1 = new Matrix(3,7);
     Matrix *m2 = Matrix::idMatrix(3);
     Matrix *m3 = Matrix::homothety(2,4);
     Matrix *m4 = Matrix::rotation(90);
@@ -35,10 +35,19 @@ int main(int argc, char *argv[])
     m4->print();
     m5->print();
 
+    // Representation matricielle du vecteur de Point
     Matrix *m6 = new Matrix(l->getPoints());
+
+    // Matrix de homothetie * Matrix reprensenté par notre Line
+    m3->print();
     m6->print();
 
+    try{
+        Matrix mm = *m3 * (*m6) ;
+        mm.print();
+    } catch(domain_error* e){
+        cout <<e->what() <<endl;
+    }
+
     return 0;
-
-
 }
