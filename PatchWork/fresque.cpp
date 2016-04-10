@@ -7,7 +7,6 @@ Fresque::Fresque() {
 
 // Inherited method from ObjectInterface
 void Fresque::draw(){
-    cout << "drawin inc "<< objects.size()<<endl;
     for(ObjectInterface* o : objects) {
         o->draw();
     }
@@ -51,7 +50,7 @@ bool Fresque::add(ObjectInterface & o){
     return true;
 }
 
-bool Fresque::remove(ObjectInterface const &o){
+bool Fresque::remove(ObjectInterface &o){
     cout << "Remove";
     return false;
 }

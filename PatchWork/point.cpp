@@ -1,28 +1,61 @@
-#include "point.h"
+#include <point.h>
 
-Point::Point(int x, int y): x(x), y(y)
+//create a point of coordinates (x,y)
+Point::Point(double x, double y)
 {
-
+    this -> x = x;
+    this -> y = y;
 }
 
-int Point::getX() const
+//return the coordinates -this
+Point Point::operator-()
 {
-    return x;
+    return Point(-(this -> x), -(this -> y));
 }
 
-void Point::setX(int x)
+Point& Point::operator=(Point& A)
 {
-    this->x = x;
+    this -> x = A.get_x();
+    this -> y = A.get_y();
+    return (*this);
 }
 
-int Point::getY() const
+Point& Point::operator+= (Point& A)
 {
-    return y;
+    this -> x += A.get_x();
+    this -> y += A.get_y();
+    return (*this);
 }
 
-void Point::setY(int y)
+Point& Point::operator-= (Point& A)
 {
-    this->y = y;
+    this -> x -= A.get_x();
+    this -> y -= A.get_y();
+    return (*this);
+}
+
+//return true if A == this, false otherwise
+bool Point::operator== (Point A)
+{
+    return (is_zero(this -> x - A.get_x())) && (is_zero(this -> y - A.get_y()));
+}
+
+//return true if A != this, false otherwise
+bool Point::operator!= (Point& A)
+{
+    return (!is_zero(this -> x - A.get_x())) || (!is_zero(this -> y - A.get_y()));
+}
+
+//return the coordinates equal to this + A
+Point Point::operator+ (Point& A)
+{
+    return Point(this -> x + A.get_x(), this -> y + A.get_y());
+}
+
+//return the coordinates equal to this - A
+Point Point::operator- (Point& A)
+{
+   return Point(this -> x - A.get_x(), this -> y - A.get_y()); 
 }
 
 ostream & operator<< (ostream & os, const Point & p)

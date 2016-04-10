@@ -14,13 +14,13 @@ class Object2D{
         Object2D(std::string color): color(color){}
 
     public:
-
         //Personal method
         virtual float getArea() {return 0;}
         virtual float getPerimeter() {return 0;}
 
         std::string getColor() const;
         void setColor(std::string color);
+        vector<Point> getPoints(){return this->vertices;}
 
 };
 #endif // OBJECT2D_H

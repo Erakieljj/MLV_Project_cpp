@@ -1,22 +1,42 @@
-#ifndef POINT_H
-#define POINT_H
-#include <iostream>
-
+#ifndef __POINT_H__
+#define __POINT_H__
+#include <ostream>
 using namespace std;
 
 class Point
 {
+    private:
+        double x;
+        double y;
+        bool is_zero(double a) {return a==0;}
+
     public:
-        Point(int x,int y);
-        int getX() const;
-        int getY() const;
-        void setX(int x);
-        void setY(int y);
+        //
+        Point(double x, double y);
 
+        //getters
+        inline double get_x(){return this -> x;};
+        inline double get_y(){return this -> y;};
+
+        //
+
+        //return the point of coordinates (-x, -y)
+        Point operator-();
+
+        Point& operator=(Point& A);
+
+        Point& operator+= (Point& A);
+
+        Point& operator-= (Point& A);
+        //return true if A == this, false otherwise
+        bool operator== (Point A);
+        //return true if A != this, false otherwise
+        bool operator!= (Point& A);
+        //return the coordinates equal to this + A
+        Point operator+ (Point& A);
+        //return the coordinates equal to this - A
+        Point operator- (Point& A);
         friend ostream& operator<< (ostream &os, const Point &p);
-    private :
-        int x,y;
-
 };
 
-#endif // POINT_H
+#endif

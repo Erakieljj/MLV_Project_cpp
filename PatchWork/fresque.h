@@ -20,7 +20,7 @@ class Fresque : public ObjectInterface
 
         // Personal method
         bool add(ObjectInterface &o);
-        bool remove(ObjectInterface const& o);
+        bool remove(ObjectInterface &o);
 
     private:
         std::vector<ObjectInterface*> objects;

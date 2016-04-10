@@ -20,6 +20,7 @@ void Line::applyCentralSymmetry(){
 
 void Line::applyHomethety(float ratio){
     cout <<"homo";
+
 }
 
 void Line::applyRotationDirect(float angle){
