@@ -54,9 +54,14 @@ int main()
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
     /* --------------- socket() function ------------------*/
 
+    #if defined (WIN32)
+        WSADATA WSAData;
+        WSAStartup(MAKEWORD(2,2), &WSAData);
+    #endif
+
     client = socket(AF_INET, SOCK_STREAM, 0);
     if (client < 0)
-    {
+    {   cout << client << endl;
         cout << "\nError establishing socket..." << endl;
         exit(1);
     }
@@ -230,5 +235,8 @@ int main()
     }
 
     close(client);
+    #if defined (WIN32)
+        WSACleanup();
+    #endif
     return 0;
 }
