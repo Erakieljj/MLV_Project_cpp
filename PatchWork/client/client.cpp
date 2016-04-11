@@ -107,8 +107,17 @@ int main()
     /* ---------- CONNECTING THE SOCKET ---------- */
     /* ---------------- connect() ---------------- */
 
+    //return 1 right now wtf??
     if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0)
         cout << "=> Connection to the server port number: " << portNum << endl;
+    else {
+        cout << "Connection error" << endl;
+        close(client);
+        #if defined (WIN32)
+            WSACleanup();
+        #endif
+        exit(-1);
+    }
 
     /*
         The connect function is called by the client to
