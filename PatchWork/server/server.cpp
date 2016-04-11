@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <map>
+#include "../fresque.h"
 #include <QtCore>
 
 using namespace std;
@@ -54,8 +55,7 @@ int main()
     struct sockaddr_in server_addr;
     socklen_t size;
 
-    /* à la place de l'int de droite mettre l'objet qui représente le dessin */
-    map<int, int> map_drawing;
+    //map<int, Fresque> map_drawing;
 
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
     /* --------------- socket() function ------------------*/
