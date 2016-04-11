@@ -188,7 +188,7 @@ int main()
             //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
             if(true==false) { //a remplacer
                 strcpy(buffer,"perfect");
-                //add to big fresque here
+                //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
 
                 //update the number of drawing finished
                 nb_drawing++;
