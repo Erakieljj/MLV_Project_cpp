@@ -93,6 +93,7 @@ int main()
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(portNum);
+    server_addr.sin_addr.s_addr = inet_addr(ip);
 
     // this function returns returns 1 if the IP is valid
     // and 0 if invalid

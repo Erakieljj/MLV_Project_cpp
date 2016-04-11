@@ -66,6 +66,7 @@ int main()
     #endif
 
     client = socket(AF_INET, SOCK_STREAM, 0);
+
     if (client < 0)
     {   cout << client << endl;
         cout << "\nError establishing socket..." << endl;
