@@ -144,28 +144,19 @@ int main()
 
     do {
         cout << "Client: ";
-        do {
-            cin >> buffer;
-            send(client, buffer, bufsize, 0);
-            if (*buffer == '#') {
-                send(client, buffer, bufsize, 0);
-                *buffer = '*';
-                isExit = true;
-            }
-        } while (*buffer != 42);
 
-        cout << "Server: ";
-        do {
-            recv(client, buffer, bufsize, 0);
-            cout << buffer << " ";
-            if (*buffer == '#') {
-                *buffer = '*';
-                isExit = true;
-            }
+        cin >> buffer;
+        send(client, buffer, bufsize, 0);
 
-        } while (*buffer != 42);
-        cout << endl;
-
+        cout << "Response from the teacher: ";
+        recv(client, buffer, bufsize, 0);
+        cout << buffer << " " << endl;
+        if (*buffer == 'perfect') {
+            isExit = true;
+        }
+        else {
+            //traitement sur le dessin
+        }
     } while (!isExit);
 
     /* ---------------- CLOSE CALL ------------- */
