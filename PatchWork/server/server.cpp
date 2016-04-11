@@ -12,11 +12,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <map>
+#include <QtCore>
 
 using namespace std;
 
 int main()
 {
+
     /* ---------- INITIALIZING VARIABLES ---------- */
 
     /*

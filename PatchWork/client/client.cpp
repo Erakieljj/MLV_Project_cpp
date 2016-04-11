@@ -11,7 +11,7 @@
 #endif
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <QtCore>
 
 using namespace std;
 
