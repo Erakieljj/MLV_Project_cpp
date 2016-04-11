@@ -48,9 +48,10 @@ int main()
     */
     int client, server;
     int portNum = 1500;
-    bool isExit = false;
     int bufsize = 1024;
     char buffer[bufsize];
+    int max_drawing = 4;
+    int nb_drawing;
 
     struct sockaddr_in server_addr;
     socklen_t size;
@@ -135,13 +136,7 @@ int main()
         The listen system call allows the process to listen
         on the socket for connections.
         The program will be stay idle here if there are no
-        incomming connections.
-        The first argument is the socket file descriptor,
-        and the second is the size for the number of clients
-        i.e the number of connections that the server can
-        handle while the process is handling a particular
-        connection. The maximum size permitted by most
-        systems is 5.
+        incomming connections..
     */
 
     /* ------------- ACCEPTING CLIENTS  ------------- */
@@ -168,10 +163,9 @@ int main()
 
     while (server > 0)
     {
-        strcpy(buffer, "=> Server connected...\n");
+        strcpy(buffer, "Server connected...\n");
         send(server, buffer, bufsize, 0);
         cout << "=> Connected with the client #" << clientCount << ", you are good to go..." << endl;
-        cout << "\n=> Enter # to end the connection\n" << endl;
 
         /*
             Note that we would only get to this point after a
@@ -184,61 +178,44 @@ int main()
             in the socket or 1024
         */
 
-        cout << "Client: ";
+        cout << "Drawing from student: ";
         do {
+            //on reçoit le dessin
             recv(server, buffer, bufsize, 0);
-            cout << buffer << " ";
-            if (*buffer == '#') {
-                *buffer = '*';
-                isExit = true;
+            cout << buffer << " " << endl;
+
+            //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
+            //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
+            if(true==false) { //a remplacer
+                strcpy(buffer,"perfect");
+                //add to big fresque here
+
+                //update the number of drawing finished
+                nb_drawing++;
             }
-        } while (*buffer != '*');
+            //ajout de la réponse avec la liste des annotations
+            else {
+                cout << "=> Message Sent: you have to work again" << endl;
+                // ecriture dans le buffer
+            }
 
-        do {
-            cout << "\nServer: ";
-            do {
-                cin >> buffer;
-                send(server, buffer, bufsize, 0);
-                if (*buffer == '#') {
-                    send(server, buffer, bufsize, 0);
-                    *buffer = '*';
-                    isExit = true;
-                }
-            } while (*buffer != '*');
+            /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
+              faire modifier son dessin */
+            send(server, buffer, bufsize, 0);
 
-            cout << "Client: ";
-            do {
-                recv(server, buffer, bufsize, 0);
-                cout << buffer << " ";
-                if (*buffer == '#') {
-                    *buffer == '*';
-                    isExit = true;
-                }
-            } while (*buffer != '*');
-        } while (!isExit);
+        //si on a reçu tout les dessins on affiche la grande fresque
+        } while (nb_drawing != max_drawing);
 
-        /*
-            Once a connection has been established, both ends
-            can both read and write to the connection. Naturally,
-            everything written by the client will be read by the
-            server, and everything written by the server will be
-            read by the client.
-        */
+        //affichage de la grande fresque ici
+
 
         /* ---------------- CLOSE CALL ------------- */
         /* ----------------- close() --------------- */
-
-        /*
-            Once the server presses # to end the connection,
-            the loop will break and it will close the server
-            socket connection and the client connection.
-        */
 
         // inet_ntoa converts packet data to IP, which was taken from client
         cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr);
         close(server);
         cout << "\nGoodbye..." << endl;
-        isExit = false;
         exit(1);
     }
 

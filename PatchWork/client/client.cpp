@@ -25,7 +25,7 @@ int main()
        system call.
        2. portNum is for storing port number on which
        the accepts connections
-       3. isExit is bool variable which will be used to
+       3. exit is bool variable which will be used to
        end the loop
        4. The client reads characters from the socket
        connection into a dynamic variable (buffer).
@@ -45,7 +45,7 @@ int main()
 
     int client;
     int portNum = 1500; // NOTE that the port number is same for both client and server
-    bool isExit = false;
+    bool finished = false;
     int bufsize = 1024;
     char buffer[bufsize];
     char* ip = "127.0.0.1";
@@ -95,15 +95,6 @@ int main()
     server_addr.sin_port = htons(portNum);
     server_addr.sin_addr.s_addr = inet_addr(ip);
 
-    // this function returns returns 1 if the IP is valid
-    // and 0 if invalid
-    // inet_pton converts IP to packets
-    // inet_ntoa converts back packets to IP
-    //inet_pton(AF_INET, ip, &server_addr.sin_addr);
-
-    /*if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0)
-        cout << "=> Connection to the server " << inet_ntoa(server_addr.sin_addr) << " with port number: " << portNum << endl;*/
-
 
     /* ---------- CONNECTING THE SOCKET ---------- */
     /* ---------------- connect() ---------------- */
@@ -136,28 +127,29 @@ int main()
 
     cout << "=> Awaiting confirmation from the server..." << endl; //line 40
     recv(client, buffer, bufsize, 0);
-    cout << "=> Connection confirmed, you are good to go...";
-
-    cout << "\n\n=> Enter # to end the connection\n" << endl;
+    cout << "=> message from the server:" << buffer << endl;
+    cout << "=> Connection confirmed, you are good to go..." << endl;
 
     // Once it reaches here, the client can send a message first.
 
     do {
-        cout << "Client: ";
+        cout << "Student: ";
 
+        //c'est ici qu'on doit envoyer le json dans le buffer on remplace le cin
         cin >> buffer;
         send(client, buffer, bufsize, 0);
 
         cout << "Response from the teacher: ";
         recv(client, buffer, bufsize, 0);
         cout << buffer << " " << endl;
-        if (*buffer == 'perfect') {
-            isExit = true;
+        if (strcmp (buffer,"perfect") == 0) {
+            finished = true;
         }
         else {
             //traitement sur le dessin
+            cout << "working on the drawing again.." << endl;
         }
-    } while (!isExit);
+    } while (!finished);
 
     /* ---------------- CLOSE CALL ------------- */
     /* ----------------- close() --------------- */
