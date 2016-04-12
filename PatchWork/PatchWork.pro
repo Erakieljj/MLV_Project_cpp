@@ -13,7 +13,8 @@ SOURCES += \
     point.cpp \
     polygone.cpp \
     circle.cpp \
-    ellipse.cpp
+    ellipse.cpp \
+    #drawingforjson.cpp
 
 HEADERS += \
     line.h \
@@ -24,7 +25,8 @@ HEADERS += \
     point.h \
     polygone.h \
     circle.h \
-    ellipse.h
+    ellipse.h \
+    #drawingforjson.h
 
 DISTFILES += \
     PatchWork.pro.user
