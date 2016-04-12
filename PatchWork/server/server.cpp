@@ -16,13 +16,19 @@
 #include <QtCore>
 
 
+unsigned __stdcall ClientSession(void *data)
+{
+    SOCKET client_socket = (SOCKET)data;
+    // Process the client.
+}
+
 
 int main()
 {
 
     /* ---------- INITIALIZING VARIABLES ---------- */
 
-    int client, server;
+    int ListeningSocket , NewConnectionSocket;
     int portNum = 1500;
     int bufsize = 3000;
     char buffer[bufsize];
@@ -43,10 +49,10 @@ int main()
         WSAStartup(MAKEWORD(2,2), &WSAData);
     #endif
 
-    client = socket(AF_INET, SOCK_STREAM, 0);
+    ListeningSocket = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (client < 0)
-    {   cout << client << endl;
+    if (ListeningSocket  < 0)
+    {   cout << ListeningSocket  << endl;
         cout << "\nError establishing socket..." << endl;
         exit(1);
     }
@@ -86,7 +92,7 @@ int main()
 
 
 
-     if (::bind(client, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
+     if (::bind(ListeningSocket , (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
         cout << "=> Error binding connection, the socket has already been established..." << endl;
         return -1;
@@ -108,7 +114,7 @@ int main()
     /* ---------------- listen() ---------------- */
 
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à 5 (comme les clients FTP)
-    listen(client, 5);
+    listen(ListeningSocket , 5);
 
     /*
         The listen system call allows the process to listen
@@ -135,16 +141,16 @@ int main()
             end of the connection, and the third argument is the size
             of this structure.
         */
-        server = accept(client,(struct sockaddr *)&server_addr,&size);
+        NewConnectionSocket = accept(ListeningSocket,(struct sockaddr *)&server_addr,&size);
 
         // first check if it is valid or not
-        if (server < 0)
+        if (NewConnectionSocket < 0)
             cout << "=> Error on accepting..." << endl;
 
-        while (server > 0)
+        while (NewConnectionSocket > 0)
         {
             strcpy(buffer, "Server connected...\n");
-            send(server, buffer, bufsize, 0);
+            send(NewConnectionSocket, buffer, bufsize, 0);
             cout << "=> Connected with the client #" << clientCount << ", you are good to go..." << endl;
 
             int size_read = 0;
@@ -156,14 +162,14 @@ int main()
             do {
 
                 //on lit la taille
-                recv(server, buffer, bufsize, 0);
+                recv(NewConnectionSocket, buffer, bufsize, 0);
                 totalsize = atoi(buffer);
                 cout << "size read: " << totalsize << endl;
 
                 //on reçoit le dessin
                 memset(buffer, 0, bufsize);
                 while(size_cum != totalsize) {
-                    size_read=recv(server, buffer, totalsize, 0);
+                    size_read=recv(NewConnectionSocket, buffer, totalsize, 0);
                     size_cum = size_cum + size_read;
                     cout << "total size: " << totalsize << endl;
                     cout << "size_cum: " << size_cum << endl;
@@ -189,7 +195,7 @@ int main()
 
                 /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
                   faire modifier son dessin */
-                send(server, buffer, bufsize, 0);
+                send(NewConnectionSocket, buffer, bufsize, 0);
 
             //si on a reçu tout les dessins on affiche la grande fresque
             } while (!drawing_finished);
@@ -199,14 +205,14 @@ int main()
 
             // inet_ntoa converts packet data to IP, which was taken from client
             cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr) << endl;
-            close(server);
+            close(NewConnectionSocket);
 
         }
     }
     //affichage de la grande fresque ici
     cout << "Enjoy the nice work from all students: " << endl;
 
-    close(client);
+    close(ListeningSocket);
     #if defined (WIN32)
         WSACleanup();
     #endif
