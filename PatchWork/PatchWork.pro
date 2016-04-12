@@ -1,20 +1,18 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
-CONFIG -= qt
 
 SOURCES += \
     main.cpp \
     line.cpp \
     object2d.cpp \
-    #objectinterface.cpp \
     fresque.cpp \
     matrix.cpp \
     point.cpp \
     polygone.cpp \
     circle.cpp \
     ellipse.cpp \
-    #drawingforjson.cpp
+    drawingforjson.cpp
 
 HEADERS += \
     line.h \
@@ -26,7 +24,7 @@ HEADERS += \
     polygone.h \
     circle.h \
     ellipse.h \
-    #drawingforjson.h
+    drawingforjson.h
 
 DISTFILES += \
     PatchWork.pro.user

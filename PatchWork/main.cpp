@@ -7,7 +7,6 @@
 #include "fresque.h"
 #include "objectinterface.h"
 #include "matrix.h"
-#include <stdexcept>
 
 
 using namespace std;
