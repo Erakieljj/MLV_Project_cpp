@@ -46,7 +46,7 @@ int main()
     int client;
     int portNum = 1500; // NOTE that the port number is same for both client and server
     bool finished = false;
-    int bufsize = 1024;
+    int bufsize = 3000;
     char buffer[bufsize];
     char* ip = "127.0.0.1";
 
@@ -136,7 +136,19 @@ int main()
         cout << "Student: ";
 
         //c'est ici qu'on doit envoyer le json dans le buffer on remplace le cin
-        cin >> buffer;
+        //cin >> buffer;
+
+        //send size buffer
+        string size = std::to_string(strlen("aza poi aze"));
+        char const* schar = size.c_str();
+
+        cout << "size of buffer: " << schar << endl;
+        strcpy(buffer, schar);
+        cout << "buffer before send: " << buffer << endl;
+        send(client, buffer, bufsize, 0);
+
+        strcpy(buffer, "aza poi aze");
+        //then send drawing
         send(client, buffer, bufsize, 0);
 
         cout << "Response from the teacher: ";

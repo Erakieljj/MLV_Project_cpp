@@ -48,7 +48,7 @@ int main()
     */
     int client, server;
     int portNum = 1500;
-    int bufsize = 1024;
+    int bufsize = 3000;
     char buffer[bufsize];
     int max_drawing = 4;
     int nb_drawing;
@@ -179,15 +179,32 @@ int main()
             in the socket or 1024
         */
 
+        int size_read = 0;
+        int totalsize = 0;
+        int size_cum = 0;
+
         cout << "Drawing from student: ";
         do {
-            //on reçoit le dessin
+
+            //on lit la taille
             recv(server, buffer, bufsize, 0);
-            cout << buffer << " " << endl;
+            totalsize = atoi(buffer);
+            cout << "size read: " << totalsize << endl;
+
+            //on reçoit le dessin
+            memset(buffer, 0, bufsize);
+            while(size_cum != totalsize) {
+                size_read=recv(server, buffer, totalsize, 0);
+                size_cum = size_cum + size_read;
+                cout << "total size: " << totalsize << endl;
+                cout << "size_cum: " << size_cum << endl;
+            }
+            cout << "buffer: " << buffer << " " << endl;
 
             //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
             //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
-            if(true==false) { //a remplacer
+            if(true==true) { //a remplacer
+                memset(buffer, 0, bufsize);
                 strcpy(buffer,"perfect");
                 //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
 
