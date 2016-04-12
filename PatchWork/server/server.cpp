@@ -16,12 +16,6 @@
 #include <QtCore>
 
 
-unsigned __stdcall ClientSession(void *data)
-{
-    SOCKET client_socket = (SOCKET)data;
-    // Process the client.
-}
-
 
 int main()
 {
