@@ -206,7 +206,7 @@ int main()
             // inet_ntoa converts packet data to IP, which was taken from client
             cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr) << endl;
             close(NewConnectionSocket);
-
+            NewConnectionSocket = 0;
         }
     }
     //affichage de la grande fresque ici
