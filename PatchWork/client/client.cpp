@@ -99,7 +99,7 @@ int main()
     /* ---------- CONNECTING THE SOCKET ---------- */
     /* ---------------- connect() ---------------- */
 
-    if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == SOCKET_ERROR) {
+    if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) != 0) {
         cout << "Connection error" << endl;
         close(client);
         #if defined (WIN32)
