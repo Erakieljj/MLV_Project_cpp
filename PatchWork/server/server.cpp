@@ -15,7 +15,7 @@
 #include "../fresque.h"
 #include <QtCore>
 
-using namespace std;
+
 
 int main()
 {
@@ -108,7 +108,8 @@ int main()
     /* ---------------- bind() ---------------- */
 
 
-    if ((bind(client, (struct sockaddr*)&server_addr,sizeof(server_addr))) < 0)
+
+     if (::bind(client, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
         cout << "=> Error binding connection, the socket has already been established..." << endl;
         return -1;
