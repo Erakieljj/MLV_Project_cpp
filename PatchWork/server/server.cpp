@@ -33,7 +33,7 @@ int main()
     int bufsize = 3000;
     char buffer[bufsize];
     int max_drawing = 4;
-    int nb_drawing;
+    int nb_drawing = 0;
     int clientCount = 0;
 
     struct sockaddr_in server_addr;
@@ -126,6 +126,8 @@ int main()
 
 
     while (max_drawing!=nb_drawing) {
+        cout << "max draw: " << max_drawing << endl;
+        cout << "nb draw: " << nb_drawing << endl;
         clientCount++;
         /* ------------- ACCEPTING CLIENTS  ------------- */
         /* ----------------- listen() ------------------- */
