@@ -22,36 +22,13 @@ int main()
 
     /* ---------- INITIALIZING VARIABLES ---------- */
 
-    /*
-       1. client/server are two file descriptors
-       These two variables store the values returned
-       by the socket system call and the accept system call.
-       2. portNum is for storing port number on which
-       the accepts connections
-       3. isExit is bool variable which will be used to
-       end the loop
-       4. The server reads characters from the socket
-       connection into a dynamic variable (buffer).
-       5. A sockaddr_in is a structure containing an internet
-       address. This structure is already defined in netinet/in.h, so
-       we don't need to declare it again.
-        DEFINITION:
-        struct sockaddr_in
-        {
-          short   sin_family;
-          u_short sin_port;
-          struct  in_addr sin_addr;
-          char    sin_zero[8];
-        };
-        6. serv_addr will contain the address of the server
-        7. socklen_t  is an intr type of width of at least 32 bits
-    */
     int client, server;
     int portNum = 1500;
     int bufsize = 3000;
     char buffer[bufsize];
     int max_drawing = 4;
     int nb_drawing;
+    int clientCount = 0;
 
     struct sockaddr_in server_addr;
     socklen_t size;
@@ -155,91 +132,82 @@ int main()
         of this structure.
     */
 
-    int clientCount = 1;
-    server = accept(client,(struct sockaddr *)&server_addr,&size);
+    while (max_drawing!=nb_drawing) {
+        clientCount++;
+        server = accept(client,(struct sockaddr *)&server_addr,&size);
 
-    // first check if it is valid or not
-    if (server < 0)
-        cout << "=> Error on accepting..." << endl;
+        // first check if it is valid or not
+        if (server < 0)
+            cout << "=> Error on accepting..." << endl;
 
-    while (server > 0)
-    {
-        strcpy(buffer, "Server connected...\n");
-        send(server, buffer, bufsize, 0);
-        cout << "=> Connected with the client #" << clientCount << ", you are good to go..." << endl;
-
-        /*
-            Note that we would only get to this point after a
-            client has successfully connected to our server.
-            This reads from the socket. Note that the read()
-            will block until there is something for it to read
-            in the socket, i.e. after the client has executed a
-            the send().
-            It will read either the total number of characters
-            in the socket or 1024
-        */
-
-        int size_read = 0;
-        int totalsize = 0;
-        int size_cum = 0;
-
-        cout << "Drawing from student: ";
-        do {
-
-            //on lit la taille
-            recv(server, buffer, bufsize, 0);
-            totalsize = atoi(buffer);
-            cout << "size read: " << totalsize << endl;
-
-            //on reçoit le dessin
-            memset(buffer, 0, bufsize);
-            while(size_cum != totalsize) {
-                size_read=recv(server, buffer, totalsize, 0);
-                size_cum = size_cum + size_read;
-                cout << "total size: " << totalsize << endl;
-                cout << "size_cum: " << size_cum << endl;
-            }
-            cout << "buffer: " << buffer << " " << endl;
-
-            //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
-            //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
-            if(true==true) { //a remplacer
-                memset(buffer, 0, bufsize);
-                strcpy(buffer,"perfect");
-                //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
-
-                //update the number of drawing finished
-                nb_drawing++;
-            }
-            //ajout de la réponse avec la liste des annotations
-            else {
-                cout << "=> Message Sent: you have to work again" << endl;
-                // ecriture dans le buffer
-            }
-
-            /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
-              faire modifier son dessin */
+        while (server > 0)
+        {
+            strcpy(buffer, "Server connected...\n");
             send(server, buffer, bufsize, 0);
+            cout << "=> Connected with the client #" << clientCount << ", you are good to go..." << endl;
 
-        //si on a reçu tout les dessins on affiche la grande fresque
-        } while (nb_drawing != max_drawing);
+            int size_read = 0;
+            int totalsize = 0;
+            int size_cum = 0;
+            boolean drawing_finished = false;
 
-        //affichage de la grande fresque ici
+            cout << "Drawing from student: ";
+            do {
 
+                //on lit la taille
+                recv(server, buffer, bufsize, 0);
+                totalsize = atoi(buffer);
+                cout << "size read: " << totalsize << endl;
 
-        /* ---------------- CLOSE CALL ------------- */
-        /* ----------------- close() --------------- */
+                //on reçoit le dessin
+                memset(buffer, 0, bufsize);
+                while(size_cum != totalsize) {
+                    size_read=recv(server, buffer, totalsize, 0);
+                    size_cum = size_cum + size_read;
+                    cout << "total size: " << totalsize << endl;
+                    cout << "size_cum: " << size_cum << endl;
+                }
+                cout << "buffer: " << buffer << " " << endl;
 
-        // inet_ntoa converts packet data to IP, which was taken from client
-        cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr);
-        close(server);
-        cout << "\nGoodbye..." << endl;
-        exit(1);
+                //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
+                //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
+                if(true==true) { //a remplacer
+                    memset(buffer, 0, bufsize);
+                    strcpy(buffer,"perfect");
+                    //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
+
+                    //update the number of drawing finished
+                    nb_drawing++;
+                    drawing_finished = true;
+                }
+                //ajout de la réponse avec la liste des annotations
+                else {
+                    cout << "=> Message Sent: you have to work again" << endl;
+                    // ecriture dans le buffer
+                }
+
+                /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
+                  faire modifier son dessin */
+                send(server, buffer, bufsize, 0);
+
+            //si on a reçu tout les dessins on affiche la grande fresque
+            } while (!drawing_finished);
+
+            /* ---------------- CLOSE CALL ------------- */
+            /* ----------------- close() --------------- */
+
+            // inet_ntoa converts packet data to IP, which was taken from client
+            cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr) << endl;
+            close(server);
+
+            close(client);
+            #if defined (WIN32)
+                WSACleanup();
+            #endif
+        }
     }
+    //affichage de la grande fresque ici
+    cout << "Enjoy the nice work from all students: " << endl;
 
-    close(client);
-    #if defined (WIN32)
-        WSACleanup();
-    #endif
     return 0;
 }

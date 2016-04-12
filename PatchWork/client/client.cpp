@@ -139,7 +139,7 @@ int main()
         //cin >> buffer;
 
         //send size buffer
-        string size = std::to_string(strlen("aza poi aze"));
+        string size = std::to_string(strlen("put json here\n"));
         char const* schar = size.c_str();
 
         cout << "size of buffer: " << schar << endl;
@@ -147,7 +147,7 @@ int main()
         cout << "buffer before send: " << buffer << endl;
         send(client, buffer, bufsize, 0);
 
-        strcpy(buffer, "aza poi aze");
+        strcpy(buffer, "put json here\n");
         //then send drawing
         send(client, buffer, bufsize, 0);
 
@@ -165,13 +165,6 @@ int main()
 
     /* ---------------- CLOSE CALL ------------- */
     /* ----------------- close() --------------- */
-
-    /*
-        Once the server presses # to end the connection,
-        the loop will break and it will close the server
-        socket connection and the client connection.
-    */
-
     cout << "\n=> Connection terminated.\nGoodbye...\n";
 
     close(client);
