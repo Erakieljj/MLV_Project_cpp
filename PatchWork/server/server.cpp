@@ -117,23 +117,24 @@ int main()
         incomming connections..
     */
 
-    /* ------------- ACCEPTING CLIENTS  ------------- */
-    /* ----------------- listen() ------------------- */
 
-    /*
-        The accept() system call causes the process to block
-        until a client connects to the server. Thus, it wakes
-        up the process when a connection from a client has been
-        successfully established. It returns a new file descriptor,
-        and all communication on this connection should be done
-        using the new file descriptor. The second argument is a
-        reference pointer to the address of the client on the other
-        end of the connection, and the third argument is the size
-        of this structure.
-    */
 
     while (max_drawing!=nb_drawing) {
         clientCount++;
+        /* ------------- ACCEPTING CLIENTS  ------------- */
+        /* ----------------- listen() ------------------- */
+
+        /*
+            The accept() system call causes the process to block
+            until a client connects to the server. Thus, it wakes
+            up the process when a connection from a client has been
+            successfully established. It returns a new file descriptor,
+            and all communication on this connection should be done
+            using the new file descriptor. The second argument is a
+            reference pointer to the address of the client on the other
+            end of the connection, and the third argument is the size
+            of this structure.
+        */
         server = accept(client,(struct sockaddr *)&server_addr,&size);
 
         // first check if it is valid or not
@@ -200,14 +201,15 @@ int main()
             cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr) << endl;
             close(server);
 
-            close(client);
-            #if defined (WIN32)
-                WSACleanup();
-            #endif
         }
     }
     //affichage de la grande fresque ici
     cout << "Enjoy the nice work from all students: " << endl;
+
+    close(client);
+    #if defined (WIN32)
+        WSACleanup();
+    #endif
 
     return 0;
 }
