@@ -150,6 +150,7 @@ int main()
         strcpy(buffer, "put json here\n");
         //then send drawing
         send(client, buffer, bufsize, 0);
+        cout << "draw sent!" << endl;
 
         cout << "Response from the teacher: ";
         recv(client, buffer, bufsize, 0);
