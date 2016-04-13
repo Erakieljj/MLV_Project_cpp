@@ -19,6 +19,8 @@
 #define MAX_DRAWING 4
 
 
+#define MAX_DRAWING 4
+
 std::atomic_int nb_drawing(0);
 std::mutex mtx;
 
@@ -91,7 +93,6 @@ void call_from_thread(int client_socket)
     close(client_socket);
 }
 
-
 int main()
 {
 
@@ -99,7 +100,6 @@ int main()
 
     int ListeningSocket , NewConnectionSocket;
     int portNum = 1500;
-    int max_drawing = 2;
 
     struct sockaddr_in server_addr;
     socklen_t size;
@@ -169,7 +169,7 @@ int main()
         incomming connections..
     */
 
-    while (max_drawing!=nb_drawing) {
+    while (MAX_DRAWING!=nb_drawing) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
         /* ----------------- listen() ------------------- */

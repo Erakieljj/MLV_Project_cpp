@@ -1,7 +1,7 @@
 #include "line.h"
 using namespace std;
 
-Line::Line(string color, Point p1, Point p2):Object2D(color)
+Line::Line(string color, Point p1, Point p2):ObjectInterface(color)
 {
     vector<Point> points;
     points.push_back(p1);

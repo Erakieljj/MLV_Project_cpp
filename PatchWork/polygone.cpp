@@ -1,7 +1,7 @@
 #include "polygone.h"
 using namespace std;
 
-Polygone::Polygone(string color, initializer_list<Point> points):Object2D(color)
+Polygone::Polygone(string color, initializer_list<Point> points):ObjectInterface(color)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");

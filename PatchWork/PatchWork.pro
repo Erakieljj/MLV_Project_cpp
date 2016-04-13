@@ -5,18 +5,17 @@ CONFIG -= app_bundle
 SOURCES += \
     main.cpp \
     line.cpp \
-    object2d.cpp \
     fresque.cpp \
     matrix.cpp \
     point.cpp \
     polygone.cpp \
     circle.cpp \
     ellipse.cpp \
-    #drawingforjson.cpp
+    #dataJSON.cpp \
+    objectinterface.cpp
 
 HEADERS += \
     line.h \
-    object2d.h \
     objectinterface.h \
     fresque.h \
     matrix.h \
@@ -24,7 +23,7 @@ HEADERS += \
     polygone.h \
     circle.h \
     ellipse.h \
-    #drawingforjson.h
+    #dataJSON.h
 
 DISTFILES += \
     PatchWork.pro.user
