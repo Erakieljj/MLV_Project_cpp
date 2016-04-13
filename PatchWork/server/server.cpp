@@ -28,7 +28,7 @@ void call_from_thread(int client_socket)
 
     strcpy(buffer, "Server connected...\n");
     send(client_socket, buffer, bufsize, 0);
-    cout << "=> Connected with the client #" << client_socket << ", you are good to go..." << endl;
+    cout << "=> Connected with the client #" << client_socket << ", starting ..." << endl;
 
     int size_read = 0;
     int totalsize = 0;
@@ -72,6 +72,7 @@ void call_from_thread(int client_socket)
         else {
             cout << "=> Message Sent: you have to work again" << endl;
             // ecriture dans le buffer
+            //json here for the answer..
         }
 
         /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
@@ -84,7 +85,7 @@ void call_from_thread(int client_socket)
 
     /* ---------------- CLOSE CALL ------------- */
     /* ----------------- close() --------------- */
-    cout << "\n\n=> Connection terminated with: " << client_socket << endl;
+    cout << "\n=> Connection ended with: " << client_socket << endl;
     close(client_socket);
 }
 
@@ -100,6 +101,11 @@ int main()
 
     struct sockaddr_in server_addr;
     socklen_t size;
+
+    /* to Store threads */
+    std::thread t[max_drawing];
+    /* for the thread join */
+    int i = 0;
 
     //map<int, Fresque> map_drawing;
 
@@ -160,9 +166,6 @@ int main()
         The program will be stay idle here if there are no
         incomming connections..
     */
-
-    std::thread t[max_drawing];
-    int i=0;
 
     while (max_drawing!=nb_drawing) {
 
