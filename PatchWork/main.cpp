@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "point.h"
 #include "line.h"
 #include "circle.h"
@@ -7,12 +8,15 @@
 #include "fresque.h"
 #include "objectinterface.h"
 #include "matrix.h"
-
-
+#include "clientgui.h"
 using namespace std;
+
+
+
 
 int main(int argc, char *argv[])
 {
+    /*
     Fresque *f = new Fresque();
 
     Point p(1,2);
@@ -36,6 +40,7 @@ int main(int argc, char *argv[])
     cout << "AREA " << f->getArea() << "  Perimeter :" <<f->getPerimeter() <<endl;
     cout <<endl;
 
+    */
     /*
     Matrix *m1 = new Matrix(3,7);
     Matrix *m2 = Matrix::idMatrix(3);
@@ -62,6 +67,12 @@ int main(int argc, char *argv[])
         cout <<e->what() <<endl;
     }
     */
+    Q_INIT_RESOURCE(clientgui);
 
-    return 0;
+    QApplication app(argc, argv);
+    Window window;
+    window.show();
+    return app.exec();
+
+    //return 0;
 }
