@@ -14,7 +14,80 @@
 #include <map>
 #include "../fresque.h"
 #include <QtCore>
+#include <thread>
+#include <mutex>
 
+std::atomic_int nb_drawing(0);
+std::mutex mtx;
+
+void call_from_thread(int client_socket)
+{
+
+    int bufsize = 3000;
+    char buffer[bufsize];
+
+    strcpy(buffer, "Server connected...\n");
+    send(client_socket, buffer, bufsize, 0);
+    cout << "=> Connected with the client #" << client_socket << ", starting ..." << endl;
+
+    int size_read = 0;
+    int totalsize = 0;
+    int size_cum = 0;
+    boolean drawing_finished = false;
+
+    //process client
+    cout << "Drawing from student: ";
+    do {
+
+        //on lit la taille
+        recv(client_socket, buffer, bufsize, 0);
+        totalsize = atoi(buffer);
+        cout << "size read: " << totalsize << endl;
+
+        //on reçoit le dessin
+        memset(buffer, 0, bufsize);
+        while(size_cum != totalsize) {
+            size_read=recv(client_socket, buffer, totalsize, 0);
+            size_cum = size_cum + size_read;
+            cout << "total size: " << totalsize << endl;
+            cout << "size_cum: " << size_cum << endl;
+        }
+        cout << "buffer: " << buffer << " " << endl;
+
+        //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
+        //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
+        if(true==true) { //a remplacer
+            memset(buffer, 0, bufsize);
+            strcpy(buffer,"perfect");
+            //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
+
+            //update the number of drawing finished
+            mtx.lock();
+            nb_drawing++;
+            mtx.unlock();
+
+            drawing_finished = true;
+        }
+        //ajout de la réponse avec la liste des annotations
+        else {
+            cout << "=> Message Sent: you have to work again" << endl;
+            // ecriture dans le buffer
+            //json here for the answer..
+        }
+
+        /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
+          faire modifier son dessin */
+        send(client_socket, buffer, bufsize, 0);
+        cout << "Message sent!" << endl;
+
+    //si on a reçu tout les dessins on affiche la grande fresque
+    } while (!drawing_finished);
+
+    /* ---------------- CLOSE CALL ------------- */
+    /* ----------------- close() --------------- */
+    cout << "\n=> Connection ended with: " << client_socket << endl;
+    close(client_socket);
+}
 
 
 int main()
@@ -22,39 +95,17 @@ int main()
 
     /* ---------- INITIALIZING VARIABLES ---------- */
 
-    /*
-       1. client/server are two file descriptors
-       These two variables store the values returned
-       by the socket system call and the accept system call.
-       2. portNum is for storing port number on which
-       the accepts connections
-       3. isExit is bool variable which will be used to
-       end the loop
-       4. The server reads characters from the socket
-       connection into a dynamic variable (buffer).
-       5. A sockaddr_in is a structure containing an internet
-       address. This structure is already defined in netinet/in.h, so
-       we don't need to declare it again.
-        DEFINITION:
-        struct sockaddr_in
-        {
-          short   sin_family;
-          u_short sin_port;
-          struct  in_addr sin_addr;
-          char    sin_zero[8];
-        };
-        6. serv_addr will contain the address of the server
-        7. socklen_t  is an intr type of width of at least 32 bits
-    */
-    int client, server;
+    int ListeningSocket , NewConnectionSocket;
     int portNum = 1500;
-    int bufsize = 1024;
-    char buffer[bufsize];
-    int max_drawing = 4;
-    int nb_drawing;
+    int max_drawing = 2;
 
     struct sockaddr_in server_addr;
     socklen_t size;
+
+    /* to Store threads */
+    std::thread t[max_drawing];
+    /* for the thread join */
+    int i = 0;
 
     //map<int, Fresque> map_drawing;
 
@@ -66,39 +117,15 @@ int main()
         WSAStartup(MAKEWORD(2,2), &WSAData);
     #endif
 
-    client = socket(AF_INET, SOCK_STREAM, 0);
+    ListeningSocket = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (client < 0)
-    {   cout << client << endl;
+    if (ListeningSocket  < 0)
+    {   cout << ListeningSocket  << endl;
         cout << "\nError establishing socket..." << endl;
         exit(1);
     }
 
-    /*
-        The socket() function creates a new socket.
-        It takes 3 arguments,
-            a. AF_INET: address domain of the socket.
-            b. SOCK_STREAM: Type of socket. a stream socket in
-            which characters are read in a continuous stream (TCP)
-            c. Third is a protocol argument: should always be 0. The
-            OS will choose the most appropiate protocol.
-            This will return a small integer and is used for all
-            references to this socket. If the socket call fails,
-            it returns -1.
-    */
-
     cout << "\n=> Socket server has been created..." << endl;
-
-    /*
-        The variable serv_addr is a structure of sockaddr_in.
-        sin_family contains a code for the address family.
-        It should always be set to AF_INET.
-        INADDR_ANY contains the IP address of the host. For
-        server code, this will always be the IP address of
-        the machine on which the server is running.
-        htons() converts the port number from host byte order
-        to a port number in network byte order.
-    */
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htons(INADDR_ANY);
@@ -109,7 +136,7 @@ int main()
 
 
 
-     if (::bind(client, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
+     if (::bind(ListeningSocket , (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
         cout << "=> Error binding connection, the socket has already been established..." << endl;
         return -1;
@@ -131,7 +158,7 @@ int main()
     /* ---------------- listen() ---------------- */
 
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à 5 (comme les clients FTP)
-    listen(client, 5);
+    listen(ListeningSocket , 5);
 
     /*
         The listen system call allows the process to listen
@@ -140,89 +167,44 @@ int main()
         incomming connections..
     */
 
-    /* ------------- ACCEPTING CLIENTS  ------------- */
-    /* ----------------- listen() ------------------- */
+    while (max_drawing!=nb_drawing) {
 
-    /*
-        The accept() system call causes the process to block
-        until a client connects to the server. Thus, it wakes
-        up the process when a connection from a client has been
-        successfully established. It returns a new file descriptor,
-        and all communication on this connection should be done
-        using the new file descriptor. The second argument is a
-        reference pointer to the address of the client on the other
-        end of the connection, and the third argument is the size
-        of this structure.
-    */
-
-    int clientCount = 1;
-    server = accept(client,(struct sockaddr *)&server_addr,&size);
-
-    // first check if it is valid or not
-    if (server < 0)
-        cout << "=> Error on accepting..." << endl;
-
-    while (server > 0)
-    {
-        strcpy(buffer, "Server connected...\n");
-        send(server, buffer, bufsize, 0);
-        cout << "=> Connected with the client #" << clientCount << ", you are good to go..." << endl;
+        /* ------------- ACCEPTING CLIENTS  ------------- */
+        /* ----------------- listen() ------------------- */
 
         /*
-            Note that we would only get to this point after a
-            client has successfully connected to our server.
-            This reads from the socket. Note that the read()
-            will block until there is something for it to read
-            in the socket, i.e. after the client has executed a
-            the send().
-            It will read either the total number of characters
-            in the socket or 1024
+            The accept() system call causes the process to block
+            until a client connects to the server. Thus, it wakes
+            up the process when a connection from a client has been
+            successfully established. It returns a new file descriptor,
+            and all communication on this connection should be done
+            using the new file descriptor. The second argument is a
+            reference pointer to the address of the client on the other
+            end of the connection, and the third argument is the size
+            of this structure.
         */
+        NewConnectionSocket = accept(ListeningSocket,(struct sockaddr *)&server_addr,&size);
 
-        cout << "Drawing from student: ";
-        do {
-            //on reçoit le dessin
-            recv(server, buffer, bufsize, 0);
-            cout << buffer << " " << endl;
+        // first check if it is valid or not
+        if (NewConnectionSocket < 0)
+            cout << "=> Error on accepting..." << endl;
 
-            //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
-            //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
-            if(true==false) { //a remplacer
-                strcpy(buffer,"perfect");
-                //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
+        t[i] = std::thread(call_from_thread, NewConnectionSocket);
+        t[i].join();
+        i++;
 
-                //update the number of drawing finished
-                nb_drawing++;
-            }
-            //ajout de la réponse avec la liste des annotations
-            else {
-                cout << "=> Message Sent: you have to work again" << endl;
-                // ecriture dans le buffer
-            }
-
-            /*renvoie de la réponse avec un perfect pour finir le client ou la liste des annotations pour lui
-              faire modifier son dessin */
-            send(server, buffer, bufsize, 0);
-
-        //si on a reçu tout les dessins on affiche la grande fresque
-        } while (nb_drawing != max_drawing);
-
-        //affichage de la grande fresque ici
-
-
-        /* ---------------- CLOSE CALL ------------- */
-        /* ----------------- close() --------------- */
-
-        // inet_ntoa converts packet data to IP, which was taken from client
-        cout << "\n\n=> Connection terminated with IP " << inet_ntoa(server_addr.sin_addr);
-        close(server);
-        cout << "\nGoodbye..." << endl;
-        exit(1);
     }
 
-    close(client);
+    mtx.lock();
+    //affichage de la grande fresque ici
+    cout << "Enjoy the nice work from all students: " << endl;
+    mtx.unlock();
+
+    close(ListeningSocket);
     #if defined (WIN32)
         WSACleanup();
     #endif
+
+
     return 0;
 }
