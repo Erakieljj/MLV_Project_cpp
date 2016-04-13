@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Circle::Circle(string color,Point p,double rayon):rayon(rayon),Object2D(color)
+Circle::Circle(string color,Point p,double rayon):rayon(rayon),ObjectInterface(color)
 {
     this->vertices.push_back(p);
     this->mat = *(new Matrix(this->vertices));

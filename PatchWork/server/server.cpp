@@ -17,6 +17,8 @@
 #include <thread>
 #include <mutex>
 
+#define MAX_DRAWING 4
+
 std::atomic_int nb_drawing(0);
 std::mutex mtx;
 
@@ -33,7 +35,7 @@ void call_from_thread(int client_socket)
     int size_read = 0;
     int totalsize = 0;
     int size_cum = 0;
-    boolean drawing_finished = false;
+    bool drawing_finished = false;
 
     //process client
     cout << "Drawing from student: ";
@@ -89,7 +91,6 @@ void call_from_thread(int client_socket)
     close(client_socket);
 }
 
-
 int main()
 {
 
@@ -97,13 +98,12 @@ int main()
 
     int ListeningSocket , NewConnectionSocket;
     int portNum = 1500;
-    int max_drawing = 2;
 
     struct sockaddr_in server_addr;
     socklen_t size;
 
     /* to Store threads */
-    std::thread t[max_drawing];
+    std::thread t[MAX_DRAWING];
     /* for the thread join */
     int i = 0;
 
@@ -167,7 +167,7 @@ int main()
         incomming connections..
     */
 
-    while (max_drawing!=nb_drawing) {
+    while (MAX_DRAWING!=nb_drawing) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
         /* ----------------- listen() ------------------- */
