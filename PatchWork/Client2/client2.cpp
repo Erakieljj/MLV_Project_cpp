@@ -1,3 +1,12 @@
+/**
+ * @file client2.cpp
+ * @brief le client qui représente un élève qui envoie son dessin au professeur
+ * et attend les annotations et attend les annotations en retour afin de corriger
+ * le dessin et de lui renvoyer jusqu'à qu'il soit parfait aux yeux du professeur
+ * @author Huy HUYNH
+ * @version 0.1
+ */
+
 #include <iostream>
 #include <string.h>
 #include <sys/types.h>
@@ -14,6 +23,14 @@
 #include <QtCore>
 
 using namespace std;
+
+
+/**
+ * @brief La fonction main du client
+ * @param aucun paramètre
+ * @return -1 s'il y a une erreur de connexion au serveur, 1 lors d'une erreur à l'établissement d'une socket,
+ * 0 si le programme s'est déroulé correctement
+ */
 
 int main()
 {

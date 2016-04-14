@@ -1,3 +1,11 @@
+/**
+ * @file server.cpp
+ * @brief le serveur qui représente la maîtresse qui envoie
+ * les corrections de dessins et assemble la fresque finale
+ * @author Huy HUYNH
+ * @version 0.1
+ */
+
 #include <iostream>
 #include <string.h>
 #include <sys/types.h>
@@ -20,6 +28,13 @@
 
 std::atomic_int nb_drawing(0);
 std::mutex mtx;
+
+/**
+ * @brief La fonction call_from_thread sera la fonction exécutée lors de la
+ * création d'une thread
+ * @param client_socket numéro de la socket du client
+ * @return rien à l'arrêt de la fonction
+ */
 
 void call_from_thread(int client_socket)
 {
@@ -89,6 +104,13 @@ void call_from_thread(int client_socket)
     cout << "\n=> Connection ended with: " << client_socket << endl;
     close(client_socket);
 }
+
+/**
+ * @brief La fonction main du serveur
+ * @param aucun paramètre
+ * @return -1 s'il y a une erreur de binding, 1 lors d'une erreur à l'établissement d'une socket,
+ * 0 si le programme s'est déroulé correctement
+ */
 
 int main()
 {
@@ -188,9 +210,11 @@ int main()
         if (NewConnectionSocket < 0)
             cout << ">> Error on accepting..." << endl;
 
-        t[i] = std::thread(call_from_thread, NewConnectionSocket);
-        t[i].join();
-        i++;
+        else {
+            t[i] = std::thread(call_from_thread, NewConnectionSocket);
+            t[i].join();
+            i++;
+        }
 
     }
 
