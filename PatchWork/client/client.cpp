@@ -79,11 +79,11 @@ int main()
     }
 
     else {
-        cout << ">> Connection to the server port number: " << portNum << "with socket: " << client << endl;
+        cout << ">> Connection to the server port number: " << portNum << " with socket: " << client << endl;
     }
 
 
-    cout << ">> Awaiting confirmation from the server..." << endl; //line 40
+    cout << ">> Awaiting confirmation from the server..." << endl;
     recv(client, buffer, bufsize, 0);
     cout << ">> message from the server:" << buffer << endl;
     cout << ">> Connection confirmed, starting..." << endl;

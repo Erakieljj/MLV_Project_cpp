@@ -111,7 +111,7 @@ void call_from_thread(int client_socket)
     } while (!drawing_finished);
 
     /* ----------------- Close --------------- */
-    cout << "\n=> Connection ended with: " << client_socket << endl;
+    cout << "=> Connection ended with: " << client_socket << "\n" << endl;
     close(client_socket);
 
 }
@@ -173,8 +173,8 @@ int main()
 
     /* ------------- LISTENING ------------- */
 
-    // En général, on met le nombre maximal de connexions pouvant être mises en attente à 5 (comme les clients FTP)
-    listen(ListeningSocket , 5);
+    // En général, on met le nombre maximal de connexions pouvant être mises en attente à MAX_DRAWING
+    listen(ListeningSocket , MAX_DRAWING);
 
     while (MAX_DRAWING!=nb_drawing) {
 
