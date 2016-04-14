@@ -57,6 +57,7 @@ void call_from_thread(int client_socket)
     do {
 
         //on lit la taille
+
         recv(client_socket, buffer, bufsize, 0);
         totalsize = atoi(buffer);
         cout << "size read: " << totalsize << endl;
@@ -74,9 +75,9 @@ void call_from_thread(int client_socket)
 
         /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
           et la maîtresse peut accéder à n'importe quel moment à la map */
-        mtx.lock();
+
         map_drawing[client_socket] = buffer;
-        mtx.unlock();
+
 
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
@@ -84,14 +85,13 @@ void call_from_thread(int client_socket)
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-            //mtx.lock();
-            //mtx.unlock();
+
 
             //update the number of drawing finished
-            mtx.lock();
+
             nb_drawing++;
-            cout << "DRAWING NUMBER: #" << nb_drawing << endl;
-            mtx.unlock();
+            //cout << "DRAWING NUMBER: #" << nb_drawing << endl;
+
 
             drawing_finished = true;
         }
@@ -180,7 +180,7 @@ int main()
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
 
-        /* accept est bloquant jusqu'à l'arrivée d'un client */
+        /* accept est bloquant jusqu'à l'arrivée d'un client, NewConnectionSocket est le numéro de socket du client */
         NewConnectionSocket = accept(ListeningSocket,(struct sockaddr *)&server_addr,&size);
 
         // first check if it is valid or not
