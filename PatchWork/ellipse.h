@@ -10,7 +10,13 @@
 class Ellipse :public ObjectInterface
 {
     private:
+        /**
+         * @brief rlon Rayon pour longueur ellipse.
+         */
         double rlon;
+        /**
+         * @brief rlar Rayon pour largeur ellipse.
+         */
         double rlar;
     public:
         Ellipse(string color,Point p1,double rlon,double rlar);

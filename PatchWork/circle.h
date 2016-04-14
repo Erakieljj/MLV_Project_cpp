@@ -9,6 +9,9 @@
 class Circle : public ObjectInterface
 {
     private:
+        /**
+         * @brief rayon Rayon du Cercle.
+         */
         double rayon;
     public:
         Circle(string color,Point p1,double rayon);
