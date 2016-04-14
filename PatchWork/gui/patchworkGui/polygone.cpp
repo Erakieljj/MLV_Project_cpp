@@ -56,12 +56,12 @@ void Polygone::draw(){
     for(int i=1;i<vertices.size();i++){
         Point p = vertices.at(i);
         scene->addLine(pp.get_x(), pp.get_y(),p.get_x(), p.get_y(),
-                          QPen(Qt::green, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+                          QPen(QColor(color.c_str()), 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
         pp = vertices.at(i);
     }
     Point p = vertices.at(0);
     scene->addLine(pp.get_x(), pp.get_y(),p.get_x(), p.get_y(),
-                      QPen(Qt::green, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+                      QPen(QColor(color.c_str()), 3,Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
 
 
 }

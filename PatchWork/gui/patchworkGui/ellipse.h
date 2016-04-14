@@ -20,6 +20,7 @@ public:
     float getArea();
     float getPerimeter();
     void draw();
+    bool isEllipse(){return true;}
 
 
 };

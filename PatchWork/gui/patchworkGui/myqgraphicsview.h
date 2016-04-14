@@ -24,6 +24,17 @@ public:
     void setPolygonPoint(double p){polygonPoint = p;}
     void setRlar(double r){rlar = r;}
     void setRlon(double r){rlon = r;}
+    void setColorCircle(QString col){colorCircle = col;}
+    void setColorEllipse(QString col){colorEllipse = col;}
+    void setColorPolygone(QString col){colorPolygone = col;}
+    void setColorLine(QString col){colorLine = col;}
+
+    void applyHomo(QString forme,double hx,double hy);
+    void applyTranslation(QString forme,double tx,double ty);
+    void applyRotation(QString forme,double r);
+
+
+
 signals:
 
 public slots:
@@ -48,6 +59,11 @@ private:
     double rayon = 20;
     double rlon = 20;
     double rlar = 10;
+
+    QString colorCircle = "black";
+    QString colorLine = "black";
+    QString colorEllipse = "black";
+    QString colorPolygone = "black";
 
 };
 

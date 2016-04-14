@@ -18,6 +18,7 @@ public:
     float getArea();
     float getPerimeter();
     void draw();
+    bool isPoly(){return true;}
 };
 
 #endif // POLYGONE_H

@@ -24,5 +24,5 @@ void Circle::draw(){
     Point p = vertices.at(vertices.size()-1);
     qDebug() << "Point :" <<p.get_x()<<" "<<p.get_y();
     scene->addEllipse(p.get_x()-rayon/2, p.get_y()-rayon/2,rayon, rayon,
-                      QPen(), QBrush(Qt::SolidPattern));
+                     QPen(QColor(color.c_str()), 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
 }

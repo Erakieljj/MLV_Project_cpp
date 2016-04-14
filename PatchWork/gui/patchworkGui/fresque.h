@@ -25,6 +25,7 @@ class Fresque : public ObjectInterface
 
         float getArea();
         float getPerimeter();
+        std::vector<ObjectInterface*> getObjects(){return objects;}
 
     private:
         QGraphicsScene *scene;

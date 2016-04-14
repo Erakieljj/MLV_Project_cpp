@@ -35,6 +35,12 @@ class Object2D :public ObjectInterface {
         void applyAxialSymmetry(double a, double b);
         void applyCentralSymmetry(double x,double y);
 
+        virtual bool isLine(){return false;}
+        virtual bool isEllipse(){return false;}
+        virtual bool isPoly(){return false;}
+        virtual bool isCircle(){return false;}
+
+
 private:
         void updateVertices();
 };

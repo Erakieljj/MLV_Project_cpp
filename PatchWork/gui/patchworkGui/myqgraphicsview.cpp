@@ -61,6 +61,100 @@ void MyQGraphicsView::updateModeEllipse()
 void MyQGraphicsView::updateModePoly()
 {
     this->m = polygone;
+
+}
+
+void MyQGraphicsView::applyHomo(QString forme,double hx,double hy)
+{
+    string f = forme.toUtf8().constData();
+    if(f=="cercle"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isCircle())
+                o->applyHomethety(hx,hy);
+        }
+    } else if(f=="ligne"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isLine())
+                o->applyHomethety(hx,hy);
+        }
+    } else if(f=="ellipse"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isEllipse())
+                o->applyHomethety(hx,hy);
+        }
+    } else {
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isPoly())
+                o->applyHomethety(hx,hy);
+        }
+    }
+
+    this->scene->clear();
+    fresque->draw();
+}
+
+void MyQGraphicsView::applyTranslation(QString forme,double hx,double hy)
+{
+    qDebug() << "Called" ;
+    string f = forme.toUtf8().constData();
+
+    if(f=="cercle"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isCircle()){
+                qDebug() << "Called" ;
+                o->applyTranslation(hx,hy);
+            } else{
+                qDebug() << "FALSE" ;
+            }
+        }
+    } else if(f=="ligne"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isLine())
+                o->applyTranslation(hx,hy);
+        }
+    } else if(f=="ellipse"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isEllipse())
+                o->applyTranslation(hx,hy);
+        }
+    } else {
+        qDebug() << "WAT" ;
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isPoly())
+                o->applyTranslation(hx,hy);
+        }
+    }
+
+    this->scene->clear();
+    fresque->draw();
+}
+
+void MyQGraphicsView::applyRotation(QString forme,double r)
+{
+    string f = forme.toUtf8().constData();
+    if(f=="cercle"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isCircle())
+                o->applyRotationDirect(r);
+        }
+    } else if(f=="ligne"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isLine())
+                o->applyRotationDirect(r);
+        }
+    } else if(f=="ellipse"){
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isEllipse())
+                o->applyRotationDirect(r);
+        }
+    } else {
+        for(ObjectInterface *o :this->fresque->getObjects()){
+            if(o->isPoly())
+                o->applyRotationDirect(r);
+        }
+    }
+    this->scene->clear();
+    fresque->draw();
 }
 
 void MyQGraphicsView::draw(){
@@ -69,7 +163,7 @@ void MyQGraphicsView::draw(){
     case none:
         break;
     case line:
-    {Line *l = new Line("red",points.at(0),points.at(1),scene);
+    {Line *l = new Line(colorLine.toUtf8().constData(),points.at(0),points.at(1),scene);
         fresque->add(*l);
         fresque->draw();
         maxPoint = 2;
@@ -77,7 +171,7 @@ void MyQGraphicsView::draw(){
     }
     case ellipse:{
 
-        Ellipse *e = new Ellipse("red",points.at(0),rlon,rlar,scene);
+        Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar,scene);
         fresque->add(*e);
         fresque->draw();
         maxPoint = 1;
@@ -85,14 +179,14 @@ void MyQGraphicsView::draw(){
     }
     case circle:
     {
-        Circle *c = new Circle("red",points.at(0),rayon,scene);
+        Circle *c = new Circle(colorCircle.toUtf8().constData(),points.at(0),rayon,scene);
         fresque->add(*c);
         fresque->draw();
         maxPoint = 1;
         break;
     }
     case polygone:
-        Polygone *p = new Polygone("red",points,scene);
+        Polygone *p = new Polygone(colorPolygone.toUtf8().constData(),points,scene);
         fresque->add(*p);
         fresque->draw();
         maxPoint = polygonPoint;

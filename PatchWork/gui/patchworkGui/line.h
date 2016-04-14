@@ -17,6 +17,7 @@ private:
         float getArea();
         float getPerimeter();
         void draw();
+        bool isLine(){return true;}
 
         friend ostream& operator<< (ostream &os, const Line &p);
 

@@ -21,5 +21,5 @@ void Ellipse::draw(){
     this->mat.print();
     Point p = vertices.at(vertices.size()-1);
     scene->addEllipse(p.get_x()-rlon/2, p.get_y()-rlar/2, rlon, rlar,
-                      QPen(), QBrush(Qt::SolidPattern));
+                      QPen(QColor(color.c_str()), 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
 }

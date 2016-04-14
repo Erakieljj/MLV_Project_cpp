@@ -30,6 +30,10 @@ private slots:
     void modePolygone();
     void modeLine();
 
+    void applyHomo();
+    void applyRotation();
+    void applyTranslation();
+
 };
 
 #endif // MAINWINDOW_H

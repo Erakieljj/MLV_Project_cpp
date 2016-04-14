@@ -19,6 +19,11 @@ class ObjectInterface
         virtual void applyAxialSymmetry(double a,double b)=0;
         virtual void applyCentralSymmetry(double x,double y)=0;
 
+        virtual bool isLine(){return false;}
+        virtual bool isEllipse(){return false;}
+        virtual bool isPoly(){return false;}
+        virtual bool isCircle(){return false;}
+
         virtual float getArea() =0;
         virtual float getPerimeter() =0;
     };

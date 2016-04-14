@@ -19,6 +19,7 @@ private:
         float getArea();
         float getPerimeter();
         void draw();
+        bool isCircle(){return true;}
 
 };
 
