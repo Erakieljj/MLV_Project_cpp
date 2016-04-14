@@ -57,7 +57,6 @@ void call_from_thread(int client_socket)
     do {
 
         //on lit la taille
-
         recv(client_socket, buffer, bufsize, 0);
         totalsize = atoi(buffer);
         cout << "size read: " << totalsize << endl;
@@ -75,9 +74,9 @@ void call_from_thread(int client_socket)
 
         /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
           et la maîtresse peut accéder à n'importe quel moment à la map */
-
+        mtx.lock();
         map_drawing[client_socket] = buffer;
-
+        mtx.unlock();
 
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
@@ -88,10 +87,9 @@ void call_from_thread(int client_socket)
 
 
             //update the number of drawing finished
-
+            mtx.lock();
             nb_drawing++;
-            //cout << "DRAWING NUMBER: #" << nb_drawing << endl;
-
+            mtx.unlock();
 
             drawing_finished = true;
         }
