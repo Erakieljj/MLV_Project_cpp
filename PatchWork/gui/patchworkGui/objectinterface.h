@@ -2,6 +2,8 @@
 #define OBJECTINTERFACE_H
 #include <iostream>
 #include <stdexcept>
+#include <QGraphicsScene>
+
 using namespace std;
 
 class ObjectInterface

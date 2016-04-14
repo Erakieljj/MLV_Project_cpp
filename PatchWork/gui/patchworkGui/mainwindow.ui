@@ -16,7 +16,20 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
+     <widget class="QLabel" name="labelMode">
+      <property name="text">
+       <string>Mode: INCONNU</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QGroupBox" name="groupBox">
+      <property name="maximumSize">
+       <size>
+        <width>450</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="title">
        <string>GroupBox</string>
       </property>
@@ -43,7 +56,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>498</width>
+            <width>424</width>
             <height>338</height>
            </rect>
           </property>

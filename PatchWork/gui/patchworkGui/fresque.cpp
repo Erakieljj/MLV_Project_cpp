@@ -1,7 +1,7 @@
 #include "fresque.h"
 using namespace std;
 
-Fresque::Fresque() {
+Fresque::Fresque(QGraphicsScene *scene):scene(scene) {
     cout << "Init fresque"<<endl;
 }
 

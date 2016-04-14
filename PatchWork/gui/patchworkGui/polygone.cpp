@@ -1,7 +1,18 @@
 #include "polygone.h"
 using namespace std;
 
-Polygone::Polygone(string color, initializer_list<Point> points):Object2D(color)
+Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *scene):scene(scene),Object2D(color)
+{
+    if(points.size()<3) {
+        throw new invalid_argument("Must have at least 3 Point for a polygone");
+    }
+    for(Point p : points) {
+        this->vertices.push_back(p);
+    }
+    this->mat = *(new Matrix(this->vertices));
+}
+
+Polygone::Polygone(string color, vector<Point> points,QGraphicsScene *scene):scene(scene),Object2D(color)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");
@@ -40,4 +51,17 @@ void Polygone::draw(){
     cout << "\n**POLYGONE**("<<color<< ")\n Matrice : " << endl;
 
     this->mat.print();
+
+    Point pp = vertices.at(0);
+    for(int i=1;i<vertices.size();i++){
+        Point p = vertices.at(i);
+        scene->addLine(pp.get_x(), pp.get_y(),p.get_x(), p.get_y(),
+                          QPen(Qt::green, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+        pp = vertices.at(i);
+    }
+    Point p = vertices.at(0);
+    scene->addLine(pp.get_x(), pp.get_y(),p.get_x(), p.get_y(),
+                      QPen(Qt::green, 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+
+
 }

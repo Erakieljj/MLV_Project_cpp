@@ -3,12 +3,13 @@
 #include "objectinterface.h"
 #include <iostream>
 #include <vector>
+#include <QGraphicsScene>
 using namespace std;
 
 class Fresque : public ObjectInterface
 {
     public:
-        Fresque();
+        Fresque(QGraphicsScene *scene);
         // Inherited method from ObjectInterface
         void draw();
         void applyTranslation(double x,double y);
@@ -26,6 +27,7 @@ class Fresque : public ObjectInterface
         float getPerimeter();
 
     private:
+        QGraphicsScene *scene;
         std::vector<ObjectInterface*> objects;
 };
 

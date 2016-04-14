@@ -2,6 +2,7 @@
 #define OBJECT2D_H
 #include <string.h>
 #include <vector>
+#include <QGraphicsScene>
 #include "point.h"
 #include "objectinterface.h"
 #include "matrix.h"

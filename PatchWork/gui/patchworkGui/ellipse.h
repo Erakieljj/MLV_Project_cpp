@@ -4,6 +4,7 @@
 #include "objectinterface.h"
 #include <iostream>
 #include <vector>
+#include <QGraphicsScene>
 using namespace  std;
 
 class Ellipse :public Object2D
@@ -11,12 +12,15 @@ class Ellipse :public Object2D
 private:
     double rlon;
     double rlar;
+     QGraphicsScene *scene;
 public:
-    Ellipse(string color,Point p1,double rlon,double rlar);
+    Ellipse(string color,Point p1,double rlon,double rlar,QGraphicsScene *scene);
 
     // Inherited method from Object2D
     float getArea();
     float getPerimeter();
     void draw();
+
+
 };
 #endif // ELLIPSE_H

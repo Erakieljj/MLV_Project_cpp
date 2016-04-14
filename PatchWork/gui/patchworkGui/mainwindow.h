@@ -3,13 +3,12 @@
 
 #include <QMainWindow>
 #include "myqgraphicsview.h"
+#include "fresque.h"
 
 
 namespace Ui {
 class MainWindow;
 }
-
-enum mode { circle, polygone,ellipse,line,none };
 
 class MainWindow : public QMainWindow
 {
@@ -22,8 +21,8 @@ public:
 private:
     Ui::MainWindow *ui;
     int waitingPoint = -1;
-    mode m = none;
     MyQGraphicsView *myGV = new MyQGraphicsView();
+
 
 private slots:
     void modeCircle();

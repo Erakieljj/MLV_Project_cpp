@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Ellipse::Ellipse(string color,Point p,double rlon,double rlar):rlon(rlon),rlar(rlar),Object2D(color)
+Ellipse::Ellipse(string color,Point p,double rlon,double rlar,QGraphicsScene *scene):scene(scene),rlon(rlon),rlar(rlar),Object2D(color)
 {
     this->vertices.push_back(p);
     this->mat = *(new Matrix(this->vertices));
@@ -19,4 +19,7 @@ float Ellipse::getPerimeter(){
 void Ellipse::draw(){
     cout << " \n**Ellipse**("<<color<< ")\nRayon large : "<<rlar<<"Rayon longeur : "<<rlon<<endl<<"Matrice : " << endl;
     this->mat.print();
+    Point p = vertices.at(vertices.size()-1);
+    scene->addEllipse(p.get_x()-rlon/2, p.get_y()-rlar/2, rlon, rlar,
+                      QPen(), QBrush(Qt::SolidPattern));
 }
