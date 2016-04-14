@@ -32,7 +32,8 @@ DISTFILES += \
 
 SUBDIRS += \
     PatchWorkClient.pro \
-    PatchWorkServer.pro
+    PatchWorkServer.pro \
+    PatchWorkClient2.pro
 
 FORMS += \
    # clientgui.ui
