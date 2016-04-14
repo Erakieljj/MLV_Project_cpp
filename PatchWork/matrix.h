@@ -65,22 +65,20 @@ class Matrix
          * @return Retourne la matrice d'homothétie.
          */
         static Matrix* homothety(double x, double y);
-
         /**
-         * @brief axialSymmetry
+         * @brief axialSymmetry Effectue l'opération de symétrie axiale sur la matrice.
          * @param a Valeur en abcisse de x.
          * @param b Valeur en ordonné de y.
          * @return Retourne la matrice de symétrie axiale.
          */
         static Matrix axialSymmetry(double a, double b);
         /**
-         * @brief centralSymmetry
+         * @brief centralSymmetry Effectue l'opération de symétrie centrale sur la matrice.
          * @param a Valeur en abcisse de x.
          * @param b Valeur en ordonné de y.
          * @return Retourne la matrice de symétrie centrale.
          */
         static Matrix* centralSymmetry(double a, double b);
-
         /**
          * @brief Affichage de la matrice.
          */

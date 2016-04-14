@@ -1,7 +1,6 @@
 #ifndef DATAJSON_H
 #define DATAJSON_H
 
-//#include <memory>
 #include <map>
 #include <QJsonObject>
 #include <string>
@@ -10,16 +9,13 @@
 class DataJSON
 {
     public:
-        DrawingForJSON();
+        //DataJSON();
 
-        const map<string, ObjectInterface> &shapes() const; //std::unique_ptr<ObjectInterface>>'
-        static void setShapes(const map<string, ObjectInterface> &shapes);
+        const vector<ObjectInterface*> &shapes() const;
+        static void setShapes(const vector<ObjectInterface*> &shapes);
 
         static void readDrawing(const QJsonObject &json);
         static void writeDrawing(QJsonObject &json);
-
-    private:
-        static map<string, ObjectInterface> mShapes;
 };
 
 #endif // DATAJSON_H
