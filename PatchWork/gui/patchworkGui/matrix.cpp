@@ -58,8 +58,8 @@ Matrix* Matrix::rotationDirect(double alpha)
     Matrix *m = idMatrix(3);
     m->mat[0][0]=cos(alpha);
     m->mat[0][1]=sin(alpha);
-    m->mat[1][1]=-sin(alpha);
-    m->mat[1][2]=cos(alpha);
+    m->mat[1][0]=-sin(alpha);
+    m->mat[1][1]=cos(alpha);
 
     return m;
 }
@@ -69,8 +69,8 @@ Matrix* Matrix::rotationIndirect(double alpha)
     Matrix *m = idMatrix(3);
     m->mat[0][0]=cos(alpha);
     m->mat[0][1]=-sin(alpha);
-    m->mat[1][1]=sin(alpha);
-    m->mat[1][2]=cos(alpha);
+    m->mat[1][0]=sin(alpha);
+    m->mat[1][1]=cos(alpha);
 
     return m;
 }
@@ -98,11 +98,14 @@ Matrix Matrix::axialSymmetry(double a, double b)
     return m;
 }
 
-Matrix* Matrix::centralSymmetry(double a, double b)
+Matrix Matrix::centralSymmetry(double a, double b)
 {
-    Matrix *m = idMatrix(3);
-    m->mat[0][0]=-1;
-    m->mat[1][1]=-1;
+
+    Matrix *m1 = translation(-a,-b);
+    Matrix *m2 = rotationDirect(atan(a));
+    Matrix *m3 = translation(a,b);
+    Matrix m = (*m1)*(*m2)*(*m3);
+
     return m;
 }
 

@@ -27,7 +27,7 @@ void Line::draw(){
     Point p1 = vertices.at(0);
     Point p2 = vertices.at(1);
     scene->addLine(p1.get_x(), p1.get_y(),p2.get_x(), p2.get_y(),
-                      QPen(QColor(color.c_str()), 3, Qt::DashDotLine, Qt::RoundCap, Qt::RoundJoin));
+                      QPen(QColor(color.c_str()), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 }
 
 ostream & operator<< (ostream & os, const Line & l)

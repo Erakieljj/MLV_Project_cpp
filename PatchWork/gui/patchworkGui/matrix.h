@@ -87,7 +87,7 @@ class Matrix
         /// \param b
         /// \return
         ///
-        static Matrix* centralSymmetry(double a,double b);
+        static Matrix centralSymmetry(double a,double b);
 
         void print();
 

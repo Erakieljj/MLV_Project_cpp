@@ -46,6 +46,6 @@ void Object2D::applyAxialSymmetry(double a, double b){
 }
 
 void Object2D::applyCentralSymmetry(double x,double y){
-    this->mat = *(Matrix::centralSymmetry(x,y)) * this->mat;
+    this->mat = (Matrix::centralSymmetry(x,y)) * this->mat;
     updateVertices();
 }
