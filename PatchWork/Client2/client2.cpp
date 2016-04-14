@@ -79,7 +79,7 @@ int main()
     }
 
     else {
-        cout << ">> Connection to the server port number: " << portNum << endl;
+        cout << ">> Connection to the server port number: " << portNum << "with socket: " << client << endl;
     }
 
     cout << ">> Awaiting confirmation from the server..." << endl; //line 40

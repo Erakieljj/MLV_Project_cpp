@@ -71,12 +71,12 @@ void call_from_thread(int client_socket)
         }
         cout << "buffer: " << buffer << " " << endl;
 
+
         /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
           et la maîtresse peut accéder à n'importe quel moment à la map */
         mtx.lock();
         map_drawing[client_socket] = buffer;
         mtx.unlock();
-
 
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
@@ -84,12 +84,13 @@ void call_from_thread(int client_socket)
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-            mtx.lock();
-            mtx.unlock();
+            //mtx.lock();
+            //mtx.unlock();
 
             //update the number of drawing finished
             mtx.lock();
             nb_drawing++;
+            cout << "DRAWING NUMBER: #" << nb_drawing << endl;
             mtx.unlock();
 
             drawing_finished = true;
@@ -191,7 +192,6 @@ int main()
             t[i].join();
             i++;
         }
-
     }
 
     mtx.lock();
@@ -204,6 +204,7 @@ int main()
     std::cout << "\n>> drawing_map contains:\n";
     for (it=map_drawing.begin(); it!=map_drawing.end(); ++it)
       std::cout << it->first << " => " << it->second << '\n';
+
 
     close(ListeningSocket);
     #if defined (WIN32)
