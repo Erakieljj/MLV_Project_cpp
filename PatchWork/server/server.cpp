@@ -26,7 +26,7 @@
 #include <mutex>
 #define MAX_DRAWING 4
 
-std::atomic_int nb_drawing(0);
+std::atomic<int> nb_drawing(0);
 std::mutex mtx;
 map<int, string> map_drawing;
 
