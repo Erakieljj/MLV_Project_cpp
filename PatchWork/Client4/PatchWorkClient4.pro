@@ -5,9 +5,8 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 
 SOURCES += \
-    server.cpp \
+    client4.cpp
 
 win32 {
     LIBS += -lws2_32
 }
-
