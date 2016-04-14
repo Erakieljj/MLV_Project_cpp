@@ -28,6 +28,7 @@
 
 std::atomic_int nb_drawing(0);
 std::mutex mtx;
+map<int, string> map_drawing;
 
 /**
  * @brief La fonction call_from_thread sera la fonction exécutée lors de la
@@ -70,12 +71,21 @@ void call_from_thread(int client_socket)
         }
         cout << "buffer: " << buffer << " " << endl;
 
+        /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
+          et la maîtresse peut accéder à n'importe quel moment à la map */
+        mtx.lock();
+        map_drawing[client_socket] = buffer;
+        mtx.unlock();
+
+
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
         if(true==true) { //a remplacer
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
-            //add to big fresque here / add to map when the drawing is finished? prevent to always actualize on the map modifications are required
+            //add to big fresque here
+            mtx.lock();
+            mtx.unlock();
 
             //update the number of drawing finished
             mtx.lock();
@@ -102,6 +112,7 @@ void call_from_thread(int client_socket)
     /* ----------------- Close --------------- */
     cout << "\n=> Connection ended with: " << client_socket << endl;
     close(client_socket);
+
 }
 
 /**
@@ -126,8 +137,6 @@ int main()
     std::thread t[MAX_DRAWING];
     /* for the thread join */
     int i = 0;
-
-    //map<int, Fresque> map_drawing;
 
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
 
@@ -189,6 +198,12 @@ int main()
     //affichage de la grande fresque ici
     cout << ">> Enjoy the nice work from all students: " << endl;
     mtx.unlock();
+
+    // showing contents of the map
+    std::map<int, string>::iterator it = map_drawing.begin();
+    std::cout << "\n>> drawing_map contains:\n";
+    for (it=map_drawing.begin(); it!=map_drawing.end(); ++it)
+      std::cout << it->first << " => " << it->second << '\n';
 
     close(ListeningSocket);
     #if defined (WIN32)
