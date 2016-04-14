@@ -99,8 +99,7 @@ void call_from_thread(int client_socket)
     //si on a reçu tout les dessins on affiche la grande fresque
     } while (!drawing_finished);
 
-    /* ---------------- CLOSE CALL ------------- */
-    /* ----------------- close() --------------- */
+    /* ----------------- Close --------------- */
     cout << "\n=> Connection ended with: " << client_socket << endl;
     close(client_socket);
 }
@@ -131,7 +130,6 @@ int main()
     //map<int, Fresque> map_drawing;
 
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
-    /* --------------- socket() function ------------------*/
 
     #if defined (WIN32)
         WSADATA WSAData;
@@ -153,9 +151,6 @@ int main()
     server_addr.sin_port = htons(portNum);
 
     /* ---------- BINDING THE SOCKET ---------- */
-    /* ---------------- bind() ---------------- */
-
-
 
      if (::bind(ListeningSocket , (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
@@ -163,47 +158,19 @@ int main()
         return -1;
     }
 
-    /*
-        The bind() system call binds a socket to an address,
-        in this case the address of the current host and port number
-        on which the server will run. It takes three arguments,
-        the socket file descriptor. The second argument is a pointer
-        to a structure of type sockaddr, this must be cast to
-        the correct type.
-    */
-
     size = sizeof(server_addr);
     cout << ">> Waiting for clients to connect..." << endl;
 
-    /* ------------- LISTENING CALL ------------- */
-    /* ---------------- listen() ---------------- */
+    /* ------------- LISTENING ------------- */
 
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à 5 (comme les clients FTP)
     listen(ListeningSocket , 5);
 
-    /*
-        The listen system call allows the process to listen
-        on the socket for connections.
-        The program will be stay idle here if there are no
-        incomming connections..
-    */
-
     while (MAX_DRAWING!=nb_drawing) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
-        /* ----------------- listen() ------------------- */
 
-        /*
-            The accept() system call causes the process to block
-            until a client connects to the server. Thus, it wakes
-            up the process when a connection from a client has been
-            successfully established. It returns a new file descriptor,
-            and all communication on this connection should be done
-            using the new file descriptor. The second argument is a
-            reference pointer to the address of the client on the other
-            end of the connection, and the third argument is the size
-            of this structure.
-        */
+        /* accept est bloquant jusqu'à l'arrivée d'un client */
         NewConnectionSocket = accept(ListeningSocket,(struct sockaddr *)&server_addr,&size);
 
         // first check if it is valid or not
