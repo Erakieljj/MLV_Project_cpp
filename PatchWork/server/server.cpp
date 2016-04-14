@@ -29,7 +29,7 @@ void call_from_thread(int client_socket)
 
     strcpy(buffer, "Server connected...\n");
     send(client_socket, buffer, bufsize, 0);
-    cout << "=> Connected with the client #" << client_socket << ", starting ..." << endl;
+    cout << ">> Connected with the client #" << client_socket << ", starting ..." << endl;
 
     int size_read = 0;
     int totalsize = 0;
@@ -120,11 +120,11 @@ int main()
 
     if (ListeningSocket  < 0)
     {   cout << ListeningSocket  << endl;
-        cout << "\nError establishing socket..." << endl;
+        cout << "\n>> Error establishing socket..." << endl;
         exit(1);
     }
 
-    cout << "\n=> Socket server has been created..." << endl;
+    cout << "\n>> Socket server has been created..." << endl;
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htons(INADDR_ANY);
@@ -137,7 +137,7 @@ int main()
 
      if (::bind(ListeningSocket , (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
-        cout << "=> Error binding connection, the socket has already been established..." << endl;
+        cout << ">> Error on binding connection" << endl;
         return -1;
     }
 
@@ -151,7 +151,7 @@ int main()
     */
 
     size = sizeof(server_addr);
-    cout << "=> Looking for clients..." << endl;
+    cout << ">> Waiting for clients to connect..." << endl;
 
     /* ------------- LISTENING CALL ------------- */
     /* ---------------- listen() ---------------- */
@@ -186,7 +186,7 @@ int main()
 
         // first check if it is valid or not
         if (NewConnectionSocket < 0)
-            cout << "=> Error on accepting..." << endl;
+            cout << ">> Error on accepting..." << endl;
 
         t[i] = std::thread(call_from_thread, NewConnectionSocket);
         t[i].join();
@@ -196,7 +196,7 @@ int main()
 
     mtx.lock();
     //affichage de la grande fresque ici
-    cout << "Enjoy the nice work from all students: " << endl;
+    cout << ">> Enjoy the nice work from all students: " << endl;
     mtx.unlock();
 
     close(ListeningSocket);

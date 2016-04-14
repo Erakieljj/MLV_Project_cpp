@@ -64,7 +64,7 @@ int main()
 
     if (client < 0)
     {
-        cout << "\nError establishing socket..." << endl;
+        cout << "\n>> Error on establishing socket..." << endl;
         exit(1);
     }
 
@@ -81,7 +81,7 @@ int main()
             it returns -1.
     */
 
-    cout << "\n=> Socket client has been created..." << endl;
+    cout << "\n>> Socket client has been created..." << endl;
 
     /*
         The variable serv_addr is a structure of sockaddr_in.
@@ -100,7 +100,7 @@ int main()
     /* ---------------- connect() ---------------- */
 
     if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) != 0) {
-        cout << "Connection error" << endl;
+        cout << ">> Connection error" << endl;
         close(client);
         #if defined (WIN32)
             WSACleanup();
@@ -109,7 +109,7 @@ int main()
     }
 
     else {
-        cout << "=> Connection to the server port number: " << portNum << endl;
+        cout << ">> Connection to the server port number: " << portNum << endl;
     }
 
     /*
@@ -125,10 +125,10 @@ int main()
         the server but not its own port number.
     */
 
-    cout << "=> Awaiting confirmation from the server..." << endl; //line 40
+    cout << ">> Awaiting confirmation from the server..." << endl; //line 40
     recv(client, buffer, bufsize, 0);
-    cout << "=> message from the server:" << buffer << endl;
-    cout << "=> Connection confirmed, you are good to go..." << endl;
+    cout << ">> message from the server:" << buffer << endl;
+    cout << ">> Connection confirmed, starting..." << endl;
 
     // Once it reaches here, the client can send a message first.
 
@@ -166,7 +166,7 @@ int main()
 
     /* ---------------- CLOSE CALL ------------- */
     /* ----------------- close() --------------- */
-    cout << "\n=> Connection terminated.\nGoodbye...\n";
+    cout << "\n>> Connection terminated.\n";
 
     close(client);
     #if defined (WIN32)
