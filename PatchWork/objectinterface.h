@@ -24,11 +24,11 @@ class ObjectInterface
         ObjectInterface(std::string color): color(color){}
 
     public:
-        virtual ~ObjectInterface(){}
+        ~ObjectInterface(){}
 
-        virtual float getArea()=0;
-        virtual float getPerimeter()=0;
-        virtual void draw()=0;
+        inline float getArea(){return 0.;}
+        inline float getPerimeter(){return 0.;}
+        void draw(){}
 
         void applyTranslation(double x,double y);
         void applyRotationDirect(double angle);

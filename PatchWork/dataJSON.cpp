@@ -4,7 +4,7 @@
 #include "ellipse.h"
 #include "polygone.h"
 
-void DataJSON::setShapes(const map<string, std::unique_ptr<ObjectInterface>> &shapes)
+void DataJSON::setShapes(const map<string, ObjectInterface> &shapes)
 {
     mShapes = shapes;
 }
@@ -12,9 +12,9 @@ void DataJSON::setShapes(const map<string, std::unique_ptr<ObjectInterface>> &sh
 void DataJSON::readDrawing(const QJsonObject &json)
 {
     QJsonObject shape;
-    /*for (const auto& kv : mShapes) {
+    for (const auto& kv : mShapes) {
         std::cout << kv.first << " has value " << kv.second << std::endl;
-    }*/
+    }
 }
 
 void DataJSON::writeDrawing(QJsonObject &json)
