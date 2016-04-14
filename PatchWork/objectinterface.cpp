@@ -2,7 +2,17 @@
 #include "matrix.h"
 #include <cstring>
 #include <string>
-using namespace std;
+
+ObjectInterface::ObjectInterface( QObject *parent) : QObject(parent)
+{
+
+}
+
+ObjectInterface::ObjectInterface(string color, QObject *parent) : QObject(parent), color(color)
+{
+
+}
+
 
 std::string ObjectInterface::getColor() const{
     return color;

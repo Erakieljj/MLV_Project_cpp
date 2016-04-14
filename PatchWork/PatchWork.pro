@@ -11,8 +11,9 @@ SOURCES += \
     polygone.cpp \
     circle.cpp \
     ellipse.cpp \
-    #dataJSON.cpp \
-    objectinterface.cpp
+    dataJSON.cpp \
+    objectinterface.cpp \
+    #clientgui.cpp
 
 HEADERS += \
     line.h \
@@ -23,13 +24,20 @@ HEADERS += \
     polygone.h \
     circle.h \
     ellipse.h \
-    #dataJSON.h
+    dataJSON.h \
+    #clientgui.h
 
 DISTFILES += \
     PatchWork.pro.user
 
 SUBDIRS += \
     PatchWorkClient.pro \
-    PatchWorkServer.pro
+    PatchWorkServer.pro \
+    PatchWorkClient2.pro \
+    PatchWorkClient3.pro \
+    PatchWorkClient4.pro
+
+FORMS += \
+   # clientgui.ui
 
 

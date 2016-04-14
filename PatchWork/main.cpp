@@ -8,7 +8,7 @@
 #include "fresque.h"
 #include "objectinterface.h"
 #include "matrix.h"
-#include "clientgui.h"
+//#include "clientgui.h"
 using namespace std;
 
 
@@ -67,12 +67,12 @@ int main(int argc, char *argv[])
         cout <<e->what() <<endl;
     }
     */
-    Q_INIT_RESOURCE(clientgui);
+    /*Q_INIT_RESOURCE(clientgui);
 
     QApplication app(argc, argv);
     Window window;
     window.show();
-    return app.exec();
+    return app.exec();*/
 
     //return 0;
 }

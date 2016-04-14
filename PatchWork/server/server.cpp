@@ -1,3 +1,11 @@
+/**
+ * @file server.cpp
+ * @brief le serveur qui représente la maîtresse qui envoie
+ * les corrections de dessins et assemble la fresque finale
+ * @author Huy HUYNH
+ * @version 0.1
+ */
+
 #include <iostream>
 #include <string.h>
 #include <sys/types.h>
@@ -18,11 +26,15 @@
 #include <mutex>
 #define MAX_DRAWING 4
 
-
-#define MAX_DRAWING 4
-
 std::atomic_int nb_drawing(0);
 std::mutex mtx;
+
+/**
+ * @brief La fonction call_from_thread sera la fonction exécutée lors de la
+ * création d'une thread
+ * @param client_socket numéro de la socket du client
+ * @return rien à l'arrêt de la fonction
+ */
 
 void call_from_thread(int client_socket)
 {
@@ -32,7 +44,7 @@ void call_from_thread(int client_socket)
 
     strcpy(buffer, "Server connected...\n");
     send(client_socket, buffer, bufsize, 0);
-    cout << "=> Connected with the client #" << client_socket << ", starting ..." << endl;
+    cout << ">> Connected with the client #" << client_socket << ", starting ..." << endl;
 
     int size_read = 0;
     int totalsize = 0;
@@ -87,11 +99,17 @@ void call_from_thread(int client_socket)
     //si on a reçu tout les dessins on affiche la grande fresque
     } while (!drawing_finished);
 
-    /* ---------------- CLOSE CALL ------------- */
-    /* ----------------- close() --------------- */
+    /* ----------------- Close --------------- */
     cout << "\n=> Connection ended with: " << client_socket << endl;
     close(client_socket);
 }
+
+/**
+ * @brief La fonction main du serveur
+ * @param aucun paramètre
+ * @return -1 s'il y a une erreur de binding, 1 lors d'une erreur à l'établissement d'une socket,
+ * 0 si le programme s'est déroulé correctement
+ */
 
 int main()
 {
@@ -112,7 +130,6 @@ int main()
     //map<int, Fresque> map_drawing;
 
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
-    /* --------------- socket() function ------------------*/
 
     #if defined (WIN32)
         WSADATA WSAData;
@@ -123,83 +140,54 @@ int main()
 
     if (ListeningSocket  < 0)
     {   cout << ListeningSocket  << endl;
-        cout << "\nError establishing socket..." << endl;
+        cout << "\n>> Error establishing socket..." << endl;
         exit(1);
     }
 
-    cout << "\n=> Socket server has been created..." << endl;
+    cout << "\n>> Socket server has been created..." << endl;
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htons(INADDR_ANY);
     server_addr.sin_port = htons(portNum);
 
     /* ---------- BINDING THE SOCKET ---------- */
-    /* ---------------- bind() ---------------- */
-
-
 
      if (::bind(ListeningSocket , (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0)
     {
-        cout << "=> Error binding connection, the socket has already been established..." << endl;
+        cout << ">> Error on binding connection" << endl;
         return -1;
     }
 
-    /*
-        The bind() system call binds a socket to an address,
-        in this case the address of the current host and port number
-        on which the server will run. It takes three arguments,
-        the socket file descriptor. The second argument is a pointer
-        to a structure of type sockaddr, this must be cast to
-        the correct type.
-    */
-
     size = sizeof(server_addr);
-    cout << "=> Looking for clients..." << endl;
+    cout << ">> Waiting for clients to connect..." << endl;
 
-    /* ------------- LISTENING CALL ------------- */
-    /* ---------------- listen() ---------------- */
+    /* ------------- LISTENING ------------- */
 
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à 5 (comme les clients FTP)
     listen(ListeningSocket , 5);
 
-    /*
-        The listen system call allows the process to listen
-        on the socket for connections.
-        The program will be stay idle here if there are no
-        incomming connections..
-    */
-
     while (MAX_DRAWING!=nb_drawing) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
-        /* ----------------- listen() ------------------- */
 
-        /*
-            The accept() system call causes the process to block
-            until a client connects to the server. Thus, it wakes
-            up the process when a connection from a client has been
-            successfully established. It returns a new file descriptor,
-            and all communication on this connection should be done
-            using the new file descriptor. The second argument is a
-            reference pointer to the address of the client on the other
-            end of the connection, and the third argument is the size
-            of this structure.
-        */
+        /* accept est bloquant jusqu'à l'arrivée d'un client */
         NewConnectionSocket = accept(ListeningSocket,(struct sockaddr *)&server_addr,&size);
 
         // first check if it is valid or not
         if (NewConnectionSocket < 0)
-            cout << "=> Error on accepting..." << endl;
+            cout << ">> Error on accepting..." << endl;
 
-        t[i] = std::thread(call_from_thread, NewConnectionSocket);
-        t[i].join();
-        i++;
+        else {
+            t[i] = std::thread(call_from_thread, NewConnectionSocket);
+            t[i].join();
+            i++;
+        }
 
     }
 
     mtx.lock();
     //affichage de la grande fresque ici
-    cout << "Enjoy the nice work from all students: " << endl;
+    cout << ">> Enjoy the nice work from all students: " << endl;
     mtx.unlock();
 
     close(ListeningSocket);

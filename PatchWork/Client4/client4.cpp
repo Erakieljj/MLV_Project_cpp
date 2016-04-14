@@ -1,5 +1,5 @@
 /**
- * @file client.cpp
+ * @file client4.cpp
  * @brief le client qui représente un élève qui envoie son dessin au professeur
  * et attend les annotations et attend les annotations en retour afin de corriger
  * le dessin et de lui renvoyer jusqu'à qu'il soit parfait aux yeux du professeur
@@ -82,11 +82,12 @@ int main()
         cout << ">> Connection to the server port number: " << portNum << endl;
     }
 
-
     cout << ">> Awaiting confirmation from the server..." << endl; //line 40
     recv(client, buffer, bufsize, 0);
     cout << ">> message from the server:" << buffer << endl;
     cout << ">> Connection confirmed, starting..." << endl;
+
+    // Once it reaches here, the client can send a message first.
 
     do {
         cout << "Student: ";
