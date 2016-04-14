@@ -6,6 +6,8 @@
 #include <string>
 #include "objectinterface.h"
 
+static vector<ObjectInterface*> mShapes;
+
 class DataJSON
 {
     public:
@@ -16,6 +18,7 @@ class DataJSON
 
         static void readDrawing(const QJsonObject &json);
         static void writeDrawing(QJsonObject &json);
+
 };
 
 #endif // DATAJSON_H

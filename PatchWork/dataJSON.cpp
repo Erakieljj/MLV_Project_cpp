@@ -4,7 +4,7 @@
 #include "ellipse.h"
 #include "polygone.h"
 
-static vector<ObjectInterface*> mShapes;
+//static vector<ObjectInterface*> mShapes;
 
 const vector<ObjectInterface *> &DataJSON::shapes() const
 {
