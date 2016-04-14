@@ -38,20 +38,38 @@ class ObjectInterface : public QObject
     public:
         ~ObjectInterface(){}
 
+        // Fonctions virtuelles.
         /**
-         * @brief getArea
-         * @return
+         * @brief getArea fonction virtuelle qui obtient l'aire de l'objet géométrique.
+         * @return Retourne l'aire de l'objet géométrique.
          */
         virtual inline float getArea(){return 0.0;}
         /**
-         * @brief getPerimeter
-         * @return
+         * @brief getPerimeter fonction virtuelle qui obtient le périmètre de l'objet géométrique.
+         * @return Retourne le périmètre de l'objet géométrique.
          */
         virtual inline float getPerimeter(){return 0.0;}
         /**
-         * @brief draw
+         * @brief draw Appel de la bonne méthode pour dessiner l'objet géométrique.
          */
         virtual inline void draw(){}
+
+        // Getter/Setter sur les membres accessibles dans les classes filles.
+        /**
+         * @brief getColor Obtient la couleur de l'objet géométrique.
+         * @return Retourne la couleur de l'objet.
+         */
+        string getColor() const;
+        /**
+         * @brief setColor Mise à jour de la couleur de l'objet géométrique.
+         * @param color la nouvelle couleur de l'objet.
+         */
+        void setColor(string color);
+        /**
+         * @brief getPoints Obtient la liste des points de l'objet géométrique.
+         * @return Retourne la liste des coordonnées des points.
+         */
+        vector<Point> getPoints(){return this->vertices;}
 
         // Fonctions de transformation de la figure géométrique.
 
@@ -91,9 +109,6 @@ class ObjectInterface : public QObject
          */
         void applyCentralSymmetry(double x,double y);
 
-        string getColor() const;
-        void setColor(string color);
-        vector<Point> getPoints(){return this->vertices;}
     };
 
 #endif // OBJECTINTERFACE_H
