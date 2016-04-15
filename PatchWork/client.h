@@ -17,14 +17,27 @@
 #include <QtCore>
 
 
-
+/**
+ * @brief La classe client permet de créer un client qui est un élève qui veut envoyer son dessin.
+ */
 class Client
 {
 public:
-    Client(){};
-    void start();
+
+    /**
+     * @brief Client Constructeur par défaut.
+     */
+    Client(){}
+
+    /**
+     * @brief Start Débute le client avec l'envoi et la réception des dessins.
+     */
+    void start(std::string json);
 
 private:
+    /**
+     * @brief json Le dessin encodé sous le format json.
+     */
     std::string json;
 };
 
