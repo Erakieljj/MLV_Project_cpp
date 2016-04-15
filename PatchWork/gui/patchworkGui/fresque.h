@@ -4,10 +4,12 @@
 #include <iostream>
 #include <vector>
 #include <QGraphicsScene>
+#include <QObject>
 using namespace std;
 
 class Fresque : public ObjectInterface
 {
+    Q_OBJECT
     public:
         Fresque(QGraphicsScene *scene);
         // Inherited method from ObjectInterface

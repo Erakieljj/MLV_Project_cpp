@@ -5,10 +5,12 @@
 #include <iostream>
 #include <vector>
 #include <QGraphicsScene>
+#include <QObject>
 using namespace  std;
 
 class Circle : public Object2D
 {
+Q_OBJECT
 private:
     double rayon;
     QGraphicsScene *scene;
@@ -23,6 +25,7 @@ private:
         void draw();
         bool isCircle(){return true;}
         Point getCenter();
+        double getRayon(){return rayon;}
 
 };
 

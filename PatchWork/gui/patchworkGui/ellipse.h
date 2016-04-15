@@ -5,10 +5,12 @@
 #include <iostream>
 #include <vector>
 #include <QGraphicsScene>
+#include <QObject>
 using namespace  std;
 
 class Ellipse :public Object2D
 {
+Q_OBJECT
 private:
     double rlon;
     double rlar;
@@ -25,6 +27,9 @@ public:
 
     void setRlon(double x){rlon*=x;}
     void setRlar(double x){rlar*=x;}
+
+    double getRlar(){double rlar;}
+    double getRlon(){double rlon;}
 
 
 };

@@ -6,6 +6,7 @@
 #include "point.h"
 #include "objectinterface.h"
 #include "matrix.h"
+#include <QObject>
 
 using namespace std;
 
@@ -47,6 +48,7 @@ class Object2D :public ObjectInterface {
         virtual bool isCircle(){return false;}
 
         virtual Point getCenter() =0;
+
 
 
 private:

@@ -3,12 +3,15 @@
 #include <iostream>
 #include <stdexcept>
 #include <QGraphicsScene>
+#include <vector>
+#include <QObject>
 #include "point.h"
 
 using namespace std;
 
 class ObjectInterface
 { 
+    Q_OBJECT
     public:
         virtual ~ObjectInterface(){}
 
@@ -34,7 +37,11 @@ class ObjectInterface
         virtual float getArea() =0;
         virtual float getPerimeter() =0;
 
+        virtual std::string getColor(){return "none";}
+
         virtual Point getCenter() =0;
+
+        virtual vector<Point> getPoints(){return *(new vector<Point>);}
 
 
     };

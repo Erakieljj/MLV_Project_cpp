@@ -5,10 +5,12 @@
 #include <iostream>
 #include <vector>
 #include <QGraphicsScene>
+#include <QObject>
 using namespace  std;
 
 class Line : public Object2D
 {
+Q_OBJECT
 private:
     QGraphicsScene *scene;
     public:

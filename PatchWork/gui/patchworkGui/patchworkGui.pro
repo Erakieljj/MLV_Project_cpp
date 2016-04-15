@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     matrix.cpp \
     fresque.cpp \
     point.cpp \
-    client.cpp
+    client.cpp \
+    dataJSON.cpp
 
 HEADERS  += mainwindow.h \
     myqgraphicsview.h \
@@ -36,7 +37,8 @@ HEADERS  += mainwindow.h \
     polygone.h \
     point.h \
     line.h \
-    client.h
+    client.h \
+    dataJSON.h
 
 FORMS    += mainwindow.ui
 
