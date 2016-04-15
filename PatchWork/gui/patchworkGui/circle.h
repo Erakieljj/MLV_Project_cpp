@@ -25,6 +25,9 @@ private:
     QGraphicsScene *scene;
     public:
 
+        /**
+         * @brief Circle Constructeur.
+         */
         Circle(string color,Point p1,double rayon,QGraphicsScene *scene);
 
         // Inherited method from Object2D
