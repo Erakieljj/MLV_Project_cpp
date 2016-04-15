@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Ellipse::Ellipse(string color,Point p,double rlon,double rlar,QGraphicsScene *scene):scene(scene),rlon(rlon),rlar(rlar),Object2D(color)
+Ellipse::Ellipse(string color,Point p,double rlon,double rlar,QGraphicsScene *scene):Object2D(color),rlon(rlon),rlar(rlar),scene(scene)
 {
     this->vertices.push_back(p);
     this->mat = *(new Matrix(this->vertices));

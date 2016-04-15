@@ -29,7 +29,7 @@ class Fresque : public ObjectInterface
 
         // Personal method
         bool add(ObjectInterface &o);
-        bool remove(ObjectInterface &o);
+        bool remove();
 
         float getArea();
         float getPerimeter();

@@ -57,7 +57,7 @@ bool Fresque::add(ObjectInterface & o){
     return true;
 }
 
-bool Fresque::remove(ObjectInterface &o){
+bool Fresque::remove(){
     cout << "Remove";
     return false;
 }
