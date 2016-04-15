@@ -26,7 +26,6 @@
 #include <mutex>
 #define MAX_DRAWING 4
 
-std::atomic<int> nb_drawing(0);
 std::mutex mtx;
 map<int, string> map_drawing;
 
@@ -84,12 +83,6 @@ void call_from_thread(int client_socket)
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-
-
-            //update the number of drawing finished
-            mtx.lock();
-            nb_drawing++;
-            mtx.unlock();
 
             drawing_finished = true;
         }
@@ -174,7 +167,7 @@ int main()
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à MAX_DRAWING
     listen(ListeningSocket , MAX_DRAWING);
 
-    while (MAX_DRAWING!=nb_drawing) {
+    while (i<MAX_DRAWING) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
 
@@ -187,15 +180,17 @@ int main()
 
         else {
             t[i] = std::thread(call_from_thread, NewConnectionSocket);
-            t[i].join();
             i++;
         }
     }
 
-    mtx.lock();
+    //on attend que tout les opérations soient finies
+    for(i=0;i<MAX_DRAWING;i++) {
+        t[i].join();
+    }
+
     //affichage de la grande fresque ici
     cout << ">> Enjoy the nice work from all students: " << endl;
-    mtx.unlock();
 
     // showing contents of the map
     std::map<int, string>::iterator it = map_drawing.begin();
