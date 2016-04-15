@@ -29,19 +29,19 @@ private:
 
         // Inherited method from Object2D
         /**
-         * @brief fonction qui calcule l'aire du cercle.
+         * @brief getArea Calcule l'aire du cercle.
          * @return Retourne l'aire du cercle.
          */
         float getArea();
 
         /**
-         * @brief fonction qui calcule le périmètre du cercle.
+         * @brief getPerimeter Calcule le périmètre du cercle.
          * @return Retourne le périmètre du cercle.
          */
         float getPerimeter();
 
         /**
-         * @brief fonction qui set le rayon du cercle.
+         * @brief setRayon Set le rayon du cercle.
          * @param x Taille du rayon.
          * @return Retourne le périmètre du cercle.
          */
@@ -53,19 +53,19 @@ private:
         void draw();
 
         /**
-         * @brief fonction qui détermine si l'objet est un cercle.
+         * @brief isCircle Détermine si l'objet est un cercle.
          * @return retourne vrai si l'objet est un cercle sinon faux.
          */
         bool isCircle(){return true;}
 
         /**
-         * @brief fonction qui récupère le centre du cercle.
+         * @brief getCenter Récupère le centre du cercle.
          * @return retourne un point qui correspond au centre du cercle.
          */
         Point getCenter();
 
         /**
-         * @brief fonction qui récupère le rayon du cercle.
+         * @brief getRayon Récupère le rayon du cercle.
          * @return retourne la taille du rayon du cercle.
          */
         double getRayon(){return rayon;}
