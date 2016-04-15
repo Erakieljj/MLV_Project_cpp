@@ -8,6 +8,7 @@
 #include "fresque.h"
 #include "objectinterface.h"
 #include "matrix.h"
+#include "client.h"
 //#include "clientgui.h"
 using namespace std;
 
@@ -74,5 +75,8 @@ int main(int argc, char *argv[])
     window.show();
     return app.exec();*/
 
-    //return 0;
+    Client* c1 = new Client();
+    (*c1).start();
+
+    return 0;
 }

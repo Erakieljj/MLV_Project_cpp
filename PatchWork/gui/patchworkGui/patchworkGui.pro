@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     object2d.cpp \
     matrix.cpp \
     fresque.cpp \
-    point.cpp
+    point.cpp \
+    client.cpp
 
 HEADERS  += mainwindow.h \
     myqgraphicsview.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     circle.h \
     polygone.h \
     point.h \
-    line.h
+    line.h \
+    client.h
 
 FORMS    += mainwindow.ui
 

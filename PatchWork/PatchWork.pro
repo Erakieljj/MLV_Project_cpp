@@ -14,6 +14,7 @@ SOURCES += \
     dataJSON.cpp \
     objectinterface.cpp \
     #clientgui.cpp
+    client.cpp
 
 HEADERS += \
     line.h \
@@ -26,6 +27,7 @@ HEADERS += \
     ellipse.h \
     dataJSON.h \
     #clientgui.h
+    client.h
 
 DISTFILES += \
     PatchWork.pro.user
@@ -40,4 +42,7 @@ SUBDIRS += \
 FORMS += \
    # clientgui.ui
 
+win32 {
+    LIBS += -lws2_32
+}
 
