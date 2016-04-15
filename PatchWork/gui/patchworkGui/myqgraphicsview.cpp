@@ -35,12 +35,10 @@ void MyQGraphicsView::mousePressEvent(QMouseEvent * e)
     qDebug() <<pt.x() << pt.y();
     qDebug() <<this->maxPoint << points.size();
 
-
     if(this->maxPoint==0 && points.size()>0){
         this->draw();
         points.clear();
     }
-
 }
 
 void MyQGraphicsView::setMaxtPoint(int point)

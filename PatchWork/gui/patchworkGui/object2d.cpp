@@ -15,7 +15,7 @@ void Object2D::setColor(string color) {
 void Object2D::updateVertices()
 {
     vector<Point> points = this->mat.getPoints();
-    for(int i=0; i<points.size(); i++){
+    for(size_t i=0; i<points.size(); i++){
         vertices.at(i) = points.at(i);
     }
 }

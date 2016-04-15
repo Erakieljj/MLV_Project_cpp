@@ -1,7 +1,7 @@
 #include "line.h"
 using namespace std;
 
-Line::Line(string color, Point p1, Point p2,QGraphicsScene *scene):scene(scene),Object2D(color)
+Line::Line(string color, Point p1, Point p2,QGraphicsScene *scene):Object2D(color),scene(scene)
 {
     vector<Point> points;
     points.push_back(p1);

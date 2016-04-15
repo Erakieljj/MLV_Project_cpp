@@ -29,6 +29,5 @@ void Circle::draw(){
 
 Point Circle::getCenter(){
     Point p1 = vertices.at(0);
-
     return p1;
 }

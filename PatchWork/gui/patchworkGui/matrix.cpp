@@ -67,12 +67,13 @@ Matrix* Matrix::rotationDirect(double alpha)
 Matrix Matrix::rotationCentral(double alpha,double a,double b)
 {
     //Matrix *m1 = translation(-a,-b);
+    a=0;
+    b=0;
     Matrix *m2 = idMatrix(3);
     m2->mat[0][0]=cos(alpha);
     m2->mat[0][1]=sin(alpha);
     m2->mat[1][0]=-sin(alpha);
     m2->mat[1][1]=cos(alpha);
-    Matrix *m3 = translation(-a,b);
 
     return (*m2);
 }

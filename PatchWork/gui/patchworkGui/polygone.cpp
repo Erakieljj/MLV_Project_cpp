@@ -1,7 +1,7 @@
 #include "polygone.h"
 using namespace std;
 
-Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *scene):scene(scene),Object2D(color)
+Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *scene):Object2D(color),scene(scene)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");
@@ -12,7 +12,7 @@ Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *
     this->mat = *(new Matrix(this->vertices));
 }
 
-Polygone::Polygone(string color, vector<Point> points,QGraphicsScene *scene):scene(scene),Object2D(color)
+Polygone::Polygone(string color, vector<Point> points,QGraphicsScene *scene):Object2D(color),scene(scene)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");
@@ -53,7 +53,7 @@ void Polygone::draw(){
     this->mat.print();
 
     Point pp = vertices.at(0);
-    for(int i=1;i<vertices.size();i++){
+    for(size_t i=1;i<vertices.size();i++){
         Point p = vertices.at(i);
         scene->addLine(pp.get_x(), pp.get_y(),p.get_x(), p.get_y(),
                           QPen(QColor(color.c_str()), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
@@ -68,7 +68,7 @@ void Polygone::draw(){
 
 Point Polygone::getCenter()
 {
-    double xfinal,yfinal = 0;
+    double xfinal=0,yfinal = 0;
     double signedArea = 0.0;
     double x0 = 0.0;
     double y0 = 0.0;
@@ -76,7 +76,7 @@ Point Polygone::getCenter()
     double y1 = 0.0;
     double a = 0.0;
 
-    int i = 0;
+    size_t i = 0;
     for(i=0;i<vertices.size()-1;i++){
         x0 = vertices.at(i).get_x();
         y0 = vertices.at(i).get_y();
