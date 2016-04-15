@@ -31,6 +31,9 @@ public:
     void start(std::string json);
 
 private:
+    /**
+     * @brief json Le dessin encodé sous le format json.
+     */
     std::string json;
 };
 
