@@ -28,8 +28,8 @@ public:
     void setRlon(double x){rlon*=x;}
     void setRlar(double x){rlar*=x;}
 
-    double getRlar(){double rlar;}
-    double getRlon(){double rlon;}
+    double getRlar(){return rlar;}
+    double getRlon(){return rlon;}
 
 
 };

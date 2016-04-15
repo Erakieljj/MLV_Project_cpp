@@ -9,7 +9,7 @@
 
 
 
-void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface &obj)
+void DataJSON::readShapeJSON(const QJsonObject &json)
 {
 
     QJsonArray pointsArray = json["points"].toArray();
@@ -35,23 +35,23 @@ void DataJSON::setShapes(const vector<ObjectInterface*> &shapes)
     mShapes = shapes;
 }
 
-vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json, Annotations &notation)
+vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json)
 {
     vector<ObjectInterface*> drawing;
 
     QJsonObject shapes = json["shapes"].toObject();
     ObjectInterface *obj;
 
-    readShapeJSON(shapes["Line"].toObject(), *obj);
+    readShapeJSON(shapes["Line"].toObject());
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Circle"].toObject(), *obj);
+    readShapeJSON(shapes["Circle"].toObject());
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Ellipse"].toObject(), *obj);
+    readShapeJSON(shapes["Ellipse"].toObject());
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Polygone"].toObject(), *obj);
+    readShapeJSON(shapes["Polygone"].toObject());
     drawing.push_back(obj);
 
     return drawing;

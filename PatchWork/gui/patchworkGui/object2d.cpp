@@ -4,7 +4,7 @@
 #include <string.h>
 using namespace std;
 
-std::string Object2D::getColor() const{
+std::string Object2D::getColor(){
     return color;
 }
 

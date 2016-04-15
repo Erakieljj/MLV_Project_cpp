@@ -23,7 +23,7 @@ class Object2D :public ObjectInterface {
         virtual float getArea()=0;
         virtual float getPerimeter()=0;
 
-        std::string getColor() const;
+        std::string getColor();
         void setColor(std::string color);
         vector<Point> getPoints(){return this->vertices;}
 
@@ -37,10 +37,6 @@ class Object2D :public ObjectInterface {
         void applyHomethety(double x,double y);
         void applyAxialSymmetry(double a, double b);
         void applyCentralSymmetry(double x,double y);
-
-        virtual void setRayon(double x){}
-        virtual void setRlon(double x){}
-        virtual void setRlar(double x){}
 
         virtual bool isLine(){return false;}
         virtual bool isEllipse(){return false;}

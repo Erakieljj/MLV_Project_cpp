@@ -22,9 +22,8 @@ class DataJSON
          /**
          * @brief readShapeJSON Lecture concernant les attributs associés à un objet.
          * @param json JSON à parser
-         * @param obj Objet stockant les information du JSON.
          */
-        static void readShapeJSON(const QJsonObject &json, ObjectInterface &obj);
+        static void readShapeJSON(const QJsonObject &json);
     public:
         //DataJSON();
          /**
@@ -41,7 +40,7 @@ class DataJSON
          * @brief readDrawing Lecture d'un JSON pour parser le dessin d'un élève (coté serveur).
          * @param json JSON à lire et parser.
          */
-        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotations &notation);
+        static vector<ObjectInterface*> readDrawing(const QJsonObject &json);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.

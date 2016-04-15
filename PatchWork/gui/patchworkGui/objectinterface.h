@@ -25,9 +25,9 @@ class ObjectInterface : public QObject
         virtual void applyAxialSymmetry(double a,double b)=0;
         virtual void applyCentralSymmetry(double x,double y)=0;
 
-        virtual void setRayon(double x){}
-        virtual void setRlon(double x){}
-        virtual void setRlar(double x){}
+        virtual void setRayon(double x){x=0;}
+        virtual void setRlon(double x){x=0;}
+        virtual void setRlar(double x){x=0;}
 
         virtual bool isLine(){return false;}
         virtual bool isEllipse(){return false;}
