@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Circle::Circle(string color,Point p,double rayon,QGraphicsScene *scene):scene(scene),rayon(rayon),Object2D(color)
+Circle::Circle(string color,Point p,double rayon,QGraphicsScene *scene):Object2D(color),rayon(rayon),scene(scene)
 {
     this->vertices.push_back(p);
     this->mat = *(new Matrix(this->vertices));
