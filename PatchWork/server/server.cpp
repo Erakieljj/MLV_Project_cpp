@@ -141,7 +141,7 @@ int main()
 
     if (ListeningSocket  < 0)
     {   cout << ListeningSocket  << endl;
-        cout << "\n>> Error establishing socket..." << endl;
+        cout << "\n>> Error on establishing socket..." << endl;
         exit(1);
     }
 
