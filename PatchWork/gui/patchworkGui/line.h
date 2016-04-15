@@ -22,6 +22,9 @@ private:
     QGraphicsScene *scene;
 
     public:
+        /**
+         * @brief Line Constructeur.
+         */
         Line(string color,Point p1,Point p2,QGraphicsScene *scene);
         // Inherited method from Object2D
 
