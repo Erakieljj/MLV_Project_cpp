@@ -3,131 +3,134 @@
 #include "point.h"
 #include<vector>
 
-//Classe Matrix : représente une matrice 3x3
+/**
+ * @brief Matrix Représente une matrice.
+ */
 ////Attention : matrice en colomn major dans son implémentation
 class Matrix
 {
     private:
+        /**
+         * @brief mat la matrice.
+         */
         vector< vector<double> > mat;
-        int m; //number of line
-        int n; //number of col
+        /**
+         * @brief m nombre de lignes.
+         */
+        int m;
+        /**
+         * @brief n nombre de colonnes.
+         */
+        int n;
 
     public:
         //Liste des constructeurs :
-        ///
-        /// \brief Default constructor
-        ///
+        /**
+         * @brief Matrix Constructeur par défaut.
+         */
         Matrix();
-        ///
-        /// \brief Matrix (m,n)
-        ///
+
+        /**
+         * @brief Matrix Constructeur définissant le nombre de ligne et colonne de la matrice.
+         * @param m Nombre de ligne.
+         * @param n Nombre de colonne.
+         */
         Matrix(double m , double n);
 
-        ///
-        /// \brief Return a Matrix representation of all Point
-        /// \param points - vector of Point
-        ///
+        /**
+         * @brief Matrix Constructeur retournant la matrice de representation de tous les points.
+         * @param points vecteur de Point.
+        */
         Matrix(vector<Point> points);
 
-        ///
-        /// \brief Matrix Copy function
-        /// \param mat
-        ///
-        //Matrix(const Matrix& mat);
-
-        ///
-        /// \brief idMatrix the Identity Matrix
-        /// \param n (number of col and line)
-        /// \return the Identity Matrix
-        ///
+        /**
+         * @brief idMatrix Matrice identité.
+         * @param n nombre de colonnes et lignes.
+         * @return Retourne la construction de la matrice identité.
+         */
         static Matrix* idMatrix(double n);
 
         //Liste des Fonctions statiques, ici factory method
-        ///
-        /// \brief Return the translation matrix
-        /// \param x
-        /// \param y
-        /// \return Return the translation matrix
-        ///
+        /**
+         * @brief translation Effectue l'opération de translation sur la matrice.
+         * @param x Valeur en abcisse de x.
+         * @param y Valeur en ordonné de y.
+         * @return
+         */
         static Matrix* translation(double x, double y);
 
-        ///
-        /// \brief Return the direct rotation matrix
-        /// \param alpha
-        /// \return return the rotation matrix
-        ///
+        /**
+         * @brief rotationDirect Effectue l'opération de rotation directe sur la matrice.
+         * @param alpha Angle de rotation directe.
+         * @return retourne la matrice de rotation directe.
+         */
         static Matrix* rotationDirect(double alpha);
 
+        /**
+         * @brief rotationCentral Effectue l'opération de rotation centrale sur la matrice.
+         * @param alpha Angle de rotation en radiant.
+         * @param x abscisse du centre de rotation.
+         * @param y ordonnée du centre de rotation.
+         * @return Retourne la matrice de rotation Central.
+         */
         static Matrix rotationCentral(double alpha,double x,double y);
 
-        ///
-        /// \brief Return the indirect rotation matrix
-        /// \param alpha
-        /// \return return the rotation matrix
-        ///
+        /**
+         * @brief rotationIndirect Effectue l'opération de rotation indirecte sur la matrice.
+         * @param alpha Angle de rotation indirecte.
+         * @return Retourne la matrice de rotation indirecte.
+         */
         static Matrix* rotationIndirect(double alpha);
 
-        ///
-        /// \brief Return the homothety matrix
-        /// \param x
-        /// \param y
-        /// \return Return the homothety matrix
-        ///
+        /**
+         * @brief axialSymmetry Effectue l'opération de symétrie axiale sur la matrice.
+         * @param a Valeur en abcisse de x.
+         * @param b Valeur en ordonné de y.
+         * @return Retourne la matrice de symétrie axiale.
+         */
         static Matrix* homothety(double x, double y);
 
-        ///
-        /// \brief Return the axial symmetry matrix for y = ax+b
-        /// \param a
-        /// \param b
-        /// \return
-        ///
+        /**
+         * @brief axialSymmetry Effectue l'opération de symétrie axiale sur la matrice.
+         * @param a Valeur en abcisse de x.
+         * @param b Valeur en ordonné de y.
+         * @return Retourne la matrice de symétrie axiale.
+         */
         static Matrix axialSymmetry(double a,double b);
 
-        ///
-        /// \brief Return the axial central matrix for y = ax+b
-        /// \param a
-        /// \param b
-        /// \return
-        ///
+        /**
+         * @brief centralSymmetry Effectue l'opération de symétrie centrale sur la matrice.
+         * @param a Valeur en abcisse de x.
+         * @param b Valeur en ordonné de y.
+         * @return Retourne la matrice de symétrie centrale.
+         */
         static Matrix centralSymmetry(double a,double b);
 
+        /**
+         * @brief print Affiche la matrice dans le terminal.
+         */
         void print();
 
-        /// Product of two matrix
-        /// \brief operator *
-        /// \param matrix
-        /// \return
-        ///
+        /**
+         * @brief operator * Produit de deux matrices.
+         * @param mat Matrice avec laquelle on veut réaliser l'opération de produit.
+         * @return Retourne le résultat du produit des deux matrices (matriceResultat = mat1 * mat).
+         */
         Matrix operator*(const Matrix &matrix);
 
-        ///
-        /// \brief affectation function of matrix
-        /// \param mat
-        /// \return
-        ///
+        /**
+         * @brief operator = Fonction d'affectation d'une matrice.
+         * @param mat Matrice à affecter.
+         * @return Retourne le résultat de l'affectation (matrice1 = matrice2).
+         */
         Matrix& operator= (const Matrix & mat);
 
+        /**
+         * @brief getPoints Obtient la liste des points.
+         * @return Retourne la liste des points sous le format "vector<Points>".
+         */
         vector<Point> getPoints();
-        /*
 
-        //Liste des fonctions de manipulation de la matrice courante
-        ///Retourne la transposée de la matrice
-        //Matrix transpose();
-
-
-        //Liste des fonctions de surcharge d'opérateur
-        ///opérateur d'affectation
-        Matrix& operator= (const Matrix & mat);
-        ///Produit matriciel
-        Matrix operator*(const Matrix &mat);
-        //Vector operator*(Vector& v);
-        Matrix& operator*= (const Matrix &mat);
-
-        ///Opérateur de cast
-        //operator double*();
-        //operator float*();
-
-        */
 };
 
 #endif
