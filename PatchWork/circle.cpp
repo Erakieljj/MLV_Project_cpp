@@ -7,6 +7,11 @@ double Circle::getRayon() const
     return rayon;
 }
 
+void Circle::setRayon(double value)
+{
+    rayon = value;
+}
+
 Circle::Circle(string color,Point p,double rayon):rayon(rayon),ObjectInterface(color)
 {
     this->vertices.push_back(p);

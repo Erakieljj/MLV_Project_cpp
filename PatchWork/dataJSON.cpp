@@ -7,19 +7,35 @@
 #include <QJsonValue>
 #include <QJsonArray>
 
-void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface &obj)
+void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type)
 {
-
+    vector<Point> points;
+    string color= json["color"].toString().toStdString();
     QJsonArray pointsArray = json["points"].toArray();
+
     for (int index = 0; index < pointsArray.size(); index++)
     {
         QJsonObject pointObjJSON = pointsArray[index].toObject();
-        pointObjJSON["x"];
-        pointObjJSON["y"];
+        points.push_back(Point(pointObjJSON["x"].toDouble(), pointObjJSON["y"].toDouble()));
     }
-    json["perimeter"];
-    json["area"];
-    json["matrix"];
+   /* json["perimeter"].toDouble();
+    json["area"].toDouble();*/
+    if(type == "Line")
+    {
+        obj = new Line(color, points[0], points[1]);
+    }
+    else if(type == "Circle")
+    {
+        obj = new Circle(color, points[0], json["rayon"].toDouble());
+    }
+    else if(type == "Ellipse") {
+       obj = new Ellipse(color, points[0], json["rlar"].toDouble(), json["rlong"].toDouble());
+    }
+    else if(type == "Polygone")
+    {
+        obj = new Polygone(color, points);
+    }
+    //json["matrix"];
 
 }
 
@@ -33,25 +49,37 @@ void DataJSON::setShapes(const vector<ObjectInterface*> &shapes)
     mShapes = shapes;
 }
 
-vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json, Annotation &notation)
+vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json, Annotations notation)
 {
     vector<ObjectInterface*> drawing;
-    Annotation notation;
+    float areaTotal = 0.0;
+    float perimeterTotal = 0.0;
+    string color;
 
     QJsonObject shapes = json["shapes"].toObject();
     ObjectInterface *obj;
 
-    readShapeJSON(shapes["Line"].toObject(), obj);
+    readShapeJSON(shapes["Line"].toObject(), obj, areaTotal, perimeterTotal, "Line");
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Circle"].toObject(), obj);
+    readShapeJSON(shapes["Circle"].toObject(), obj, areaTotal, perimeterTotal, "Circle");
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Ellipse"].toObject(), obj);
+    readShapeJSON(shapes["Ellipse"].toObject(), obj, areaTotal, perimeterTotal, "Ellipse");
     drawing.push_back(obj);
 
-    readShapeJSON(shapes["Polygone"].toObject(), obj);
+    readShapeJSON(shapes["Polygone"].toObject(), obj, areaTotal, perimeterTotal, "Polygone");
     drawing.push_back(obj);
+
+    // Annotation de la maîtresse.
+    if (drawing.size() == 4)
+    {
+        notation.nbShapesRequired ="True";
+    } else
+    {
+        notation.nbShapesRequired ="False";
+    }
+
 
     return drawing;
 }

@@ -18,6 +18,7 @@ class Circle : public ObjectInterface
         Circle(string color,Point p1,double rayon);
 
         double getRayon() const;
+        void setRayon(double value);
 
         // Inherited method from ObjectInterface
         /**

@@ -12,6 +12,17 @@ Polygone::Polygone(string color, initializer_list<Point> points):ObjectInterface
     this->mat = *(new Matrix(this->vertices));
 }
 
+Polygone::Polygone(string color, vector<Point> points):ObjectInterface(color)
+{
+    if(points.size()<3) {
+        throw new invalid_argument("Must have at least 3 Point for a polygone");
+    }
+    for(Point p : points) {
+        this->vertices.push_back(p);
+    }
+    this->mat = *(new Matrix(this->vertices));
+}
+
 float Polygone::getArea() {
     float a = 0;
     if(this->vertices.size()<3){

@@ -5,6 +5,8 @@
 #include <string>
 #include "objectinterface.h"
 
+using namespace std;
+
 static vector<ObjectInterface*> mShapes; //penser au clear et init
 typedef struct  {
     QString nbColorAccepted;
@@ -23,8 +25,11 @@ class DataJSON
          * @brief readShapeJSON Lecture concernant les attributs associés à un objet.
          * @param json JSON à parser
          * @param obj Objet stockant les information du JSON.
+         * @param areaTotal aire total des formes géométrique.
+         * @param perimeterTotal perimetre total des formes géométriques.
+         * @param type type de la forme géométrique.
          */
-        static void readShapeJSON(const QJsonObject &json, ObjectInterface &obj);
+        static void readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type);
     public:
         //DataJSON();
          /**
@@ -42,7 +47,7 @@ class DataJSON
          * @param json JSON à lire et parser.
          * @param notation annotation laissé par la maîtresse.
          */
-        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotation notation);
+        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotations notation);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.

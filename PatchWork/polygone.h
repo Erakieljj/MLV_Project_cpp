@@ -16,6 +16,7 @@ class Polygone : public ObjectInterface
          * @param points Listes des point avec leur coordonnées x et y.
          */
         Polygone(string color,initializer_list<Point> points);
+        Polygone(string color, vector<Point> points);
         // Inherited method from ObjectInterface
         /**
          * @brief getArea Calcule et obtient l'aire du polygone.

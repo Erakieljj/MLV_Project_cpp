@@ -15,10 +15,10 @@ using namespace std;
 #include <iostream>
 
 #include "point.h"
+#include "ellipse.h"
 #include "line.h"
 #include "circle.h"
 #include "polygone.h"
-#include "ellipse.h"
 #include "fresque.h"
 #include "objectinterface.h"
 #include "dataJSON.h"
@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
 
     ObjectInterface *l = new Line("red",p,p2);
     ObjectInterface *c = new Circle("blue",Point(5,7),10);
-    ObjectInterface *e = new Ellipse("blue",Point(54,70),10,30);
+
+    //ObjectInterface *e = new Ellipse("blue",Point(54,70),10,30);
     ObjectInterface *pol = new Polygone("black",{Point(4,6),Point(5,7),Point(44,65),Point(24,6),Point(4,76)});
 
     /*f->add(*l);
@@ -91,7 +92,7 @@ int main(int argc, char *argv[])
     vector<ObjectInterface*> shapes;
 
     shapes.push_back(l);
-    shapes.push_back(e);
+    //shapes.push_back(e);
     shapes.push_back(c);
     shapes.push_back(pol);
 

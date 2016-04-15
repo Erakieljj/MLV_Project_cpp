@@ -12,6 +12,16 @@ double Ellipse::getRlar() const
     return rlar;
 }
 
+void Ellipse::setRlar(double value)
+{
+    rlar = value;
+}
+
+void Ellipse::setRlon(double value)
+{
+    rlon = value;
+}
+
 Ellipse::Ellipse(string color,Point p,double rlon,double rlar):rlon(rlon),rlar(rlar),ObjectInterface(color)
 {
     this->vertices.push_back(p);

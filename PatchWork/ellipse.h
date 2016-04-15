@@ -24,6 +24,8 @@ class Ellipse :public ObjectInterface
 
         double getRlon() const;
         double getRlar() const;
+        void setRlar(double value);
+        void setRlon(double value);
 
         // Inherited method from ObjectInterface
         /**
