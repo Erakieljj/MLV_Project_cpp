@@ -8,9 +8,10 @@
  */
 class Line : public ObjectInterface
 {
+    Q_OBJECT
     public:
 
-        Line(string color,Point p1,Point p2);
+        Line( string color,Point p1,Point p2, QObject * parent=0);
         // Inherited method from ObjectInterface
         /**
          * @brief getArea calcule et obtient l'aire de la ligne.

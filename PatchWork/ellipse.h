@@ -9,6 +9,7 @@
  */
 class Ellipse :public ObjectInterface
 {
+    Q_OBJECT
     private:
         /**
          * @brief rlon Rayon pour longueur ellipse.
@@ -20,6 +21,9 @@ class Ellipse :public ObjectInterface
         double rlar;
     public:
         Ellipse(string color,Point p1,double rlon,double rlar);
+
+        double getRlon() const;
+        double getRlar() const;
 
         // Inherited method from ObjectInterface
         /**

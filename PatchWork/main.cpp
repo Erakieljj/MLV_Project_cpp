@@ -7,27 +7,27 @@
 #include "ellipse.h"
 #include "fresque.h"
 #include "objectinterface.h"
+#include "dataJSON.h"
 #include "matrix.h"
+#include <QJsonDocument>
 //#include "clientgui.h"
+
 using namespace std;
-
-
-
 
 int main(int argc, char *argv[])
 {
     /*
-    Fresque *f = new Fresque();
+    Fresque *f = new Fresque();*/
 
     Point p(1,2);
     Point p2(5,2);
 
     Line *l = new Line("red",p,p2);
     Circle *c = new Circle("blue",Point(5,7),10);
-    ObjectInterface *e = new Ellipse("blue",Point(54,70),10,30);
-    ObjectInterface *pol = new Polygone("black",{Point(4,6),Point(5,7),Point(44,65),Point(24,6),Point(4,76)});
+    Ellipse *e = new Ellipse("blue",Point(54,70),10,30);
+    Polygone *pol = new Polygone("black",{Point(4,6),Point(5,7),Point(44,65),Point(24,6),Point(4,76)});
 
-    f->add(*l);
+    /*f->add(*l);
     f->add(*c);
     f->add(*e);
     f->add(*pol);
@@ -74,5 +74,33 @@ int main(int argc, char *argv[])
     window.show();
     return app.exec();*/
 
-    //return 0;
+    vector<ObjectInterface*> shapes;
+
+    shapes.push_back(l);
+    shapes.push_back(e);
+    shapes.push_back(c);
+    shapes.push_back(pol);
+
+    DataJSON::setShapes(shapes);
+
+    QJsonObject objJSONWrite;
+    QJsonObject objJSON;
+
+    /*DataJSON::writeJsonAnnotation(objJSONWrite);
+    QJsonDocument jsonDoc(objJSONWrite);
+    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
+    cout<<strJson.toStdString()<<endl;*/
+
+    DataJSON::writeDrawing(objJSON);
+
+    /*Annotations notation = DataJSON::readJsonAnnotation(objJSONWrite);
+    jsonDoc.setObject(objJSONWrite);
+    strJson = jsonDoc.toJson(QJsonDocument::Compact);
+
+    cout<<strJson.toStdString()<<endl;
+    cout<<notation.nbColorAccepted.toStdString()<<endl;
+    cout<<notation.nbShapesRequired.toStdString()<<endl;
+    cout<<notation.sumAreaAccepted.toStdString()<<endl;
+    cout<<notation.sumAreaShapeRequired<<endl;*/
+    return 0;
 }
