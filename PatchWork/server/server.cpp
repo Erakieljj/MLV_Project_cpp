@@ -28,6 +28,7 @@
 
 std::mutex mtx;
 map<int, string> map_drawing;
+std::atomic<int> nb_drawing(1);
 
 /**
  * @brief La fonction call_from_thread sera la fonction exécutée lors de la
@@ -74,7 +75,8 @@ void call_from_thread(int client_socket)
         /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
           et la maîtresse peut accéder à n'importe quel moment à la map */
         mtx.lock();
-        map_drawing[client_socket] = buffer;
+        map_drawing[nb_drawing] = buffer;
+        nb_drawing++;
         mtx.unlock();
 
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
