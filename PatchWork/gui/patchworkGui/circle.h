@@ -28,7 +28,7 @@ private:
         /**
          * @brief Circle Constructeur.
          */
-        Circle(string color,Point p1,double rayon,QGraphicsScene *scene);
+        Circle(string color,Point p1,double rayon);
 
         // Inherited method from Object2D
         /**
@@ -53,7 +53,7 @@ private:
         /**
          * @brief draw Dessine la forme du cercle.
          */
-        void draw();
+        void draw(QGraphicsScene *scene);
 
         /**
          * @brief isCircle Détermine si l'objet est un cercle.

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Circle::Circle(string color,Point p,double rayon,QGraphicsScene *scene):Object2D(color),rayon(rayon),scene(scene)
+Circle::Circle(string color,Point p,double rayon):Object2D(color),rayon(rayon)
 {
     this->vertices.push_back(p);
     this->mat = *(new Matrix(this->vertices));
@@ -18,7 +18,7 @@ float Circle::getPerimeter(){
     return 3.142 * 2* rayon;
 }
 
-void Circle::draw(){
+void Circle::draw(QGraphicsScene *scene){
     cout << " \n**CIRCLE**("<<color<< ")\nRayon : "<<rayon<<endl<<"Matrice : " << endl;
     this->mat.print();
     Point p = vertices.at(vertices.size()-1);

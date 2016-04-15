@@ -17,7 +17,7 @@ class ObjectInterface : public QObject
         /**
          * @brief draw virtual pure pour dessiner
          */
-        virtual void draw()=0;
+        virtual void draw(QGraphicsScene *scene)=0;
          /**
          * @brief applyTranslation virtual pure pour appliquer une translation
          * @param x double

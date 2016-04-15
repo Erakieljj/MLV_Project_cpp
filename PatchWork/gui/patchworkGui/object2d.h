@@ -61,7 +61,7 @@ class Object2D :public ObjectInterface {
         /**
          * @brief draw virtual pure a redefinir pour dessiner chaque forme
          */
-        virtual void draw()=0;
+        virtual void draw(QGraphicsScene *scene)=0;
 
         /**
          * @brief applyTranslation applique une translation a la matrice representant l'objet

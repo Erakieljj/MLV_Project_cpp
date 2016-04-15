@@ -32,7 +32,7 @@ private:
      QGraphicsScene *scene;
 
 public:
-    Ellipse(string color,Point p1,double rlon,double rlar,QGraphicsScene *scene);
+    Ellipse(string color,Point p1,double rlon,double rlar);
 
     // Inherited method from Object2D
     /**
@@ -50,7 +50,7 @@ public:
     /**
      * @brief draw Dessine la forme de l'ellipse.
      */
-    void draw();
+    void draw(QGraphicsScene *scene);
 
     /**
      * @brief isEllipse Détermine si l'objet est une ellipse.
