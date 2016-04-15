@@ -21,19 +21,46 @@ public:
 private:
     Ui::MainWindow *ui;
     int waitingPoint = -1;
+    /**
+     * @brief myGV graphics view
+     */
     MyQGraphicsView *myGV = new MyQGraphicsView();
 
 
 private slots:
+    /**
+     * @brief modeCircle change mode
+     */
     void modeCircle();
+    /**
+     * @brief modeEllipse change mode
+     */
     void modeEllipse();
+    /**
+     * @brief modePolygone change mode
+     */
     void modePolygone();
+    /**
+     * @brief modeLine change mode
+     */
     void modeLine();
 
+    /**
+     * @brief applyHomo call homothetie
+     */
     void applyHomo();
+    /**
+     * @brief applyRotation call rotation
+     */
     void applyRotation();
+    /**
+     * @brief applyTranslation call Translation
+     */
     void applyTranslation();
 
+    /**
+     * @brief callServer call server
+     */
     void callServer();
 
 };

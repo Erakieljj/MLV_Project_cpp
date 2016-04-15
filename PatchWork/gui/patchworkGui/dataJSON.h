@@ -5,6 +5,8 @@
 #include <string>
 #include "objectinterface.h"
 
+using namespace std;
+
 static vector<ObjectInterface*> mShapes; //penser au clear et init
 typedef struct  {
     QString nbColorAccepted;
@@ -22,8 +24,12 @@ class DataJSON
          /**
          * @brief readShapeJSON Lecture concernant les attributs associés à un objet.
          * @param json JSON à parser
+         * @param obj Objet stockant les information du JSON.
+         * @param areaTotal aire total des formes géométrique.
+         * @param perimeterTotal perimetre total des formes géométriques.
+         * @param type type de la forme géométrique.
          */
-        static void readShapeJSON(const QJsonObject &json);
+        static void readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type,QGraphicsScene * scene);
     public:
         //DataJSON();
          /**
@@ -39,8 +45,9 @@ class DataJSON
         /**
          * @brief readDrawing Lecture d'un JSON pour parser le dessin d'un élève (coté serveur).
          * @param json JSON à lire et parser.
+         * @param notation annotation laissé par la maîtresse.
          */
-        static vector<ObjectInterface*> readDrawing(const QJsonObject &json);
+        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotations notation,QGraphicsScene * scene);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.
@@ -49,8 +56,9 @@ class DataJSON
         /**
          * @brief writeJsonAnnotation Ecriture d'un JSON avec les annotation de la maîtresse(coté serveur -> client).
          * @param json JSON à créer.
+         * @param notation annotation laissé par la maîtresse.
          */
-        void writeJsonAnnotation(QJsonObject &json, Annotations notation);
+        static void writeJsonAnnotation(QJsonObject &json, Annotations notation);
         /**
          * @brief readJsonAnnotation Lecture d'un JSON contenant les annotations de la maîtresse (provenant du serveur).
          * @param json JSON à lire et parser.
