@@ -188,11 +188,11 @@ void MyQGraphicsView::draw(){
     }
     case ellipse:{
 
-       /* Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar,scene);
+     /*   Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar,scene);
         fresque->add(*e);
         fresque->draw();
-        maxPoint = 1;*/
-        break;
+        maxPoint = 1;
+        break;*/
     }
     case circle:
     {
