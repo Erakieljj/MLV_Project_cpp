@@ -15,7 +15,7 @@ MyQGraphicsView::MyQGraphicsView(QWidget *parent) :
     QGraphicsView(parent)
 {
     scene = new QGraphicsScene();
-    this->fresque = new Fresque(scene);
+    this->fresque = new Fresque();
     this->setSceneRect(50, 50, 350, 350);
     this->setScene(scene);
 }
@@ -90,7 +90,7 @@ void MyQGraphicsView::applyHomo(QString forme,double hx,double hy)
     }
 
     this->scene->clear();
-    fresque->draw();
+    fresque->draw(this->scene);
 }
 
 void MyQGraphicsView::applyTranslation(QString forme,double hx,double hy)
@@ -125,7 +125,7 @@ void MyQGraphicsView::applyTranslation(QString forme,double hx,double hy)
         }
     }
     this->scene->clear();
-    fresque->draw();
+    fresque->draw(this->scene);
 }
 
 void MyQGraphicsView::applyRotation(QString forme,double r)
@@ -169,7 +169,7 @@ void MyQGraphicsView::applyRotation(QString forme,double r)
         }
     }
     this->scene->clear();
-    fresque->draw();
+    fresque->draw(this->scene);
 }
 
 void MyQGraphicsView::draw(){
@@ -178,31 +178,31 @@ void MyQGraphicsView::draw(){
     case none:
         break;
     case line:
-    {Line *l = new Line(colorLine.toUtf8().constData(),points.at(0),points.at(1),scene);
+    {Line *l = new Line(colorLine.toUtf8().constData(),points.at(0),points.at(1));
         fresque->add(*l);
-        fresque->draw();
+        fresque->draw(this->scene);
         maxPoint = 2;
         break;
     }
     case ellipse:{
-        Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar,scene);
+        Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar);
         fresque->add(*e);
-        fresque->draw();
+        fresque->draw(this->scene);
         maxPoint = 1;
         break;
     }
     case circle:
     {
-        Circle *c = new Circle(colorCircle.toUtf8().constData(),points.at(0),rayon,scene);
+        Circle *c = new Circle(colorCircle.toUtf8().constData(),points.at(0),rayon);
         fresque->add(*c);
-        fresque->draw();
+        fresque->draw(this->scene);
         maxPoint = 1;
         break;
     }
     case polygone:
-        Polygone *p = new Polygone(colorPolygone.toUtf8().constData(),points,scene);
+        Polygone *p = new Polygone(colorPolygone.toUtf8().constData(),points);
         fresque->add(*p);
-        fresque->draw();
+        fresque->draw(this->scene);
         maxPoint = polygonPoint;
         break;
     }

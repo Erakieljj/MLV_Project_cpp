@@ -1,7 +1,7 @@
 #include "line.h"
 using namespace std;
 
-Line::Line(string color, Point p1, Point p2,QGraphicsScene *scene):Object2D(color),scene(scene)
+Line::Line(string color, Point p1, Point p2):Object2D(color)
 {
     vector<Point> points;
     points.push_back(p1);
@@ -21,7 +21,7 @@ float Line::getPerimeter(){
     return Point::dist(pi,pj);
 }
 
-void Line::draw(){
+void Line::draw(QGraphicsScene *scene){
     cout << "\n**LINE**("<<color<< ")\n Matrice : " << endl;
     this->mat.print();
     Point p1 = vertices.at(0);

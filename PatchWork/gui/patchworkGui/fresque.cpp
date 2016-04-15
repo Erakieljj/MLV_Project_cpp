@@ -1,14 +1,14 @@
 #include "fresque.h"
 using namespace std;
 
-Fresque::Fresque(QGraphicsScene *scene):scene(scene) {
+Fresque::Fresque(){
     cout << "Init fresque"<<endl;
 }
 
 // Inherited method from ObjectInterface
-void Fresque::draw(){
+void Fresque::draw(QGraphicsScene *scene){
     for(ObjectInterface* o : objects) {
-        o->draw();
+        o->draw(scene);
     }
 }
 

@@ -25,7 +25,7 @@ private:
         /**
          * @brief Line Constructeur.
          */
-        Line(string color,Point p1,Point p2,QGraphicsScene *scene);
+        Line(string color,Point p1,Point p2);
         // Inherited method from Object2D
 
         float getArea();
@@ -34,7 +34,7 @@ private:
         /**
          * @brief draw Dessine la ligne.
          */
-        void draw();
+        void draw(QGraphicsScene *scene);
 
         /**
          * @brief isLine Détermine si l'objet est une ligne.

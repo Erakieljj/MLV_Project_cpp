@@ -29,7 +29,7 @@ class DataJSON
          * @param perimeterTotal perimetre total des formes géométriques.
          * @param type type de la forme géométrique.
          */
-        static void readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type,QGraphicsScene * scene);
+        static void readShapeJSON(const QJsonObject &json, ObjectInterface *obj,  string type);
     public:
         //DataJSON();
          /**
@@ -47,7 +47,7 @@ class DataJSON
          * @param json JSON à lire et parser.
          * @param notation annotation laissé par la maîtresse.
          */
-        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotations notation,QGraphicsScene * scene);
+        static vector<ObjectInterface*> readDrawing(QJsonObject &json, Annotations notation);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.

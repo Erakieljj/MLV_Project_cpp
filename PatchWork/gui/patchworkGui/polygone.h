@@ -21,14 +21,14 @@ public:
      * @param points liste des points
      * @param scene la scene de la QGraphicsView
      */
-    Polygone(string color,initializer_list<Point> points,QGraphicsScene *scene);
+    Polygone(string color,initializer_list<Point> points);
     /**
     * @brief Polygone
     * @param color la couleur
     * @param points liste des points
     * @param scene la scene de la QGraphicsView
     */
-    Polygone(string color,vector<Point> points,QGraphicsScene *scene);
+    Polygone(string color,vector<Point> points);
     /**
      * @brief getArea
      * @return float l'aire de la forme
@@ -42,7 +42,7 @@ public:
     /**
      * @brief draw dessin
      */
-    void draw();
+    void draw(QGraphicsScene *scene);
     /**
      * @brief isPoly
      * @return

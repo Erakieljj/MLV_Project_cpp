@@ -1,7 +1,7 @@
 #include "polygone.h"
 using namespace std;
 
-Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *scene):Object2D(color),scene(scene)
+Polygone::Polygone(string color, initializer_list<Point> points):Object2D(color)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");
@@ -12,7 +12,7 @@ Polygone::Polygone(string color, initializer_list<Point> points,QGraphicsScene *
     this->mat = *(new Matrix(this->vertices));
 }
 
-Polygone::Polygone(string color, vector<Point> points,QGraphicsScene *scene):Object2D(color),scene(scene)
+Polygone::Polygone(string color, vector<Point> points):Object2D(color)
 {
     if(points.size()<3) {
         throw new invalid_argument("Must have at least 3 Point for a polygone");
@@ -47,7 +47,7 @@ float Polygone::getPerimeter(){
     return p;
 }
 
-void Polygone::draw(){
+void Polygone::draw(QGraphicsScene *scene){
     cout << "\n**POLYGONE**("<<color<< ")\n Matrice : " << endl;
 
     this->mat.print();

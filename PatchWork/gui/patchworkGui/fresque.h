@@ -16,12 +16,12 @@ class Fresque : public ObjectInterface
 {
     Q_OBJECT
     public:
-        Fresque(QGraphicsScene *scene);
+        Fresque();
         // Inherited method from ObjectInterface
         /**
          * @brief draw Dessine la fresque à partir des dessins des différents élèves.
          */
-        void draw();
+        void draw(QGraphicsScene *scene);
 
         /**
          * @brief applyTranslation Applique une translation à la fresque.
