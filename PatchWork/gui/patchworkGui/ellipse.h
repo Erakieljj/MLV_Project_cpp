@@ -20,11 +20,17 @@ private:
      * @brief rlon Rayon pour longueur ellipse.
      */
     double rlon;
+
     /**
      * @brief rlar Rayon pour largeur ellipse.
      */
     double rlar;
+
+    /**
+     * @brief scene Scene de la qgraphicsView.
+     */
      QGraphicsScene *scene;
+
 public:
     Ellipse(string color,Point p1,double rlon,double rlar,QGraphicsScene *scene);
 

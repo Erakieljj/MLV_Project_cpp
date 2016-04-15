@@ -7,6 +7,10 @@
 #include <QObject>
 using namespace std;
 
+
+/**
+ * @brief La classe Fresque
+ */
 class Fresque : public ObjectInterface
 {
     Q_OBJECT
