@@ -6,9 +6,24 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
-#include <QObject>
 
-//static vector<ObjectInterface*> mShapes;
+
+
+void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface &obj)
+{
+
+    QJsonArray pointsArray = json["points"].toArray();
+    for (int index = 0; index < pointsArray.size(); index++)
+    {
+        QJsonObject pointObjJSON = pointsArray[index].toObject();
+        pointObjJSON["x"];
+        pointObjJSON["y"];
+    }
+    json["perimeter"];
+    json["area"];
+    json["matrix"];
+
+}
 
 const vector<ObjectInterface *> &DataJSON::getShapes()
 {
@@ -20,21 +35,26 @@ void DataJSON::setShapes(const vector<ObjectInterface*> &shapes)
     mShapes = shapes;
 }
 
-void DataJSON::readDrawing(const QJsonObject &json)
+vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json, Annotations &notation)
 {
-    for (ObjectInterface *obj : mShapes)
-    {
-        QString type = QString::fromLatin1(obj->metaObject()->className());
-        QJsonObject shapeJSON;
+    vector<ObjectInterface*> drawing;
 
-        shapeJSON["color"] = QString::fromStdString(obj->getColor());
-        QJsonArray pointsArray = shapeJSON["points"].toArray();
-        for(Point point : obj->getPoints())
-        {
-            QJsonObject pointObjJSON;
+    QJsonObject shapes = json["shapes"].toObject();
+    ObjectInterface *obj;
 
-        }
-    }
+    readShapeJSON(shapes["Line"].toObject(), *obj);
+    drawing.push_back(obj);
+
+    readShapeJSON(shapes["Circle"].toObject(), *obj);
+    drawing.push_back(obj);
+
+    readShapeJSON(shapes["Ellipse"].toObject(), *obj);
+    drawing.push_back(obj);
+
+    readShapeJSON(shapes["Polygone"].toObject(), *obj);
+    drawing.push_back(obj);
+
+    return drawing;
 }
 
 void DataJSON::writeDrawing(QJsonObject &json)
@@ -43,6 +63,8 @@ void DataJSON::writeDrawing(QJsonObject &json)
     {
         QString type = QString::fromLatin1(obj->metaObject()->className());
         QJsonObject shapeJSON;
+
+        //cout<<obj->metaObject()->className()<<endl;
 
         shapeJSON["color"] = QString::fromStdString(obj->getColor());
         QJsonArray pointsArray;
@@ -77,12 +99,12 @@ void DataJSON::writeDrawing(QJsonObject &json)
     }
 }
 
-void DataJSON::writeJsonAnnotation(QJsonObject &json)
+void DataJSON::writeJsonAnnotation(QJsonObject &json, Annotations notation)
 {
-    QString nbColorAccepted = "2";
     QString nbShapesRequired;
-    QString sumAreaAccepted = "30";
-    float sumArea;
+    QString nbColorAccepted = notation.nbColorAccepted;
+    QString sumAreaAccepted = notation.sumAreaAccepted;
+    float sumArea = notation.sumAreaShapeRequired;
 
     if (mShapes.size() > 2)
         nbShapesRequired = "False";
@@ -111,8 +133,3 @@ Annotations DataJSON::readJsonAnnotation(QJsonObject &json)
 
     return notation;
 }
-
-
-
-
-

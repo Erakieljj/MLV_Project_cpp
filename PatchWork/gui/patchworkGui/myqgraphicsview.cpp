@@ -187,7 +187,6 @@ void MyQGraphicsView::draw(){
         break;
     }
     case ellipse:{
-
         Ellipse *e = new Ellipse(colorEllipse.toUtf8().constData(),points.at(0),rlon,rlar,scene);
         fresque->add(*e);
         fresque->draw();

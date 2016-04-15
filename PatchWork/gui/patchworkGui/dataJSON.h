@@ -41,7 +41,7 @@ class DataJSON
          * @brief readDrawing Lecture d'un JSON pour parser le dessin d'un élève (coté serveur).
          * @param json JSON à lire et parser.
          */
-        static vector<ObjectInterface*> readDrawing(const QJsonObject &json);
+        static vector<ObjectInterface*> readDrawing(const QJsonObject &json, Annotations &notation);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.
@@ -51,7 +51,7 @@ class DataJSON
          * @brief writeJsonAnnotation Ecriture d'un JSON avec les annotation de la maîtresse(coté serveur -> client).
          * @param json JSON à créer.
          */
-        static void writeJsonAnnotation(QJsonObject &json);
+        void writeJsonAnnotation(QJsonObject &json, Annotations notation);
         /**
          * @brief readJsonAnnotation Lecture d'un JSON contenant les annotations de la maîtresse (provenant du serveur).
          * @param json JSON à lire et parser.

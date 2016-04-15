@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class ObjectInterface
+class ObjectInterface : public QObject
 { 
     Q_OBJECT
     public:
