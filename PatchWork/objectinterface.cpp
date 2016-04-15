@@ -5,12 +5,10 @@
 
 ObjectInterface::ObjectInterface( QObject *parent) : QObject(parent)
 {
-
 }
 
 ObjectInterface::ObjectInterface(string color, QObject *parent) : QObject(parent), color(color)
 {
-
 }
 
 

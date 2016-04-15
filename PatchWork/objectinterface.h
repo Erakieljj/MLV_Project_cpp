@@ -15,7 +15,9 @@
  * Elle Dérive de la classe QObject afin d'utiliser les membres des classes filles.
  */
 class ObjectInterface : public QObject
-{ 
+{
+    Q_OBJECT
+
     private:
         void updateVertices();
 
@@ -52,7 +54,7 @@ class ObjectInterface : public QObject
         /**
          * @brief draw Appel de la bonne méthode pour dessiner l'objet géométrique.
          */
-        virtual inline void draw(){}
+        virtual void draw() = 0;
 
         // Getter/Setter sur les membres accessibles dans les classes filles.
         /**

@@ -8,6 +8,7 @@
  */
 class Circle : public ObjectInterface
 {
+    Q_OBJECT
     private:
         /**
          * @brief rayon Rayon du Cercle.
@@ -15,6 +16,8 @@ class Circle : public ObjectInterface
         double rayon;
     public:
         Circle(string color,Point p1,double rayon);
+
+        double getRayon() const;
 
         // Inherited method from ObjectInterface
         /**
@@ -31,6 +34,7 @@ class Circle : public ObjectInterface
          * @brief draw Dessine la forme du cercle.
          */
         void draw();
+
 };
 
 #endif // CIRCLE_H

@@ -2,6 +2,16 @@
 
 using namespace std;
 
+double Ellipse::getRlon() const
+{
+    return rlon;
+}
+
+double Ellipse::getRlar() const
+{
+    return rlar;
+}
+
 Ellipse::Ellipse(string color,Point p,double rlon,double rlar):rlon(rlon),rlar(rlar),ObjectInterface(color)
 {
     this->vertices.push_back(p);

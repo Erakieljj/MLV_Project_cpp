@@ -2,6 +2,11 @@
 
 using namespace std;
 
+double Circle::getRayon() const
+{
+    return rayon;
+}
+
 Circle::Circle(string color,Point p,double rayon):rayon(rayon),ObjectInterface(color)
 {
     this->vertices.push_back(p);

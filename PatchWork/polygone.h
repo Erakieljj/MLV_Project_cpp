@@ -8,6 +8,7 @@
  */
 class Polygone : public ObjectInterface
 {
+    Q_OBJECT
     public:
         /**
          * @brief Polygone Constructeur de la classe Polygone.
