@@ -41,3 +41,7 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 CONFIG += console
+
+win32 {
+    LIBS += -lws2_32
+}
