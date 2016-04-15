@@ -64,8 +64,22 @@ Matrix* Matrix::rotationDirect(double alpha)
     return m;
 }
 
+Matrix Matrix::rotationCentral(double alpha,double a,double b)
+{
+    //Matrix *m1 = translation(-a,-b);
+    Matrix *m2 = idMatrix(3);
+    m2->mat[0][0]=cos(alpha);
+    m2->mat[0][1]=sin(alpha);
+    m2->mat[1][0]=-sin(alpha);
+    m2->mat[1][1]=cos(alpha);
+    Matrix *m3 = translation(-a,b);
+
+    return (*m2);
+}
+
 Matrix* Matrix::rotationIndirect(double alpha)
 {
+
     Matrix *m = idMatrix(3);
     m->mat[0][0]=cos(alpha);
     m->mat[0][1]=-sin(alpha);
@@ -102,11 +116,11 @@ Matrix Matrix::centralSymmetry(double a, double b)
 {
 
     Matrix *m1 = translation(-a,-b);
-    Matrix *m2 = rotationDirect(atan(a));
-    Matrix *m3 = translation(a,b);
-    Matrix m = (*m1)*(*m2)*(*m3);
+    //Matrix *m2 = rotationDirect(atan(a));
+    //Matrix *m3 = translation(a,b);
+    //Matrix m = (*m1)*(*m2)*(*m3);
 
-    return m;
+    return *m1;
 }
 
 void Matrix::print()

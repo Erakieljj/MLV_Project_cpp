@@ -18,8 +18,11 @@ private:
         // Inherited method from Object2D
         float getArea();
         float getPerimeter();
+        void setRayon(double x){rayon*=x;}
+
         void draw();
         bool isCircle(){return true;}
+        Point getCenter();
 
 };
 

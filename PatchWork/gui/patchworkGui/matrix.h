@@ -58,6 +58,8 @@ class Matrix
         ///
         static Matrix* rotationDirect(double alpha);
 
+        static Matrix rotationCentral(double alpha,double x,double y);
+
         ///
         /// \brief Return the indirect rotation matrix
         /// \param alpha

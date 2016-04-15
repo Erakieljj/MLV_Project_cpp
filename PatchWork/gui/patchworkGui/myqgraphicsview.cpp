@@ -134,23 +134,39 @@ void MyQGraphicsView::applyRotation(QString forme,double r)
     string f = forme.toUtf8().constData();
     if(f=="cercle"){
         for(ObjectInterface *o :this->fresque->getObjects()){
-            if(o->isCircle())
-                o->applyRotationDirect(r);
+            if(o->isCircle()){
+                Point p = o->getCenter();
+                o->applyRotationCentral(r,p.get_x(),p.get_y());
+            }
+                //o->applyRotationDirect(r);
+
         }
     } else if(f=="ligne"){
         for(ObjectInterface *o :this->fresque->getObjects()){
-            if(o->isLine())
-                o->applyRotationDirect(r);
+            if(o->isLine()){
+                Point p = o->getCenter();
+                o->applyRotationCentral(r,p.get_x(),p.get_y());
+            }
+                //o->applyRotationDirect(r);
+
         }
     } else if(f=="ellipse"){
         for(ObjectInterface *o :this->fresque->getObjects()){
-            if(o->isEllipse())
-                o->applyRotationDirect(r);
+            if(o->isEllipse()){
+                Point p = o->getCenter();
+                o->applyRotationCentral(r,p.get_x(),p.get_y());
+            }
+                //o->applyRotationDirect(r);
+
         }
     } else {
         for(ObjectInterface *o :this->fresque->getObjects()){
-            if(o->isPoly())
-                o->applyRotationDirect(r);
+            if(o->isPoly()){
+                Point p = o->getCenter();
+                o->applyRotationCentral(r,p.get_x(),p.get_y());
+            }
+                //o->applyRotationDirect(r);
+
         }
     }
     this->scene->clear();

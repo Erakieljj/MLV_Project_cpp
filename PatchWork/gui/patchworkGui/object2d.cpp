@@ -26,12 +26,30 @@ void Object2D::applyTranslation(double x, double y){
 }
 
 void Object2D::applyHomethety(double x, double y){
+    Point p = this->getCenter();
+    double xc = p.get_x();
+    double yc = p.get_y();
+    this->mat = *(Matrix::translation(-xc,-yc)) * this->mat;
     this->mat = *(Matrix::homothety(x,y)) * this->mat;
+    this->mat = *(Matrix::translation(xc,yc)) * this->mat;
+    if(this->isCircle()){
+        setRayon(x);
+    } else if(this->isEllipse()){
+        setRlar(x);
+        setRlon(y);
+    }
     updateVertices();
 }
 
 void Object2D::applyRotationDirect(double angle) {
     this->mat = *(Matrix::rotationDirect(angle)) * this->mat;
+    updateVertices();
+}
+
+void Object2D::applyRotationCentral(double angle,double x,double y){
+    this->mat = *(Matrix::translation(-x,-y)) * this->mat;
+    this->mat = (Matrix::rotationCentral(angle,x,y)) * this->mat;
+    this->mat = *(Matrix::translation(x,y)) * this->mat;
     updateVertices();
 }
 

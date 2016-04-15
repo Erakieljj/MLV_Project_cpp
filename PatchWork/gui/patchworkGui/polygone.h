@@ -19,6 +19,7 @@ public:
     float getPerimeter();
     void draw();
     bool isPoly(){return true;}
+    Point getCenter();
 };
 
 #endif // POLYGONE_H

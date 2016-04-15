@@ -127,9 +127,9 @@ void MainWindow::applyHomo()
         hy = 1.5;
     }
     if(hx ==0)
-        hx = 0.1;
+        hx = 1;
     if(hy ==0)
-        hy = 0.1;
+        hy = 1;
 
     myGV->applyHomo(forme,hx,hy);
 

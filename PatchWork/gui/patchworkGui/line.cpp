@@ -38,3 +38,10 @@ ostream & operator<< (ostream & os, const Line & l)
 
     return os;
 }
+
+Point Line::getCenter(){
+    Point p1 = vertices.at(0);
+    Point p2 = vertices.at(1);
+
+    return *(new Point((p1.get_x() + p2.get_x())/2,(p1.get_y() + p2.get_y())/2));
+}

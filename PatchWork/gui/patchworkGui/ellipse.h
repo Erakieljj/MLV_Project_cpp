@@ -21,6 +21,10 @@ public:
     float getPerimeter();
     void draw();
     bool isEllipse(){return true;}
+    Point getCenter();
+
+    void setRlon(double x){rlon*=x;}
+    void setRlar(double x){rlar*=x;}
 
 
 };

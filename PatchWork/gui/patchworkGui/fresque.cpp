@@ -22,6 +22,13 @@ void Fresque::applyRotationDirect(double angle){
         o->applyRotationDirect(angle);
     }
 }
+
+void Fresque::applyRotationCentral(double angle,double x,double y){
+    for(ObjectInterface* o : objects) {
+        o->applyRotationCentral(angle,x,y);
+    }
+}
+
 void Fresque::applyRotationIndirect(double angle){
     for(ObjectInterface* o : objects) {
         o->applyRotationIndirect(angle);

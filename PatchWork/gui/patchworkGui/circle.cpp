@@ -26,3 +26,9 @@ void Circle::draw(){
     scene->addEllipse(p.get_x()-rayon/2, p.get_y()-rayon/2,rayon, rayon,
                      QPen(QColor(color.c_str()), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 }
+
+Point Circle::getCenter(){
+    Point p1 = vertices.at(0);
+
+    return p1;
+}

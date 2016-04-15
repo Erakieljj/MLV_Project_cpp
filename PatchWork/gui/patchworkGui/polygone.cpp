@@ -65,3 +65,41 @@ void Polygone::draw(){
 
 
 }
+
+Point Polygone::getCenter()
+{
+    double xfinal,yfinal = 0;
+    double signedArea = 0.0;
+    double x0 = 0.0;
+    double y0 = 0.0;
+    double x1 = 0.0;
+    double y1 = 0.0;
+    double a = 0.0;
+
+    int i = 0;
+    for(i=0;i<vertices.size()-1;i++){
+        x0 = vertices.at(i).get_x();
+        y0 = vertices.at(i).get_y();
+        x1 = vertices.at(i+1).get_x();
+        y1 = vertices.at(i+1).get_y();
+        a = x0*y1 - x1*y0;
+        signedArea += a;
+        xfinal += (x0 + x1)*a;
+        yfinal += (y0 + y1)*a;
+    }
+
+    x0 = vertices.at(i).get_x();
+    y0 = vertices.at(i).get_y();
+    x1 = vertices.at(0).get_x();
+    y1 = vertices.at(0).get_y();
+    a = x0*y1 - x1*y0;
+    signedArea += a;
+    xfinal += (x0 + x1)*a;
+    yfinal += (y0 + y1)*a;
+
+    signedArea *= 0.5;
+    xfinal /= (6.0*signedArea);
+    yfinal /= (6.0*signedArea);
+
+    return *(new Point(xfinal,yfinal));
+}

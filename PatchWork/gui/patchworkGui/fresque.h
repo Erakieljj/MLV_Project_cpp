@@ -15,9 +15,11 @@ class Fresque : public ObjectInterface
         void applyTranslation(double x,double y);
         void applyRotationDirect(double angle);
         void applyRotationIndirect(double angle);
+        void applyRotationCentral(double angle,double x,double y);
         void applyHomethety(double x, double y);
         void applyAxialSymmetry(double a,double b);
         void applyCentralSymmetry(double x,double y);
+        Point getCenter(){return *(new Point(0,0));}
 
         // Personal method
         bool add(ObjectInterface &o);

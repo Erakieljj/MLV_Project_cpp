@@ -20,6 +20,7 @@ private:
         bool isLine(){return true;}
 
         friend ostream& operator<< (ostream &os, const Line &p);
+        Point getCenter();
 
 };
 

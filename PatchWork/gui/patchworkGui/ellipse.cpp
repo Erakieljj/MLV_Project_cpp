@@ -23,3 +23,8 @@ void Ellipse::draw(){
     scene->addEllipse(p.get_x()-rlon/2, p.get_y()-rlar/2, rlon, rlar,
                       QPen(QColor(color.c_str()), 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 }
+
+Point Ellipse::getCenter(){
+    Point p1 = vertices.at(0);
+    return p1;
+}

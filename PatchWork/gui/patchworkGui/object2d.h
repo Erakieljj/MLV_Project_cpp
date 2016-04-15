@@ -30,15 +30,23 @@ class Object2D :public ObjectInterface {
 
         void applyTranslation(double x,double y);
         void applyRotationDirect(double angle);
+        void applyRotationCentral(double angle,double x,double y);
+
         void applyRotationIndirect(double angle);
         void applyHomethety(double x,double y);
         void applyAxialSymmetry(double a, double b);
         void applyCentralSymmetry(double x,double y);
 
+        virtual void setRayon(double x){}
+        virtual void setRlon(double x){}
+        virtual void setRlar(double x){}
+
         virtual bool isLine(){return false;}
         virtual bool isEllipse(){return false;}
         virtual bool isPoly(){return false;}
         virtual bool isCircle(){return false;}
+
+        virtual Point getCenter() =0;
 
 
 private:
