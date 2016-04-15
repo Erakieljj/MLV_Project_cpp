@@ -7,7 +7,7 @@
 #include <QJsonValue>
 #include <QJsonArray>
 
-void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type)
+void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type,QGraphicsScene * scene)
 {
     vector<Point> points;
     string color= json["color"].toString().toStdString();
