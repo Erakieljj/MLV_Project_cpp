@@ -18,6 +18,13 @@ typedef struct  {
  */
 class DataJSON
 {
+    private:
+         /**
+         * @brief readShapeJSON Lecture concernant les attributs associés à un objet.
+         * @param json JSON à parser
+         * @param obj Objet stockant les information du JSON.
+         */
+        static void readShapeJSON(const QJsonObject &json, ObjectInterface &obj);
     public:
         //DataJSON();
          /**
@@ -34,7 +41,7 @@ class DataJSON
          * @brief readDrawing Lecture d'un JSON pour parser le dessin d'un élève (coté serveur).
          * @param json JSON à lire et parser.
          */
-        static void readDrawing(const QJsonObject &json);
+        static vector<ObjectInterface*> readDrawing(const QJsonObject &json);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param json JSON à créer.
