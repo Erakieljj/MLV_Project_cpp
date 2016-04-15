@@ -34,6 +34,8 @@ private slots:
     void applyRotation();
     void applyTranslation();
 
+    void callServer();
+
 };
 
 #endif // MAINWINDOW_H

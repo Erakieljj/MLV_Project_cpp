@@ -33,6 +33,8 @@ public:
     void applyTranslation(QString forme,double tx,double ty);
     void applyRotation(QString forme,double r);
 
+    void callServer();
+
 
 
 signals:
@@ -64,6 +66,7 @@ private:
     QString colorLine = "black";
     QString colorEllipse = "black";
     QString colorPolygone = "black";
+
 
 };
 

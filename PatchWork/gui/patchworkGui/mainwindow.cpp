@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->buttonRotation,SIGNAL(clicked()),this,SLOT(applyRotation()));
     connect(ui->buttonTranslation,SIGNAL(clicked()),this,SLOT(applyTranslation()));
     connect(ui->buttonHomo,SIGNAL(clicked()),this,SLOT(applyHomo()));
-
+    connect(ui->actionEnvoyer_serveur,SIGNAL(triggered(bool)),this,SLOT(callServer()));
 }
 
 
@@ -170,4 +170,8 @@ void MainWindow::applyTranslation()
         ty = 0.1;
 
     myGV->applyTranslation(forme,tx,ty);
+}
+
+void MainWindow::callServer(){
+    myGV->callServer();
 }

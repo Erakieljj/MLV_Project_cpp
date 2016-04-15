@@ -64,7 +64,7 @@ void Client::start(string json) {
         //cin >> buffer;
 
         //send size buffer
-        string size = std::to_string(strlen(json));
+        string size = std::to_string(json.size());
         char const* schar = size.c_str();
 
         cout << "size of buffer: " << schar << endl;
@@ -72,7 +72,7 @@ void Client::start(string json) {
         cout << "buffer before send: " << buffer << endl;
         send(client, buffer, bufsize, 0);
 
-        strcpy(buffer, json);
+        strcpy(buffer, json.c_str());
         //then send drawing
         send(client, buffer, bufsize, 0);
         cout << "draw sent!" << endl;

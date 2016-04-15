@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>632</width>
-    <height>456</height>
+    <width>827</width>
+    <height>666</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
             <x>0</x>
             <y>0</y>
             <width>174</width>
-            <height>418</height>
+            <height>548</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -315,7 +315,7 @@
             <x>0</x>
             <y>0</y>
             <width>424</width>
-            <height>338</height>
+            <height>548</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -619,7 +619,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>632</width>
+     <width>827</width>
      <height>22</height>
     </rect>
    </property>
@@ -627,6 +627,7 @@
     <property name="title">
      <string>Patchwork</string>
     </property>
+    <addaction name="actionEnvoyer_serveur"/>
    </widget>
    <addaction name="menuPatchwork"/>
   </widget>
@@ -639,6 +640,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionEnvoyer_serveur">
+   <property name="text">
+    <string>Envoyer serveur</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

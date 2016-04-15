@@ -6,6 +6,8 @@
 #include "ellipse.h"
 #include "circle.h"
 #include "polygone.h"
+#include "client.h"
+
 #include <QtDebug>
 using namespace std;
 
@@ -124,7 +126,6 @@ void MyQGraphicsView::applyTranslation(QString forme,double hx,double hy)
                 o->applyTranslation(hx,hy);
         }
     }
-
     this->scene->clear();
     fresque->draw();
 }
@@ -208,4 +209,16 @@ void MyQGraphicsView::draw(){
         maxPoint = polygonPoint;
         break;
     }
+}
+
+void MyQGraphicsView::callServer(){
+    //parse fresque
+    /*
+    DataJSON::setShapes(this->fresque->getObjects());
+    QJsonObject objJSONWrite;
+    QJsonObject objJSON;
+    DataJSON::writeDrawing(objJSON);
+    */
+    Client *c = new Client();
+    c->start("hello");
 }
