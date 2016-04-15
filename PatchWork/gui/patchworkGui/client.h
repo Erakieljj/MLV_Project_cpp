@@ -21,7 +21,7 @@
 class Client
 {
 public:
-    Client(){};
+    Client(){}
     void start(std::string json);
 
 private:
