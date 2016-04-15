@@ -15,7 +15,13 @@ class Circle : public Object2D
 {
 Q_OBJECT
 private:
+    /**
+     * @brief rayon Rayon du Cercle.
+     */
     double rayon;
+    /**
+     * @brief scene Scene de la qgraphicsView.
+     */
     QGraphicsScene *scene;
     public:
 
@@ -57,6 +63,11 @@ private:
          * @return retourne un point qui correspond au centre du cercle.
          */
         Point getCenter();
+
+        /**
+         * @brief fonction qui récupère le rayon du cercle.
+         * @return retourne la taille du rayon du cercle.
+         */
         double getRayon(){return rayon;}
 
 };
