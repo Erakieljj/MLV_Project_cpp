@@ -6,92 +6,33 @@
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QJsonArray>
+#include <QJsonDocument>
+#include <set>
 
-void DataJSON::readShapeJSON(const QJsonObject &json, ObjectInterface *obj, float areaTotal, float perimeterTotal, string type)
+void DataJSON::readDrawingAndCheck(QJsonObject &json, QJsonObject &notation)
 {
-    vector<Point> points;
-    string color= json["color"].toString().toStdString();
-    QJsonArray pointsArray = json["points"].toArray();
+    set<QString> colors;
 
-    for (int index = 0; index < pointsArray.size(); index++)
+    QStringList keys = json.keys();
+    notation["NumberShape"] = keys.size();
+
+    for(QString key : keys)
     {
-        QJsonObject pointObjJSON = pointsArray[index].toObject();
-        points.push_back(Point(pointObjJSON["x"].toDouble(), pointObjJSON["y"].toDouble()));
+        colors.insert((json[key].toObject())["color"].toString());
     }
-   /* json["perimeter"].toDouble();
-    json["area"].toDouble();*/
-    if(type == "Line")
-    {
-        obj = new Line(color, points[0], points[1]);
-    }
-    else if(type == "Circle")
-    {
-        obj = new Circle(color, points[0], json["rayon"].toDouble());
-    }
-    else if(type == "Ellipse") {
-       obj = new Ellipse(color, points[0], json["rlar"].toDouble(), json["rlong"].toDouble());
-    }
-    else if(type == "Polygone")
-    {
-        obj = new Polygone(color, points);
-    }
-    //json["matrix"];
+
+    notation["NumberColor"] = static_cast<int>(colors.size());
 
 }
 
-const vector<ObjectInterface *> &DataJSON::getShapes()
+void DataJSON::writeDrawing(vector<ObjectInterface *> shapes, QJsonObject &json)
 {
-    return mShapes;
-}
-
-void DataJSON::setShapes(const vector<ObjectInterface*> &shapes)
-{
-    mShapes = shapes;
-}
-
-vector<ObjectInterface *> DataJSON::readDrawing(const QJsonObject &json, Annotations notation)
-{
-    vector<ObjectInterface*> drawing;
-    float areaTotal = 0.0;
-    float perimeterTotal = 0.0;
-    string color;
-
-    QJsonObject shapes = json["shapes"].toObject();
-    ObjectInterface *obj;
-
-    readShapeJSON(shapes["Line"].toObject(), obj, areaTotal, perimeterTotal, "Line");
-    drawing.push_back(obj);
-
-    readShapeJSON(shapes["Circle"].toObject(), obj, areaTotal, perimeterTotal, "Circle");
-    drawing.push_back(obj);
-
-    readShapeJSON(shapes["Ellipse"].toObject(), obj, areaTotal, perimeterTotal, "Ellipse");
-    drawing.push_back(obj);
-
-    readShapeJSON(shapes["Polygone"].toObject(), obj, areaTotal, perimeterTotal, "Polygone");
-    drawing.push_back(obj);
-
-    // Annotation de la maîtresse.
-    if (drawing.size() == 4)
-    {
-        notation.nbShapesRequired ="True";
-    } else
-    {
-        notation.nbShapesRequired ="False";
-    }
-
-
-    return drawing;
-}
-
-void DataJSON::writeDrawing(QJsonObject &json)
-{
-    for (ObjectInterface *obj : mShapes)
+    for (ObjectInterface *obj : shapes)
     {
         QString type = QString::fromLatin1(obj->metaObject()->className());
         QJsonObject shapeJSON;
 
-        //cout<<obj->metaObject()->className()<<endl;
+        cout<<obj->metaObject()->className()<<endl;
 
         shapeJSON["color"] = QString::fromStdString(obj->getColor());
         QJsonArray pointsArray;
@@ -121,44 +62,86 @@ void DataJSON::writeDrawing(QJsonObject &json)
         /*else if (type == "Fresque") {
             Fresque *fresque = (Fresque*)obj;
         }*/
-        //shapeJSON["matrix"] = obj->mat;
-        json.insert(QString("shapes"), QJsonValue(shapeJSON));
+
+        json.insert(type, QJsonValue(shapeJSON));
     }
 }
 
-void DataJSON::writeJsonAnnotation(QJsonObject &json, Annotations notation)
+string DataJSON::readJsonAnnotation(QJsonObject &json)
 {
-    QString nbShapesRequired;
-    QString nbColorAccepted = notation.nbColorAccepted;
-    QString sumAreaAccepted = notation.sumAreaAccepted;
-    float sumArea = notation.sumAreaShapeRequired;
+    int nbShape = json["NumberShape"].toInt();
+    int nbColor = json["NumberColor"].toInt();
 
-    if (mShapes.size() > 2)
-        nbShapesRequired = "False";
+    if(nbShape >= 2 && nbColor >= 2)
+    {
+        return "";
+    }
     else
-        nbShapesRequired = "True";
-
-    QJsonObject annotationsJSON;
-    annotationsJSON["nbColorAccepted"] = nbColorAccepted;
-
-    annotationsJSON["nbShapeRequired"] = nbShapesRequired;
-    annotationsJSON["sumAreaShapeAccepted"] = sumAreaAccepted;
-    annotationsJSON["sumAreaShapeRequired"] = sumArea;
-    //json.insert(QString("studentID"), QJsonValue(annotationsJSON));
-    json.insert(QString("annotations"), QJsonValue(annotationsJSON));
+    {
+        return "nombre de couleur ( " + to_string(nbColor) + ") et nombre forme ( " + to_string(nbShape) + " ) doivent etre superieur à 2";
+    }
 }
 
-Annotations DataJSON::readJsonAnnotation(QJsonObject &json)
+Fresque DataJSON::read(string jsonO)
 {
-    Annotations notation;
+    QJsonObject obj = QJsonDocument::fromJson(QString::fromStdString(jsonO).toUtf8()).object();
+    Fresque *fresque = new Fresque();
+    QJsonArray pointsArray;
 
-    QJsonObject annotationsJSON = json["annotations"].toObject();
-    notation.nbColorAccepted = annotationsJSON.value("nbColorAccepted").toString();
-    notation.nbShapesRequired = annotationsJSON.value("nbShapeRequired").toString();
-    notation.sumAreaAccepted = annotationsJSON.value("sumAreaShapeAccepted").toString();
-    notation.sumAreaShapeRequired = annotationsJSON.value("sumAreaShapeRequired").toDouble();
 
-    return notation;
+    if(obj.contains("Circle"))
+    {
+        QJsonObject circleJson = obj["Circle"].toObject();
+        pointsArray = circleJson["points"].toArray();
+        vector<Point> points;
+        foreach (const QJsonValue & value, pointsArray) {
+            QJsonObject obj = value.toObject();
+            points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
+        }
+        Circle *circle = new Circle(circleJson["color"].toString().toStdString(), points[0], circleJson["rayon"].toDouble());
+        circle->draw();
+        fresque->add(*circle);
+    }
+    if(obj.contains("Ellipse"))
+    {
+        QJsonObject ellipseJson = obj["Circle"].toObject();
+        pointsArray = ellipseJson["points"].toArray();
+        vector<Point> points;
+        foreach (const QJsonValue & value, pointsArray) {
+            QJsonObject obj = value.toObject();
+            points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
+        }
+        Ellipse *ellipse = new Ellipse(ellipseJson["color"].toString().toStdString(), points[0], ellipseJson["rlong"].toDouble(), ellipseJson["rlar"].toDouble());
+        ellipse->draw();
+        fresque->add(*ellipse);
+    }
+    if(obj.contains("Line"))
+    {
+        QJsonObject lineJson = obj["Line"].toObject();
+        pointsArray = lineJson["points"].toArray();
+        vector<Point> points;
+        foreach (const QJsonValue & value, pointsArray) {
+            QJsonObject obj = value.toObject();
+            points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
+        }
+        Line *line = new Line(lineJson["color"].toString().toStdString(), points[0], points[1]);
+        line->draw();
+        fresque->add(*line);
+    }
+    if(obj.contains("Polygone"))
+    {
+        QJsonObject polygonJson = obj["Circle"].toObject();
+        pointsArray = polygonJson["points"].toArray();
+        vector<Point> points;
+        foreach (const QJsonValue & value, pointsArray) {
+            QJsonObject obj = value.toObject();
+            points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
+        }
+        Polygone *polygon = new Polygone(polygonJson["color"].toString().toStdString(), points);
+        polygon->draw();
+        fresque->add(*polygon);
+    }
+    return *fresque;
 }
 
 
