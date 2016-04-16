@@ -29,7 +29,7 @@
 #include <QString>
 #include "../dataJSON.h"
 #include "../fresque.h"
-#define MAX_DRAWING 4
+#define MAX_DRAWING 3
 
 std::mutex mtx;
 map<int, string> map_drawing;

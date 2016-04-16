@@ -28,7 +28,7 @@
 #include <QString>
 #include "dataJSON.h"
 #include "fresque.h"
-#define MAX_DRAWING 4
+#define MAX_DRAWING 3
 
 std::mutex mtx;
 map<int, string> map_drawing;
@@ -98,7 +98,6 @@ void call_from_thread(int client_socket)
         }
 
         QJsonObject annotation;
-
 
         DataJSON::readDrawingAndCheck(objDrawing, annotation);
         string strNotation = DataJSON::readJsonAnnotation(annotation);
@@ -196,7 +195,7 @@ int main()
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à MAX_DRAWING
     listen(ListeningSocket , MAX_DRAWING);
 
-    while (nb_drawing <MAX_DRAWING) {
+    while (nb_drawing < MAX_DRAWING) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
 
@@ -216,12 +215,12 @@ int main()
     }
 
     //on attend que tout les opérations soient finies
-    for(i=0;i<MAX_DRAWING;i++) {
+    for(i=0;i<MAX_DRAWING-1;i++) {
         t[i].join();
     }
     cout << "map size:" << map_drawing.size() << endl;
 
-    //affichage de la grande fresque ici
+    fresqueServer->draw();
     cout << ">> Enjoy the nice work from all students: " << endl;
 
     // showing contents of the map

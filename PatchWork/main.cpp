@@ -39,8 +39,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    /*
-    Fresque *f = new Fresque();*/
 
     Point p(1,2);
     Point p2(5,2);
@@ -100,9 +98,9 @@ int main(int argc, char *argv[])
     Client* c2 = new Client(n2);
     Client* c3 = new Client(n3);
     //Client* c4 = new Client(n4);
-    (*c1).start(strJson.toStdString());
+    (*c1).start(strJson1.toStdString());
     (*c2).start(strJson1.toStdString());
-    (*c3).start(strJson.toStdString());
+    (*c3).start(strJson1.toStdString());
     //(*c4).start(strJson.toStdString());
 
 
