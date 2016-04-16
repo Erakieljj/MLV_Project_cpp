@@ -60,7 +60,7 @@ void Client::start(string json) {
     cout << ">> message from the server:" << buffer << endl;
     cout << ">> Connection confirmed, starting..." << endl;
 
-    do {
+    //do {
         cout << "Student: ";
 
 
@@ -88,12 +88,15 @@ void Client::start(string json) {
         else {
             //traitement sur le dessin
             QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
+            QJsonObject annotationJson = jsonDoc.object();
+            string annotation = DataJSON::readJsonAnnotation(annotationJson);
+
 
             //modifier la varialble json après avoir pris en compte les annotations
 
             cout << "working on the drawing again.." << endl;
         }
-    } while (!finished);
+    //} while (!finished);
 
     /* ---------------- CLOSE CALL ------------- */
     cout << "\n>> Connection terminated.\n";

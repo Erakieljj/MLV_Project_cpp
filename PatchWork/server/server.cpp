@@ -20,13 +20,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <map>
-#include "../fresque.h"
 #include <QtCore>
 #include <thread>
 #include <mutex>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QByteArray>
+#include <QString>
 #include "../dataJSON.h"
+#include "../fresque.h"
 #define MAX_DRAWING 4
 
 std::mutex mtx;
@@ -86,13 +88,28 @@ void call_from_thread(int client_socket)
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
         if(true==true) { //a remplacer
+            //QByteArray data(buffer, bufsize);
+
+            QJsonDocument jsonDoc;
+            QJsonParseError error;
+            QJsonObject objDrawing = QJsonDocument::fromJson(QString::fromUtf8(buffer, size_cum).toUtf8(), &error).object();
+            if (objDrawing.isEmpty())
+            {
+                cout<<"Error : " +  error.errorString().toStdString()<<endl;
+            }
+
+            QJsonObject annotation;
+
+
+            DataJSON::readDrawingAndCheck(objDrawing, annotation);
+
+
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-            QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
-            QJsonObject annotation;
-            QJsonObject obj = jsonDoc.object();
-            //DataJSON::readDrawingAndCheck(obj, annotation);
+            Fresque *fresque = new Fresque();
+            fresque->draw();
+
             drawing_finished = true;
         }
         //ajout de la réponse avec la liste des annotations

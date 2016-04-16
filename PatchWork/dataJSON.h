@@ -20,7 +20,7 @@ class DataJSON
          * @param json JSON à lire et parser.
          * @param notation annotation laissé par la maîtresse.
          */
-        static void readDrawingAndCheck(QJsonObject &json , QJsonObject &notation);
+        static void readDrawingAndCheck(const QJsonObject &json , QJsonObject &notation);
         /**
          * @brief writeDrawing Ecriture d'un JSON associé au format de dessin d'un élève(coté client).
          * @param shapes list des formes géométriques.

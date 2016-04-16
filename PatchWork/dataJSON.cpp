@@ -10,7 +10,7 @@
 #include <set>
 
 
-void DataJSON::readDrawingAndCheck(QJsonObject &json, QJsonObject &notation)
+void DataJSON::readDrawingAndCheck(const QJsonObject &json, QJsonObject &notation)
 {
     set<QString> colors;
 

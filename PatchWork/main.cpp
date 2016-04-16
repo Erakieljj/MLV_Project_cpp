@@ -93,11 +93,11 @@ int main(int argc, char *argv[])
     QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
     cout<<strJson.toStdString()<<endl;
 
-    DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
+    //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
 
-    Fresque *fresque = DataJSON::read(strJson.toStdString());
+    /*Fresque *fresque = DataJSON::read(strJson.toStdString());
     cout << "affichage de la fresque: " << endl;
-    fresque->draw();
+    fresque->draw();*/
 
     Client* c1 = new Client();
     (*c1).start(strJson.toStdString());
