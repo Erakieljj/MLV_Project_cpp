@@ -88,7 +88,6 @@ void Client::start(string json) {
         else {
             //traitement sur le dessin
             QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
-            string annotation = DataJSON::readJsonAnnotation(jsonDoc.object());
 
             //modifier la varialble json après avoir pris en compte les annotations
 

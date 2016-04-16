@@ -9,6 +9,7 @@
 #include "objectinterface.h"
 #include "matrix.h"
 #include "client.h"
+#include "dataJSON.h"
 //#include "clientgui.h"
 
 using namespace std;
