@@ -9,21 +9,7 @@
 #include "objectinterface.h"
 #include "matrix.h"
 #include "client.h"
-//#include "clientgui.h"
-using namespace std;
-
-#include <iostream>
-
-#include "point.h"
-#include "ellipse.h"
-#include "line.h"
-#include "circle.h"
-#include "polygone.h"
-#include "fresque.h"
-#include "objectinterface.h"
 #include "dataJSON.h"
-#include "matrix.h"
-#include <QJsonDocument>
 //#include "clientgui.h"
 
 using namespace std;
@@ -109,7 +95,9 @@ int main(int argc, char *argv[])
 
     DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
 
-    DataJSON::read(strJson.toStdString());
+    Fresque *fresque = DataJSON::read(strJson.toStdString());
+    cout << "affichage de la fresque: " << endl;
+    fresque->draw();
 
     Client* c1 = new Client();
     (*c1).start(strJson.toStdString());

@@ -75,7 +75,7 @@ string DataJSON::readJsonAnnotation(QJsonObject &json)
 
     if(nbShape >= 2 && nbColor >= 2)
     {
-        return "";
+        return "perfect";
     }
     else
     {
@@ -83,7 +83,7 @@ string DataJSON::readJsonAnnotation(QJsonObject &json)
     }
 }
 
-Fresque DataJSON::read(string jsonO)
+Fresque *DataJSON::read(string jsonO)
 {
     QJsonObject obj = QJsonDocument::fromJson(QString::fromStdString(jsonO).toUtf8()).object();
     Fresque *fresque = new Fresque();
@@ -131,7 +131,7 @@ Fresque DataJSON::read(string jsonO)
     }
     if(obj.contains("Polygone"))
     {
-        QJsonObject polygonJson = obj["Circle"].toObject();
+        QJsonObject polygonJson = obj["Polygone"].toObject();
         pointsArray = polygonJson["points"].toArray();
         vector<Point> points;
         foreach (const QJsonValue & value, pointsArray) {
@@ -142,7 +142,7 @@ Fresque DataJSON::read(string jsonO)
         polygon->draw();
         fresque->add(*polygon);
     }
-    return *fresque;
+    return fresque;
 }
 
 

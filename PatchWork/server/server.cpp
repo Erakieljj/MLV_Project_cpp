@@ -89,6 +89,9 @@ void call_from_thread(int client_socket)
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
+            QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
+            QJsonObject annotation;
+            QJsonObject obj = jsonDoc.object();
 
             drawing_finished = true;
         }
