@@ -27,7 +27,7 @@ public:
     /**
      * @brief Client Constructeur par défaut.
      */
-    Client(std::string id){}
+    Client(){}
 
     /**
      * @brief Start Débute le client avec l'envoi et la réception des dessins.

@@ -12,8 +12,7 @@ using namespace  std;
 class Polygone : public Object2D
 {
 Q_OBJECT
-private:
-        QGraphicsScene *scene;
+
 public:
      /**
      * @brief Polygone

@@ -27,8 +27,8 @@
 #include <QJsonObject>
 #include <QByteArray>
 #include <QString>
-#include "../dataJSON.h"
-#include "../fresque.h"
+#include "dataJSON.h"
+#include "fresque.h"
 #define MAX_DRAWING 4
 
 std::mutex mtx;

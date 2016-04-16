@@ -8,9 +8,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QFile>
-
 #include <set>
 #include <QtCore/QtDebug>
+
 
 void DataJSON::readDrawingAndCheck(QJsonObject &json, QJsonObject &notation)
 {
@@ -143,12 +143,14 @@ Fresque* DataJSON::read(string jsonO)
     return fresque;
 }
 
-Fresque* DataJSON::readJsonFile(QString jsonO) {
-    QString qval;
-    QFile file;
-    file.setFileName(jsonO);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    qval = file.readAll();
-    file.close();
-    return DataJSON::read(qval.toStdString());
+Fresque* DataJSON::readFromFile(QString pathfile)
+{
+     QString val;
+     QFile file;
+     file.setFileName(pathfile);
+     file.open(QIODevice::ReadOnly | QIODevice::Text);
+     val = file.readAll();
+     file.close();
+     return read(val.toStdString());
 }
+

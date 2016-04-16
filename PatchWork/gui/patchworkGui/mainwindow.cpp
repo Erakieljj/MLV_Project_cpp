@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
+
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,17 +27,18 @@ MainWindow::MainWindow(QWidget *parent) :
         this->ui->comboColorPolygone->addItem(col);
         this->ui->comboColorEllipse->addItem(col);
         this->ui->comboColorLine->addItem(col);
-
     }
 
     connect(ui->buttonRotation,SIGNAL(clicked()),this,SLOT(applyRotation()));
     connect(ui->buttonTranslation,SIGNAL(clicked()),this,SLOT(applyTranslation()));
     connect(ui->buttonHomo,SIGNAL(clicked()),this,SLOT(applyHomo()));
     connect(ui->buttonReset,SIGNAL(clicked()),this,SLOT(applyReset()));
+
     connect(ui->actionEnvoyer_serveur,SIGNAL(triggered(bool)),this,SLOT(callServer()));
-    connect(ui->actionLire_dessin_professeur,SIGNAL(triggered(bool)),this,SLOT(openFile()));
+    connect(ui->actionLire,SIGNAL(triggered(bool)),this,SLOT(openFile()));
     myGV = new MyQGraphicsView(this);
     ui->horizontalLayout->addWidget( this->myGV );
+
 }
 
 
@@ -226,3 +228,4 @@ void MainWindow::openFile(){
     qDebug() << filename;
     this->myGV->setDessin(filename);
 }
+

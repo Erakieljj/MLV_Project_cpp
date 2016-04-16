@@ -5,6 +5,11 @@
 
 using namespace std;
 
+
+Client::Client(int id) {
+    this->id = id;
+}
+
 void Client::start(string json) {
     /* ---------- INITIALIZING VARIABLES ---------- */
 
@@ -60,12 +65,17 @@ void Client::start(string json) {
     cout << ">> message from the server:" << buffer << endl;
     cout << ">> Connection confirmed, starting..." << endl;
 
-    do {
+
+    //do {
         cout << "Student: ";
+        memset(buffer, 0, bufsize);
+        std::string s = std::to_string(id);
+        char const *pchar = s.c_str();
+        strcpy(buffer, pchar);
+        send(client, buffer, bufsize, 0);
+        cout << "id sent!" << endl;
 
-
-
-        //send size buffer
+        //send size buffer json a envoyer
         string size = std::to_string(json.size());
         char const* schar = size.c_str();
 
@@ -88,12 +98,15 @@ void Client::start(string json) {
         else {
             //traitement sur le dessin
             QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
+            QJsonObject annotationJson = jsonDoc.object();
+            string annotation = DataJSON::readJsonAnnotation(annotationJson);
+
 
             //modifier la varialble json après avoir pris en compte les annotations
 
             cout << "working on the drawing again.." << endl;
         }
-    } while (!finished);
+    //} while (!finished);
 
     /* ---------------- CLOSE CALL ------------- */
     cout << "\n>> Connection terminated.\n";

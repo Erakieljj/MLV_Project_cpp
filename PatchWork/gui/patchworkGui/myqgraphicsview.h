@@ -115,6 +115,7 @@ public:
     bool containEllipse();
     bool containLine();
 
+
 signals:
 
 public slots:

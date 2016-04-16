@@ -95,6 +95,13 @@ int main()
         //c'est ici qu'on doit envoyer le json dans le buffer on remplace le cin
         //cin >> buffer;
 
+        memset(buffer, 0, bufsize);
+        std::string s = std::to_string(4);
+        char const *pchar = s.c_str();
+        strcpy(buffer, pchar);
+        send(client, buffer, bufsize, 0);
+        cout << "id sent!" << endl;
+
         //send size buffer
         string size = std::to_string(strlen("put json here\n"));
         char const* schar = size.c_str();

@@ -39,13 +39,12 @@ class DataJSON
          * @return Retourne la fresque des dessins des élèves.
          */
         static Fresque* read(string jsonO);
-
         /**
-         * @brief readJsonFile Création de la fresquea partir d'un fichier Json
-         * @param jsonO filepath du fichier.
+         * @brief read from pathfile Création de la fresque.
+         * @param pathfile : chemin d'acces au fichier .dessin.
          * @return Retourne la fresque des dessins des élèves.
          */
-        static Fresque* readJsonFile(QString jsonO);
+        static Fresque* readFromFile(QString pathfile);
 
 };
 

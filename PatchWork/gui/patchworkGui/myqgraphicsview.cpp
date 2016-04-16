@@ -1,9 +1,5 @@
 #include "myqgraphicsview.h"
 #include <QPointF>
-#include <QProgressBar>
-#include <QInputDialog>
-#include <QMessageBox>
-#include <QLineEdit>
 #include <QtCore/QtDebug>
 #include <dataJSON.h>
 #include "point.h"
@@ -14,6 +10,7 @@
 #include "client.h"
 #include "mainwindow.h"
 #include <QtDebug>
+#include <QMessageBox>
 using namespace std;
 
 MyQGraphicsView::MyQGraphicsView(QWidget *parent) :
@@ -179,8 +176,6 @@ void MyQGraphicsView::applyRotation(QString forme,double r)
 
 void MyQGraphicsView::draw(){
     scene->clear();
-    MainWindow* parent = qobject_cast<MainWindow*>(this->parent());
-
     switch(m) {
     case none:
         break;
@@ -218,50 +213,27 @@ void MyQGraphicsView::draw(){
 void MyQGraphicsView::callServer(){
     //parse fresque
 
-    bool ok;
-    QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
-                                         tr("User id:"), QLineEdit::Normal,
-                                         QDir::home().dirName(), &ok);
-    if (ok && !text.isEmpty())
-    {
-        QJsonObject objJsonFresque;
-        QJsonObject objJsonAnnotation;
+    QJsonObject objJsonFresque;
+    QJsonObject objJsonAnnotation;
 
-        QJsonDocument jsonDoc;
+    QJsonDocument jsonDoc;
 
-        DataJSON::writeDrawing(this->fresque->getObjects(), objJsonFresque);
-        jsonDoc.setObject(objJsonFresque);
-        QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
-        //cout<<strJson.toStdString()<<endl;
-        //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
+    DataJSON::writeDrawing(this->fresque->getObjects(), objJsonFresque);
+    jsonDoc.setObject(objJsonFresque);
+    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
+    //cout<<strJson.toStdString()<<endl;
+    //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
 
-        //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
-        //f->draw(this->scene);
-
-        try{
-            Client *c = new Client(text.toStdString());
-            c->start(strJson.toStdString());
-            QProgressBar *progressBar = new QProgressBar();
-            progressBar->setMaximum(100);
-            progressBar->setValue(100);
-            progressBar->setTextVisible(true);
-            progressBar->show();
-
-        } catch(runtime_error e){
-            QMessageBox msgBox;
-            msgBox.setText("Probleme de serveur, vérifier que vous l'avez bien allumez");
-            msgBox.exec();
-        }
+    //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
+    //f->draw(this->scene);
+    try{
+        Client *c = new Client();
+        c->start("hello");
+    } catch(runtime_error* e){
+        QMessageBox msgBox;
+        msgBox.setText("Erreur a la connection du serveur, vérifier que vous avez allumer le serveur");
+        msgBox.exec();
     }
-}
-
-
-
-
-void MyQGraphicsView::setDessin(QString filename){
-    Fresque *f = DataJSON::readJsonFile(filename);
-    fresque->setObject(f->getObjects());
-
 }
 
 void MyQGraphicsView::applyReset(){
@@ -299,4 +271,10 @@ bool MyQGraphicsView::containPolygone(){
             return true;
     }
     return false;
+}
+
+void MyQGraphicsView::setDessin(QString filename){
+    Fresque *f = DataJSON::readFromFile(filename);
+    this->fresque->setObject(f->getObjects());
+
 }

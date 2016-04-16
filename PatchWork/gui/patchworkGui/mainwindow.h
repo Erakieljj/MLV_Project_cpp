@@ -63,9 +63,9 @@ private slots:
      */
     void callServer();
 
-    void openFile();
-
     void applyReset();
+
+    void openFile();
 
 };
 
