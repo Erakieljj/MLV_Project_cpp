@@ -38,7 +38,7 @@ class DataJSON
          * @param jsonO Annotations de la maîtresse.
          * @return Retourne la fresque des dessins des élèves.
          */
-        static Fresque read(string jsonO);
+        static Fresque* read(string jsonO);
 
 };
 
