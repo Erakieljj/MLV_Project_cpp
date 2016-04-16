@@ -10,21 +10,6 @@
 #include "matrix.h"
 #include "client.h"
 //#include "clientgui.h"
-using namespace std;
-
-#include <iostream>
-
-#include "point.h"
-#include "ellipse.h"
-#include "line.h"
-#include "circle.h"
-#include "polygone.h"
-#include "fresque.h"
-#include "objectinterface.h"
-#include "dataJSON.h"
-#include "matrix.h"
-#include <QJsonDocument>
-//#include "clientgui.h"
 
 using namespace std;
 

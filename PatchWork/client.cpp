@@ -63,8 +63,7 @@ void Client::start(string json) {
     do {
         cout << "Student: ";
 
-        //c'est ici qu'on doit envoyer le json dans le buffer on remplace le cin
-        //cin >> buffer;
+
 
         //send size buffer
         string size = std::to_string(json.size());
@@ -89,18 +88,10 @@ void Client::start(string json) {
         else {
             //traitement sur le dessin
             QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
-            //Annotations notation = DataJSON::readJsonAnnotation(jsonDoc.object());
+            string annotation = DataJSON::readJsonAnnotation(jsonDoc.object());
 
-            /*if(notation.nbColorAccepted != "False")
-            {
-                QJsonDocument jsonStudent = QJsonDocument::fromVariant(QString(json));
-                //QJsonObject jsonObj = jsonStudent.object();
+            //modifier la varialble json après avoir pris en compte les annotations
 
-            }
-            if(notation.nbShapesRequired != 4)
-            {
-
-            }*/
             cout << "working on the drawing again.." << endl;
         }
     } while (!finished);

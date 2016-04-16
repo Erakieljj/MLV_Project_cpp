@@ -75,7 +75,7 @@ string DataJSON::readJsonAnnotation(QJsonObject &json)
 
     if(nbShape >= 2 && nbColor >= 2)
     {
-        return "";
+        return "perfect";
     }
     else
     {
