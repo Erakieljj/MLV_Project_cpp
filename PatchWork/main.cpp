@@ -109,7 +109,9 @@ int main(int argc, char *argv[])
 
     DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
 
-    DataJSON::read(strJson.toStdString());
+    Fresque *fresque = DataJSON::read(strJson.toStdString());
+    cout << "affichage de la fresque: " << endl;
+    fresque->draw();
 
     Client* c1 = new Client();
     (*c1).start(strJson.toStdString());
