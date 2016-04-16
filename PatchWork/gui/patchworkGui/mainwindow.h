@@ -24,7 +24,7 @@ private:
     /**
      * @brief myGV graphics view
      */
-    MyQGraphicsView *myGV = new MyQGraphicsView();
+    MyQGraphicsView *myGV;
 
 
 private slots:

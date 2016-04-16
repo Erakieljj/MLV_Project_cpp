@@ -12,7 +12,7 @@
 #include "circle.h"
 #include "polygone.h"
 #include "client.h"
-
+#include "mainwindow.h"
 #include <QtDebug>
 using namespace std;
 
@@ -179,6 +179,8 @@ void MyQGraphicsView::applyRotation(QString forme,double r)
 
 void MyQGraphicsView::draw(){
     scene->clear();
+    MainWindow* parent = qobject_cast<MainWindow*>(this->parent());
+
     switch(m) {
     case none:
         break;
@@ -267,3 +269,34 @@ void MyQGraphicsView::applyReset(){
     this->fresque->setObject(*(new vector<ObjectInterface*>));
 }
 
+bool MyQGraphicsView::containCircle(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isCircle())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containEllipse(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isEllipse())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containLine(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isLine())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containPolygone(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isPoly())
+            return true;
+    }
+    return false;
+}
