@@ -27,8 +27,7 @@ public:
     /**
      * @brief Client Constructeur par défaut.
      */
-    Client(){}
-
+    Client(int id);
     /**
      * @brief Start Débute le client avec l'envoi et la réception des dessins.
      */
@@ -39,6 +38,7 @@ private:
      * @brief json Le dessin encodé sous le format json.
      */
     std::string json;
+    int id;
 };
 
 
