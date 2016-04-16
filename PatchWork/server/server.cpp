@@ -24,6 +24,9 @@
 #include <QtCore>
 #include <thread>
 #include <mutex>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include "../dataJSON.h"
 #define MAX_DRAWING 4
 
 std::mutex mtx;
@@ -79,13 +82,17 @@ void call_from_thread(int client_socket)
         nb_drawing++;
         mtx.unlock();
 
+
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
         if(true==true) { //a remplacer
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-
+            QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
+            Annotations notation;
+            QJsonObject obj = jsonDoc.object();
+            DataJSON::readDrawing(&(obj), notation);
             drawing_finished = true;
         }
         //ajout de la réponse avec la liste des annotations

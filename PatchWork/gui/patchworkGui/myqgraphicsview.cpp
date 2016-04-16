@@ -1,6 +1,7 @@
 #include "myqgraphicsview.h"
 #include <QPointF>
 #include <QtCore/QtDebug>
+#include <dataJSON.h>
 #include "point.h"
 #include "line.h"
 #include "ellipse.h"
@@ -210,12 +211,21 @@ void MyQGraphicsView::draw(){
 
 void MyQGraphicsView::callServer(){
     //parse fresque
-    /*
-    DataJSON::setShapes(this->fresque->getObjects());
-    QJsonObject objJSONWrite;
-    QJsonObject objJSON;
-    DataJSON::writeDrawing(objJSON);
-    */
-    Client *c = new Client();
+
+    QJsonObject objJsonFresque;
+    QJsonObject objJsonAnnotation;
+
+    QJsonDocument jsonDoc;
+
+    DataJSON::writeDrawing(this->fresque->getObjects(), objJsonFresque);
+    jsonDoc.setObject(objJsonFresque);
+    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
+    //cout<<strJson.toStdString()<<endl;
+    //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
+
+    //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
+    //f->draw(this->scene);
+
+    Client *c = new Client(strJson);
     c->start("hello");
 }

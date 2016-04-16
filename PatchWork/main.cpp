@@ -96,30 +96,23 @@ int main(int argc, char *argv[])
     shapes.push_back(c);
     shapes.push_back(pol);
 
-    DataJSON::setShapes(shapes);
 
     QJsonObject objJSONWrite;
-    QJsonObject objJSON;
+    QJsonObject objJsonAnnotation;
 
-    /*DataJSON::writeJsonAnnotation(objJSONWrite);
-    QJsonDocument jsonDoc(objJSONWrite);
-    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
-    cout<<strJson.toStdString()<<endl;*/
+    QJsonDocument jsonDoc;
 
-    DataJSON::writeDrawing(objJSON);
-
-    /*Annotations notation = DataJSON::readJsonAnnotation(objJSONWrite);
+    DataJSON::writeDrawing(shapes, objJSONWrite);
     jsonDoc.setObject(objJSONWrite);
-    strJson = jsonDoc.toJson(QJsonDocument::Compact);
-
+    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
     cout<<strJson.toStdString()<<endl;
-    cout<<notation.nbColorAccepted.toStdString()<<endl;
-    cout<<notation.nbShapesRequired.toStdString()<<endl;
-    cout<<notation.sumAreaAccepted.toStdString()<<endl;
-    cout<<notation.sumAreaShapeRequired<<endl;*/
+
+    DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
+
+    DataJSON::read(strJson.toStdString());
 
     Client* c1 = new Client();
-    (*c1).start();
+    (*c1).start(strJson.toStdString());
 
     return 0;
 }

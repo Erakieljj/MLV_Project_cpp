@@ -11,6 +11,7 @@ using namespace std;
  */
 class Fresque : public ObjectInterface
 {
+    Q_OBJECT
     public:
         Fresque();
         // Inherited method from ObjectInterface

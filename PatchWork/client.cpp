@@ -1,4 +1,7 @@
 #include "client.h"
+#include "dataJSON.h"
+#include <QJsonDocument>
+#include <QJsonObject>
 
 using namespace std;
 
@@ -85,6 +88,19 @@ void Client::start(string json) {
         }
         else {
             //traitement sur le dessin
+            QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
+            //Annotations notation = DataJSON::readJsonAnnotation(jsonDoc.object());
+
+            /*if(notation.nbColorAccepted != "False")
+            {
+                QJsonDocument jsonStudent = QJsonDocument::fromVariant(QString(json));
+                //QJsonObject jsonObj = jsonStudent.object();
+
+            }
+            if(notation.nbShapesRequired != 4)
+            {
+
+            }*/
             cout << "working on the drawing again.." << endl;
         }
     } while (!finished);

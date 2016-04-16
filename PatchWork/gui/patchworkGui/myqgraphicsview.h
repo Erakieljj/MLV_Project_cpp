@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
+#include <QJsonDocument>
 #include <QMouseEvent>
 #include "point.h"
 #include "fresque.h"
