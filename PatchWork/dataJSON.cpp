@@ -33,7 +33,7 @@ void DataJSON::writeDrawing(vector<ObjectInterface *> shapes, QJsonObject &json)
         QString type = QString::fromLatin1(obj->metaObject()->className());
         QJsonObject shapeJSON;
 
-        cout<<obj->metaObject()->className()<<endl;
+        //cout<<obj->metaObject()->className()<<endl;
 
         shapeJSON["color"] = QString::fromStdString(obj->getColor());
         QJsonArray pointsArray;

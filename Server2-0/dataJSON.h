@@ -35,10 +35,10 @@ class DataJSON
         static string readJsonAnnotation(QJsonObject &json);
         /**
          * @brief read Création de la fresque.
-         * @param jsonO Annotations de la maîtresse.
+         * @param obj Annotations de la maîtresse.
          * @return Retourne la fresque des dessins des élèves.
          */
-        static Fresque* read(string jsonO);
+        static Fresque* read(QJsonObject obj);
 
 };
 

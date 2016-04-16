@@ -10,6 +10,13 @@ Client::Client(int id) {
     this->id = id;
 }
 
+int IndexOf(const char *s, const char c)
+{
+    const char * const p = s;
+    while(*s && *s != c) s++;
+    return (*s) ? s-p : -1;
+}
+
 void Client::start(string json) {
     /* ---------- INITIALIZING VARIABLES ---------- */
 
@@ -18,6 +25,7 @@ void Client::start(string json) {
     bool finished = false;
     int bufsize = 3000;
     char buffer[bufsize];
+    int size_read;
     const char* ip = "127.0.0.1";
 
     struct sockaddr_in server_addr;
@@ -90,19 +98,25 @@ void Client::start(string json) {
         cout << "draw sent!" << endl;
 
         cout << "Response from the teacher: ";
-        recv(client, buffer, bufsize, 0);
+        size_read = recv(client, buffer, bufsize, 0);
         cout << buffer << " " << endl;
+        size_read = IndexOf(buffer, '\0') + 1;
         if (strcmp (buffer,"perfect") == 0) {
             finished = true;
+            /*cout << "taille buffer : " << size_read <<endl;
+            QJsonObject annotationJson = QJsonDocument::fromJson(QString::fromUtf8(buffer, size_read).toUtf8()).object();
+            string annotation = DataJSON::readJsonAnnotation(annotationJson);
+            cout << "Annotation : " + annotation <<endl;
+            retourne parfait */
         }
         else {
             //traitement sur le dessin
-            QJsonDocument jsonDoc = QJsonDocument::fromRawData(buffer, bufsize);
-            QJsonObject annotationJson = jsonDoc.object();
-            string annotation = DataJSON::readJsonAnnotation(annotationJson);
 
+            /*QJsonObject annotationJson = QJsonDocument::fromJson(QString::fromUtf8(buffer, size_read).toUtf8()).object();
+            string annotation = DataJSON::readJsonAnnotation(annotationJson);*/
 
-            //modifier la varialble json après avoir pris en compte les annotations
+            finished = true;
+            //modifier la variable json après avoir pris en compte les annotations
 
             cout << "working on the drawing again.." << endl;
         }

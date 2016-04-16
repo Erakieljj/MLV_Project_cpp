@@ -83,9 +83,8 @@ string DataJSON::readJsonAnnotation(QJsonObject &json)
     }
 }
 
-Fresque *DataJSON::read(string jsonO)
+Fresque *DataJSON::read(QJsonObject obj)
 {
-    QJsonObject obj = QJsonDocument::fromJson(QString::fromStdString(jsonO).toUtf8()).object();
     Fresque *fresque = new Fresque();
     QJsonArray pointsArray;
 

@@ -23,7 +23,6 @@
 #include <QtCore>
 #include <thread>
 #include <mutex>
-#include <QJsonDocument>
 #include <QJsonObject>
 #include <QByteArray>
 #include <QString>
@@ -34,6 +33,7 @@
 std::mutex mtx;
 map<int, string> map_drawing;
 std::atomic<int> nb_drawing(1);
+Fresque *fresqueServer = new Fresque();
 
 /**
  * @brief La fonction call_from_thread sera la fonction exécutée lors de la
@@ -90,35 +90,34 @@ void call_from_thread(int client_socket)
 
         //analyse du dessin (lecture du buffer et analyse a faire et mettre ici)
         //si le dessin convient aux critères on l'envoie au client et on l'ajoute à la fresque
-        if(true==true) { //a remplacer
-            //QByteArray data(buffer, bufsize);
+        QJsonParseError error;
+        QJsonObject objDrawing = QJsonDocument::fromJson(QString::fromUtf8(buffer, size_cum).toUtf8(), &error).object();
+        if (objDrawing.isEmpty())
+        {
+            cout<<"Error : " +  error.errorString().toStdString()<<endl;
+        }
 
-            QJsonDocument jsonDoc;
-            QJsonParseError error;
-            QJsonObject objDrawing = QJsonDocument::fromJson(QString::fromUtf8(buffer, size_cum).toUtf8(), &error).object();
-            if (objDrawing.isEmpty())
-            {
-                cout<<"Error : " +  error.errorString().toStdString()<<endl;
-            }
-
-            QJsonObject annotation;
+        QJsonObject annotation;
 
 
-            DataJSON::readDrawingAndCheck(objDrawing, annotation);
-
-
+        DataJSON::readDrawingAndCheck(objDrawing, annotation);
+        string strNotation = DataJSON::readJsonAnnotation(annotation);
+        cout<<"Notation Server :" + strNotation<<endl;
+        if(strNotation == "perfect") { //a remplacer
             memset(buffer, 0, bufsize);
             strcpy(buffer,"perfect");
             //add to big fresque here
-            Fresque *fresque = new Fresque();
-            fresque->draw();
 
+            Fresque *fresque = DataJSON::read(objDrawing);
+            fresqueServer->add(*fresque);
             drawing_finished = true;
             nb_drawing++;
         }
         //ajout de la réponse avec la liste des annotations
         else {
             cout << "=> Message Sent: you have to work again" << endl;
+            memset(buffer, 0, bufsize);
+            strcpy(buffer,strNotation.c_str());
             // ecriture dans le buffer
             //json here for the answer..
         }
