@@ -63,6 +63,10 @@ private slots:
      */
     void callServer();
 
+    void openFile();
+
+    void applyReset();
+
 };
 
 #endif // MAINWINDOW_H

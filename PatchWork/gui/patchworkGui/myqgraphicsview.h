@@ -104,6 +104,10 @@ public:
      */
     void callServer();
 
+    void setDessin(QString filename);
+
+    void applyReset();
+
 
 
 signals:
@@ -185,6 +189,8 @@ private:
      * @brief colorPolygone couleurs par défauts des polygones
      */
     QString colorPolygone = "black";
+
+
 
 
 };

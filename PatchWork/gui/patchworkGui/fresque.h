@@ -17,6 +17,7 @@ class Fresque : public ObjectInterface
     Q_OBJECT
     public:
         Fresque();
+
         // Inherited method from ObjectInterface
         /**
          * @brief draw Dessine la fresque à partir des dessins des différents élèves.
@@ -95,7 +96,7 @@ class Fresque : public ObjectInterface
          * @return retourne les différents objets.
          */
         std::vector<ObjectInterface*> getObjects(){return objects;}
-
+        void setObject(std::vector<ObjectInterface*> vec){objects = vec;}
     private:
         /**
          * @brief scene Scene de la qgraphicsView.

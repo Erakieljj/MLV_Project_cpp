@@ -50,6 +50,25 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="buttonReset">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Reset</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QComboBox" name="comboBox">
              <property name="minimumSize">
               <size>
@@ -144,7 +163,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>homothetie</string>
                 </property>
                </widget>
               </item>
@@ -200,7 +219,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>rotation</string>
                 </property>
                </widget>
               </item>
@@ -266,7 +285,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>Translation</string>
                 </property>
                </widget>
               </item>
@@ -379,7 +398,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>ajouter</string>
                 </property>
                </widget>
               </item>
@@ -450,7 +469,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>ajouter</string>
                 </property>
                </widget>
               </item>
@@ -490,7 +509,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>ajouter</string>
                 </property>
                </widget>
               </item>
@@ -598,7 +617,7 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>ajouter</string>
                 </property>
                </widget>
               </item>
@@ -628,6 +647,7 @@
      <string>Patchwork</string>
     </property>
     <addaction name="actionEnvoyer_serveur"/>
+    <addaction name="actionLire_dessin_professeur"/>
    </widget>
    <addaction name="menuPatchwork"/>
   </widget>
@@ -643,6 +663,11 @@
   <action name="actionEnvoyer_serveur">
    <property name="text">
     <string>Envoyer serveur</string>
+   </property>
+  </action>
+  <action name="actionLire_dessin_professeur">
+   <property name="text">
+    <string>Lire dessin professeur</string>
    </property>
   </action>
  </widget>

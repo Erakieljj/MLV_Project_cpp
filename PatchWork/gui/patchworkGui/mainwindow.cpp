@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "myqgraphicsview.h"
 #include <QtCore/QtDebug>
+#include <QFileDialog>
 
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) :
@@ -30,7 +31,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->buttonRotation,SIGNAL(clicked()),this,SLOT(applyRotation()));
     connect(ui->buttonTranslation,SIGNAL(clicked()),this,SLOT(applyTranslation()));
     connect(ui->buttonHomo,SIGNAL(clicked()),this,SLOT(applyHomo()));
+    connect(ui->buttonReset,SIGNAL(clicked()),this,SLOT(applyReset()));
     connect(ui->actionEnvoyer_serveur,SIGNAL(triggered(bool)),this,SLOT(callServer()));
+    connect(ui->actionLire_dessin_professeur,SIGNAL(triggered(bool)),this,SLOT(openFile()));
+
 }
 
 
@@ -174,4 +178,17 @@ void MainWindow::applyTranslation()
 
 void MainWindow::callServer(){
     myGV->callServer();
+}
+
+void MainWindow::applyReset(){
+    myGV->applyReset();
+}
+
+
+void MainWindow::openFile(){
+
+    QString filename = QFileDialog::getOpenFileName(this,
+         tr("Open dessin"), "./../Dessin", tr("Dessin (*.dessin)"));
+    qDebug() << filename;
+    this->myGV->setDessin(filename);
 }

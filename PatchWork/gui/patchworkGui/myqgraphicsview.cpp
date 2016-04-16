@@ -1,5 +1,9 @@
 #include "myqgraphicsview.h"
 #include <QPointF>
+#include <QProgressBar>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QLineEdit>
 #include <QtCore/QtDebug>
 #include <dataJSON.h>
 #include "point.h"
@@ -212,20 +216,54 @@ void MyQGraphicsView::draw(){
 void MyQGraphicsView::callServer(){
     //parse fresque
 
-    QJsonObject objJsonFresque;
-    QJsonObject objJsonAnnotation;
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+                                         tr("User id:"), QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    if (ok && !text.isEmpty())
+    {
+        QJsonObject objJsonFresque;
+        QJsonObject objJsonAnnotation;
 
-    QJsonDocument jsonDoc;
+        QJsonDocument jsonDoc;
 
-    DataJSON::writeDrawing(this->fresque->getObjects(), objJsonFresque);
-    jsonDoc.setObject(objJsonFresque);
-    QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
-    //cout<<strJson.toStdString()<<endl;
-    //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
+        DataJSON::writeDrawing(this->fresque->getObjects(), objJsonFresque);
+        jsonDoc.setObject(objJsonFresque);
+        QString strJson(jsonDoc.toJson(QJsonDocument::Compact));
+        //cout<<strJson.toStdString()<<endl;
+        //DataJSON::readDrawingAndCheck(objJSONWrite, objJsonAnnotation);
 
-    //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
-    //f->draw(this->scene);
+        //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
+        //f->draw(this->scene);
 
-    Client *c = new Client(strJson);
-    c->start("hello");
+        try{
+            Client *c = new Client(text.toStdString());
+            c->start(strJson.toStdString());
+            QProgressBar *progressBar = new QProgressBar();
+            progressBar->setMaximum(100);
+            progressBar->setValue(100);
+            progressBar->setTextVisible(true);
+            progressBar->show();
+
+        } catch(runtime_error e){
+            QMessageBox msgBox;
+            msgBox.setText("Probleme de serveur, vérifier que vous l'avez bien allumez");
+            msgBox.exec();
+        }
+    }
 }
+
+
+
+
+void MyQGraphicsView::setDessin(QString filename){
+    Fresque *f = DataJSON::readJsonFile(filename);
+    fresque->setObject(f->getObjects());
+
+}
+
+void MyQGraphicsView::applyReset(){
+    this->scene->clear();
+    this->fresque->setObject(*(new vector<ObjectInterface*>));
+}
+

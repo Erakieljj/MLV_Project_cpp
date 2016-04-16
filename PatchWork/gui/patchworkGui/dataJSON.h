@@ -38,7 +38,14 @@ class DataJSON
          * @param jsonO Annotations de la maîtresse.
          * @return Retourne la fresque des dessins des élèves.
          */
-        static Fresque* read(string jsonO,QGraphicsScene *scene);
+        static Fresque* read(string jsonO);
+
+        /**
+         * @brief readJsonFile Création de la fresquea partir d'un fichier Json
+         * @param jsonO filepath du fichier.
+         * @return Retourne la fresque des dessins des élèves.
+         */
+        static Fresque* readJsonFile(QString jsonO);
 
 };
 

@@ -7,9 +7,10 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QFile>
+
 #include <set>
 #include <QtCore/QtDebug>
-
 
 void DataJSON::readDrawingAndCheck(QJsonObject &json, QJsonObject &notation)
 {
@@ -84,7 +85,7 @@ string DataJSON::readJsonAnnotation(QJsonObject &json)
     }
 }
 
-Fresque* DataJSON::read(string jsonO,QGraphicsScene *scene)
+Fresque* DataJSON::read(string jsonO)
 {
     QJsonObject obj = QJsonDocument::fromJson(QString::fromStdString(jsonO).toUtf8()).object();
     Fresque *fresque = new Fresque();
@@ -101,8 +102,6 @@ Fresque* DataJSON::read(string jsonO,QGraphicsScene *scene)
             points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
         }
         Circle *circle = new Circle(circleJson["color"].toString().toStdString(), points[0], circleJson["rayon"].toDouble());
-        qDebug()<< "heelo";
-        circle->draw(scene);
         fresque->add(*circle);
     }
     if(obj.contains("Ellipse"))
@@ -115,9 +114,6 @@ Fresque* DataJSON::read(string jsonO,QGraphicsScene *scene)
             points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
         }
         Ellipse *ellipse = new Ellipse(ellipseJson["color"].toString().toStdString(), points[0], ellipseJson["rlong"].toDouble(), ellipseJson["rlar"].toDouble());
-        qDebug()<< "heelo";
-        ellipse->draw(scene);
-
         fresque->add(*ellipse);
     }
     if(obj.contains("Line"))
@@ -130,8 +126,6 @@ Fresque* DataJSON::read(string jsonO,QGraphicsScene *scene)
             points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
         }
         Line *line = new Line(lineJson["color"].toString().toStdString(), points[0], points[1]);
-        qDebug()<< "heelo";
-        line->draw(scene);
         fresque->add(*line);
     }
     if(obj.contains("Polygone"))
@@ -144,12 +138,17 @@ Fresque* DataJSON::read(string jsonO,QGraphicsScene *scene)
             points.push_back(Point(obj["x"].toDouble(), obj["y"].toDouble()));
         }
         Polygone *polygon = new Polygone(polygonJson["color"].toString().toStdString(), points);
-        qDebug()<< "heelo";
-        polygon->draw(scene);
         fresque->add(*polygon);
     }
-    qDebug()<< "heelo";
-    fresque->draw(scene);
-    qDebug()<< "FIIIIIN";
     return fresque;
+}
+
+Fresque* DataJSON::readJsonFile(QString jsonO) {
+    QString qval;
+    QFile file;
+    file.setFileName(jsonO);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    qval = file.readAll();
+    file.close();
+    return DataJSON::read(qval.toStdString());
 }
