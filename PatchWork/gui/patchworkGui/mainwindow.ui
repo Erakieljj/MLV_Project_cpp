@@ -50,6 +50,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="buttonReset">
+             <property name="text">
+              <string>reset</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QComboBox" name="comboBox">
              <property name="minimumSize">
               <size>
@@ -628,6 +635,7 @@
      <string>Patchwork</string>
     </property>
     <addaction name="actionEnvoyer_serveur"/>
+    <addaction name="actionLire"/>
    </widget>
    <addaction name="menuPatchwork"/>
   </widget>
@@ -643,6 +651,11 @@
   <action name="actionEnvoyer_serveur">
    <property name="text">
     <string>Envoyer serveur</string>
+   </property>
+  </action>
+  <action name="actionLire">
+   <property name="text">
+    <string>Lire dessin professeur</string>
    </property>
   </action>
  </widget>

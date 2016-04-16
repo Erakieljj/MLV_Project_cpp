@@ -15,11 +15,6 @@ using namespace  std;
 class Line : public Object2D
 {
 Q_OBJECT
-private:
-    /**
-     * @brief scene Scene de la qgraphicsView.
-     */
-    QGraphicsScene *scene;
 
     public:
         /**

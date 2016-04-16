@@ -24,7 +24,7 @@ private:
     /**
      * @brief myGV graphics view
      */
-    MyQGraphicsView *myGV = new MyQGraphicsView();
+    MyQGraphicsView *myGV;
 
 
 private slots:
@@ -62,6 +62,10 @@ private slots:
      * @brief callServer call server
      */
     void callServer();
+
+    void applyReset();
+
+    void openFile();
 
 };
 

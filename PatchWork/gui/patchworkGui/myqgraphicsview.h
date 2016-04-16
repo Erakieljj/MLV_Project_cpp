@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 #include <QJsonDocument>
+#include <QPushButton>
 #include <QMouseEvent>
 #include "point.h"
 #include "fresque.h"
@@ -14,6 +15,7 @@
 /**
  * @brief Le mode actuelle du gui
  */
+
 enum mode{none,line,ellipse,circle,polygone};
 class MyQGraphicsView : public QGraphicsView
 {
@@ -104,6 +106,14 @@ public:
      */
     void callServer();
 
+    void setDessin(QString filename);
+
+    void applyReset();
+
+    bool containCircle();
+    bool containPolygone();
+    bool containEllipse();
+    bool containLine();
 
 
 signals:

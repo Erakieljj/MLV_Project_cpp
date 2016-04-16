@@ -96,6 +96,7 @@ class Fresque : public ObjectInterface
          */
         std::vector<ObjectInterface*> getObjects(){return objects;}
 
+        void setObject(vector<ObjectInterface*> vec){objects=vec;}
     private:
         /**
          * @brief scene Scene de la qgraphicsView.

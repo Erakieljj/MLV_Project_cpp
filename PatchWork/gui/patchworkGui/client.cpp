@@ -44,7 +44,8 @@ void Client::start(string json) {
         #if defined (WIN32)
             WSACleanup();
         #endif
-        exit(-1);
+        //exit(-1);
+        throw new runtime_error("error connection aux serveur");
     }
 
     else {

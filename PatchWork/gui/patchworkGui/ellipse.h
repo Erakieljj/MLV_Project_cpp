@@ -26,10 +26,6 @@ private:
      */
     double rlar;
 
-    /**
-     * @brief scene Scene de la qgraphicsView.
-     */
-     QGraphicsScene *scene;
 
 public:
     /**

@@ -8,8 +8,9 @@
 #include "circle.h"
 #include "polygone.h"
 #include "client.h"
-
+#include "mainwindow.h"
 #include <QtDebug>
+#include <QMessageBox>
 using namespace std;
 
 MyQGraphicsView::MyQGraphicsView(QWidget *parent) :
@@ -225,7 +226,55 @@ void MyQGraphicsView::callServer(){
 
     //Fresque *f = DataJSON::read(strJson.toStdString(),this->scene);
     //f->draw(this->scene);
+    try{
+        Client *c = new Client();
+        c->start("hello");
+    } catch(runtime_error* e){
+        QMessageBox msgBox;
+        msgBox.setText("Erreur a la connection du serveur, vérifier que vous avez allumer le serveur");
+        msgBox.exec();
+    }
+}
 
-    Client *c = new Client(strJson);
-    c->start("hello");
+void MyQGraphicsView::applyReset(){
+    this->scene->clear();
+    this->fresque->setObject(*(new vector<ObjectInterface*>));
+}
+
+bool MyQGraphicsView::containCircle(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isCircle())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containEllipse(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isEllipse())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containLine(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isLine())
+            return true;
+    }
+    return false;
+}
+
+bool MyQGraphicsView::containPolygone(){
+    for(ObjectInterface *o : this->fresque->getObjects()){
+        if(o->isPoly())
+            return true;
+    }
+    return false;
+}
+
+void MyQGraphicsView::setDessin(QString filename){
+    Fresque *f = DataJSON::readFromFile(filename);
+    this->fresque->setObject(f->getObjects());
+
 }
