@@ -32,6 +32,9 @@ private:
      QGraphicsScene *scene;
 
 public:
+    /**
+      * @brief Ellipse Constructeur.
+     */
     Ellipse(string color,Point p1,double rlon,double rlar);
 
     // Inherited method from Object2D

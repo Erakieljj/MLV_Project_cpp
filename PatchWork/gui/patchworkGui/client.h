@@ -23,6 +23,10 @@
 class Client
 {
 public:
+
+    /**
+     * @brief Client Constructeur par défaut.
+     */
     Client(){}
 
     /**
