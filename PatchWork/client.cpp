@@ -65,19 +65,15 @@ void Client::start(string json) {
     cout << ">> message from the server:" << buffer << endl;
     cout << ">> Connection confirmed, starting..." << endl;
 
-<<<<<<< HEAD
+
     //do {
         cout << "Student: ";
-
-
-=======
         memset(buffer, 0, bufsize);
         std::string s = std::to_string(id);
         char const *pchar = s.c_str();
         strcpy(buffer, pchar);
         send(client, buffer, bufsize, 0);
         cout << "id sent!" << endl;
->>>>>>> aa79f934100f8d168e02d2c59432d3d34f920ccf
 
         //send size buffer json a envoyer
         string size = std::to_string(json.size());
@@ -110,10 +106,7 @@ void Client::start(string json) {
 
             cout << "working on the drawing again.." << endl;
         }
-<<<<<<< HEAD
     //} while (!finished);
-=======
->>>>>>> aa79f934100f8d168e02d2c59432d3d34f920ccf
 
     /* ---------------- CLOSE CALL ------------- */
     cout << "\n>> Connection terminated.\n";

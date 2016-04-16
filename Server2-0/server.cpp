@@ -50,7 +50,7 @@ void call_from_thread(int client_socket)
 
     strcpy(buffer, "Server connected...\n");
     send(client_socket, buffer, bufsize, 0);
-    cout << ">> Connected with the client #" << client_socket << ", starting ..." << endl;
+    cout << ">> Connected, starting ..." << endl;
 
     int size_read = 0;
     int totalsize = 0;
@@ -58,8 +58,12 @@ void call_from_thread(int client_socket)
     bool drawing_finished = false;
 
     //process client
-    cout << "Drawing from student: ";
-    do {
+    cout << "Drawing from student:\n";
+   // do {
+        //on lit l'id
+        recv(client_socket, buffer, bufsize, 0);
+        int id = atoi(buffer);
+        cout << "id read:" << id << endl;
 
         //on lit la taille
         recv(client_socket, buffer, bufsize, 0);
@@ -80,8 +84,7 @@ void call_from_thread(int client_socket)
         /*on met le json du dessin dans la map (moins lourd) avant décodage, ainsi si la connexion avec le client s'interrompt on gardera le dernier dessin
           et la maîtresse peut accéder à n'importe quel moment à la map */
         mtx.lock();
-        map_drawing[nb_drawing] = buffer;
-        nb_drawing++;
+        map_drawing[id] = buffer;
         mtx.unlock();
 
 
@@ -111,6 +114,7 @@ void call_from_thread(int client_socket)
             fresque->draw();
 
             drawing_finished = true;
+            nb_drawing++;
         }
         //ajout de la réponse avec la liste des annotations
         else {
@@ -125,7 +129,7 @@ void call_from_thread(int client_socket)
         cout << "Message sent!" << endl;
 
     //si on a reçu tout les dessins on affiche la grande fresque
-    } while (!drawing_finished);
+    //} while (!drawing_finished);
 
     /* ----------------- Close --------------- */
     cout << "=> Connection ended with: " << client_socket << "\n" << endl;
@@ -193,7 +197,7 @@ int main()
     // En général, on met le nombre maximal de connexions pouvant être mises en attente à MAX_DRAWING
     listen(ListeningSocket , MAX_DRAWING);
 
-    while (i<MAX_DRAWING) {
+    while (nb_drawing <MAX_DRAWING) {
 
         /* ------------- ACCEPTING CLIENTS  ------------- */
 
@@ -202,9 +206,11 @@ int main()
 
         // first check if it is valid or not
         if (NewConnectionSocket < 0)
-            cout << ">> Error on accepting..." << endl;
-
-        else {
+            continue;
+        else if(nb_drawing == MAX_DRAWING) {
+            break;
+        }
+        else  {
             t[i] = std::thread(call_from_thread, NewConnectionSocket);
             i++;
         }
@@ -214,6 +220,7 @@ int main()
     for(i=0;i<MAX_DRAWING;i++) {
         t[i].join();
     }
+    cout << "map size:" << map_drawing.size() << endl;
 
     //affichage de la grande fresque ici
     cout << ">> Enjoy the nice work from all students: " << endl;
